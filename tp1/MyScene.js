@@ -34,6 +34,9 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
+    this.diamondVisible = true;
+    this.triangleVisible = true;
+    this.parallelogramVisible = true;
   }
   initLights() {
     this.lights[0].setPosition(15, 2, 5, 1);
@@ -69,6 +72,18 @@ export class MyScene extends CGFscene {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
+    if (this.diamondVisible) {
+      this.setDiffuse(0.2, 0.4, 0.8, 1.0);
+      this.diamond.display();
+    }
+    if (this.triangleVisible) {
+      this.setDiffuse(1.0, 0.5, 0.5, 1.0);
+      this.triangle.display();
+    }
+    if (this.parallelogramVisible) {
+      this.setDiffuse(1.0, 1.0, 0.0, 1.0);  
+      this.parallelogram.display();
+    }
 
     this.setDefaultAppearance();
 
@@ -97,7 +112,7 @@ export class MyScene extends CGFscene {
 
     //this.diamond.display();
     //this.triangle.display();
-    this.parallelogram.display();
+    //this.parallelogram.display();
     
 
     // ---- END Primitive drawing section

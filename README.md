@@ -1,10 +1,10 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T09G12
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Rafael Neves Teixeira         | 202108831 | up202108831@up.pt                |
+| João Pedro Moreira Costa         | 202108714 | up202108714@up.pt                |
 
 ----
 

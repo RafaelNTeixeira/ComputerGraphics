@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyParallelogram } from "./MyParallelogram.js";
+import { MyTriangleSmall } from "./MyTriangleSmall.js";
 
 /**
  * MyScene
@@ -30,6 +31,7 @@ export class MyScene extends CGFscene {
     this.diamond = new MyDiamond(this);
     this.triangle = new MyTriangle(this);
     this.parallelogram = new MyParallelogram(this);
+    this.smallTriangle = new MyTriangleSmall(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -37,6 +39,7 @@ export class MyScene extends CGFscene {
     this.diamondVisible = true;
     this.triangleVisible = true;
     this.parallelogramVisible = true;
+    this.smallTriangleVisible = true;
   }
   initLights() {
     this.lights[0].setPosition(15, 2, 5, 1);
@@ -72,18 +75,6 @@ export class MyScene extends CGFscene {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
-    if (this.diamondVisible) {
-      this.setDiffuse(0.2, 0.4, 0.8, 1.0);
-      this.diamond.display();
-    }
-    if (this.triangleVisible) {
-      this.setDiffuse(1.0, 0.5, 0.5, 1.0);
-      this.triangle.display();
-    }
-    if (this.parallelogramVisible) {
-      this.setDiffuse(1.0, 1.0, 0.0, 1.0);  
-      this.parallelogram.display();
-    }
 
     this.setDefaultAppearance();
 
@@ -110,10 +101,22 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    //this.diamond.display();
-    //this.triangle.display();
-    //this.parallelogram.display();
-    
+    // Draw Elements
+    if (this.diamondVisible) {
+      this.diamond.display();
+    }
+    if (this.triangleVisible) {
+      this.setDiffuse(1.0, 0.5, 0.5, 1.0);
+      this.triangle.display();
+    }
+    if (this.parallelogramVisible) {
+      this.setDiffuse(1.0, 1.0, 0.0, 1.0);
+      this.parallelogram.display();
+    }
+    if (this.smallTriangleVisible) {
+      this.setDiffuse(1.0, 0.0, 0.0, 1.0);
+      this.smallTriangle.display();
+    }
 
     // ---- END Primitive drawing section
   }

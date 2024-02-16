@@ -3,6 +3,7 @@ import { MyDiamond } from "./MyDiamond.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyParallelogram } from "./MyParallelogram.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { MyTriangleBig } from "./MyTriangleBig.js";
 
 /**
  * MyScene
@@ -32,6 +33,7 @@ export class MyScene extends CGFscene {
     this.triangle = new MyTriangle(this);
     this.parallelogram = new MyParallelogram(this);
     this.smallTriangle = new MyTriangleSmall(this);
+    this.bigTriangle = new MyTriangleBig(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -40,13 +42,16 @@ export class MyScene extends CGFscene {
     this.triangleVisible = true;
     this.parallelogramVisible = true;
     this.smallTriangleVisible = true;
+    this.bigTriangleVisible = false;
   }
+
   initLights() {
     this.lights[0].setPosition(15, 2, 5, 1);
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
   }
+
   initCameras() {
     this.camera = new CGFcamera(
       0.4,
@@ -56,12 +61,14 @@ export class MyScene extends CGFscene {
       vec3.fromValues(0, 0, 0)
     );
   }
+
   setDefaultAppearance() {
     this.setAmbient(0.2, 0.4, 0.8, 1.0);
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -105,17 +112,25 @@ export class MyScene extends CGFscene {
     if (this.diamondVisible) {
       this.diamond.display();
     }
+
     if (this.triangleVisible) {
       this.setDiffuse(1.0, 0.5, 0.5, 1.0);
       this.triangle.display();
     }
+
     if (this.parallelogramVisible) {
       this.setDiffuse(1.0, 1.0, 0.0, 1.0);
       this.parallelogram.display();
     }
+
     if (this.smallTriangleVisible) {
       this.setDiffuse(1.0, 0.0, 0.0, 1.0);
       this.smallTriangle.display();
+    }
+
+    if (this.bigTriangleVisible) {
+      this.setDiffuse(0.2, 0.4, 0.8, 1.0);
+      this.bigTriangle.display();
     }
 
     // ---- END Primitive drawing section

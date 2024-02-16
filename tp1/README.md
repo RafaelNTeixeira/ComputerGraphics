@@ -4,10 +4,8 @@
 
 ## TP 1 Notes
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
+- In exercise 1, it was feasible to develop MyTriangle.js, which has one base triangle, and MyParallelogram.js, which has four triangles (two in front and two behind) using the basis code of MyDiamond.js. To regulate the visibility of every figure, we included checkboxes in both figures;
+- In exercise 2, we made the figures MyTriangleSmall and MyTriangleBig using the MyTriangle.js code;
 
-- In exercise 1 we observed X
-- In exercise 2 we had difficulties in Y
-
-![Screenshot 1](screenshots/cg-t09g12-tp1-1a.png)
-![Screenshot 2](screenshots/cg-t09g12-tp1-1b.png)
+![Screenshot 1](screenshots\cg-t09-g12-tp1-1a.png)
+![Screenshot 2](screenshots\cg-t09-g12-tp1-1b.png)

@@ -6,76 +6,11 @@
 
 ### Exercício 1:
 
-- No ponto 1, foi desenvolvido o ficheiro MyTriangle.js com apenas 1 triângulo de base, seguindo como exemplo o ficheiro MyDiamond.js. 
-- No ponto 2 foram criadas checkboxes no ficheiro MyInterface.js e variáveis bool e objetos dos objetos geométricos que queremos desenhar (dentro da função `init()` do **MyScene.js**) para os associar à checkboxes respetivas e determinar quando se irá dar display ou não display dos objetos (dentro da função `display()` do ficheiro **MyScene.js**): 
+- No ponto 1, foi desenvolvido o ficheiro **MyTriangle.js** com apenas 1 triângulo de base, seguindo como exemplo o ficheiro **MyDiamond.js**.
 
-**MyInterface.js:**
-```js
-init() {
-    ...
+- No ponto 2 foram criados controladores de interface para controlar a visibilidade dos objetos na cena, no ficheiro **MyInterface.js** (dentro da função `init()`), e variáveis booleanas e objetos dos objetos geométricos que queremos desenhar (dentro da função `init()` do **MyScene.js**) para os associar aos controladores respetivos e determinar quando se irá dar display ou não display dos objetos (dentro da função `display()` do ficheiro **MyScene.js**).
 
-    // Create checkboxes
-    this.gui.add(this.scene, 'diamondVisible').name('Diamond Visible');
-    this.gui.add(this.scene, 'triangleVisible').name('Triangle Visible');
-
-    ...
-}
-```
-
-**MyScene:**
-```js
-init(application) {
-    ...
-
-    //Initialize scene objects
-    this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
-
-     //Objects connected to MyInterface
-    this.diamondVisible = true;
-    this.triangleVisible = true;
-
-    ...
-}
-
-display() {
-    ...
-
-    // Draw Elements
-    if (this.diamondVisible) {
-      this.diamond.display();
-    }
-
-    if (this.triangleVisible) {
-      this.setDiffuse(1.0, 0.5, 0.5, 1.0);
-      this.triangle.display();
-    }
-}
-```
-
-- No ponto 3 criamos um paralelogramo double sided através da repetição dos índices e da sua ordem:
-
-```js
-initBuffers() {
-		this.vertices = [
-			0, 0, 0,	//0
-			2, 0, 0,	//1
-			3, 1, 0,	//2
-			1, 1, 0,	//3
-		];
-
-		//Counter-clockwise reference of vertices
-		this.indices = [
-			0, 1, 2,
-			2, 3, 0
-			,
-			2, 1, 0,
-			0, 3, 2
-		];
-
-        ...
-}
-```
+- No ponto 3 criamos um paralelogramo double sided através da repetição dos índices e da sua ordem
 
 - No ponto 4 repetimos o que se fez no ponto 2 mas para o objeto do paralelogramo
 

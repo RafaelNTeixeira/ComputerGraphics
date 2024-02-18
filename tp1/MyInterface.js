@@ -17,7 +17,7 @@ export class MyInterface extends CGFinterface {
         // https://github.com/dataarts/dat.gui/blob/master/API.md
         this.gui = new dat.GUI();
 
-        // Checkbox element in GUI to toggle visibility of elements
+        // Boolean controls in GUI to toggle visibility of scene elements
         this.gui.add(this.scene, 'diamondVisible').name('Diamond Visible');
         this.gui.add(this.scene, 'triangleVisible').name('Triangle Visible');
         this.gui.add(this.scene, 'parallelogramVisible').name('Parallelogram Visible');

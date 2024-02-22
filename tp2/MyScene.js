@@ -1,5 +1,9 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
+import { MyTriangle } from "./MyTriangle.js";
+import { MyParallelogram } from "./MyParallelogram.js";
+import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { MyTriangleBig } from "./MyTriangleBig.js";
 
 /**
  * MyScene
@@ -26,10 +30,26 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.diamond = new MyDiamond(this);
+    this.triangle = new MyTriangle(this);
+    this.parallelogram = new MyParallelogram(this);
+    this.smallTriangle1 = new MyTriangleSmall(this);
+    this.smallTriangle2 = new MyTriangleSmall(this);
+    this.bigTriangle1 = new MyTriangleBig(this);
+    this.bigTriangle2 = new MyTriangleBig(this);
+    
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
+    this.diamondVisible = true;
+    this.triangleVisible = false;
+    this.parallelogramVisible = false;
+    this.smallTriangle1Visible = false;
+    this.bigTriangle1Visible = false;
+    this.smallTriangle2Visible = false;
+    this.bigTriangle2Visible = false;
+
+    this.setupY = 0.70;
   }
 
   initLights() {
@@ -66,7 +86,7 @@ export class MyScene extends CGFscene {
     this.loadIdentity();
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
-
+    
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
@@ -96,8 +116,81 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     // Draw Elements
+    if (this.diamondVisible) {
+      this.setDiffuse(0.0, 1, 0.0, 1.0);
+  
+      var rad = 45 * Math.PI / 180; 
+      var rotDiamond = [
+          Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
+          Math.sin(rad), Math.cos(rad), 0.0, 0.0,
+          0.0, 0.0, 1.0, 0.0,
+          0.0, 0.0, 0.0, 1.0
+      ];
 
-    this.diamond.display();
+      var transDiamond = [
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, this.setupY, 0.0, 1.0,
+      ]
+
+      this.pushMatrix();
+      this.multMatrix(transDiamond);
+      this.multMatrix(rotDiamond);
+      this.diamond.display();
+      this.popMatrix();
+    }  
+  
+    if (this.triangleVisible) {
+      this.setDiffuse(1.0, 0.5, 0.5, 1.0);
+      this.triangle.display();
+    }
+
+    if (this.parallelogramVisible) {
+      this.setDiffuse(1.0, 1.0, 0.0, 1.0);
+      this.parallelogram.display();
+    }
+
+    if (this.smallTriangle1Visible) {
+      this.setDiffuse(1.0, 0.0, 0.0, 1.0);
+      this.smallTriangle1.display();
+    }
+
+    if (this.bigTriangle1Visible) {
+      this.setDiffuse(0.2, 0.4, 0.8, 1.0);
+
+      var rad = 90 * Math.PI / 180; 
+
+      var rotBigTriangle1 = [
+          Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
+          Math.sin(rad), Math.cos(rad), 0.0, 0.0,
+          0.0, 0.0, 1.0, 0.0,
+          0.0, 0.0, 0.0, 1.0
+      ];
+
+      var transBigTriangle1 = [
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        this.setupY, 2.0, 0.0, 1.0,
+      ]
+
+      this.pushMatrix();
+      this.multMatrix(transBigTriangle1);
+      this.multMatrix(rotBigTriangle1);
+      this.bigTriangle1.display();
+      this.popMatrix();
+    }
+
+    if (this.smallTriangle2Visible) {
+      this.setDiffuse(1.0, 0.0, 0.0, 1.0);
+      this.smallTriangle2.display();
+    }
+
+    if (this.bigTriangle2Visible) {
+      this.setDiffuse(0.2, 0.4, 0.8, 1.0);
+      this.bigTriangle2.display();
+    }
 
     // ---- END Primitive drawing section
   }

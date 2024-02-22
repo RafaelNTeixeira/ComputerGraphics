@@ -44,10 +44,10 @@ export class MyScene extends CGFscene {
     this.diamondVisible = true;
     this.triangleVisible = false;
     this.parallelogramVisible = false;
-    this.smallTriangle1Visible = false;
-    this.bigTriangle1Visible = false;
+    this.smallTriangle1Visible = true;
+    this.bigTriangle1Visible = true;
     this.smallTriangle2Visible = false;
-    this.bigTriangle2Visible = false;
+    this.bigTriangle2Visible = true;
 
     this.setupY = 0.70;
   }
@@ -143,17 +143,73 @@ export class MyScene extends CGFscene {
   
     if (this.triangleVisible) {
       this.setDiffuse(1.0, 0.5, 0.5, 1.0);
+
+      var rad = - 135 * Math.PI / 180; 
+
+      var rotTriangle = [
+          Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
+          Math.sin(rad), Math.cos(rad), 0.0, 0.0,
+          0.0, 0.0, 1.0, 0.0,
+          0.0, 0.0, 0.0, 1.0
+      ];
+
+      this.pushMatrix();
+      //this.multMatrix(transDiamond);
+      this.multMatrix(rotTriangle);
       this.triangle.display();
+      this.popMatrix();
     }
 
     if (this.parallelogramVisible) {
       this.setDiffuse(1.0, 1.0, 0.0, 1.0);
+
+      var rad = 90 * Math.PI / 180;
+
+      var rotParallelogram = [
+        Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
+        Math.sin(rad), Math.cos(rad), 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 1.0
+      ];
+
+      var transParallelogram = [
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, -1.0, 0.0, 1.0,
+      ]
+
+      this.pushMatrix();
+      this.multMatrix(rotParallelogram);
+      this.multMatrix(transParallelogram);
       this.parallelogram.display();
+      this.popMatrix();
     }
 
     if (this.smallTriangle1Visible) {
-      this.setDiffuse(1.0, 0.0, 0.0, 1.0);
+      this.setDiffuse(0.5, 0.0, 0.5, 1.0);
+
+      var rad = 45 * Math.PI / 180; 
+
+      var rotsmallTriangle1 = [
+        Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
+        Math.sin(rad), Math.cos(rad), 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, -this.setupY, 0.0, 1.0
+      ];
+
+      var transmallTriangle1 = [
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 1.0,
+      ]
+      /* Não sei é bom fazer assim */
+      this.pushMatrix();
+      this.multMatrix(rotsmallTriangle1);
+      //this.multMatrix(transmallTriangle1);
       this.smallTriangle1.display();
+      this.popMatrix();
     }
 
     if (this.bigTriangle1Visible) {
@@ -184,12 +240,46 @@ export class MyScene extends CGFscene {
 
     if (this.smallTriangle2Visible) {
       this.setDiffuse(1.0, 0.0, 0.0, 1.0);
+
+      var rad = 135 * Math.PI / 180; 
+
+      var rotBigTriangle1 = [
+        Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
+        Math.sin(rad), Math.cos(rad), 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 1.0
+      ];
+
+      this.pushMatrix();
+      this.multMatrix(rotBigTriangle1);
       this.smallTriangle2.display();
+      this.popMatrix();
     }
 
     if (this.bigTriangle2Visible) {
-      this.setDiffuse(0.2, 0.4, 0.8, 1.0);
+      this.setDiffuse(1.0, 0.5, 0.0, 1.0);
+
+      var rad = - 90 * Math.PI / 180; 
+
+      var rotBigTriangle2 = [
+          Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
+          Math.sin(rad), Math.cos(rad), 0.0, 0.0,
+          0.0, 0.0, 1.0, 0.0,
+          0.0, 0.0, 0.0, 1.0
+      ];
+
+      var transBigTriangle2 = [
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        -this.setupY, 2.0, 0.0, 1.0,
+      ]
+
+      this.pushMatrix();
+      this.multMatrix(transBigTriangle2);
+      this.multMatrix(rotBigTriangle2);
       this.bigTriangle2.display();
+      this.popMatrix();
     }
 
     // ---- END Primitive drawing section

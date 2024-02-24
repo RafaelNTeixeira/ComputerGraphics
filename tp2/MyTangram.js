@@ -23,6 +23,7 @@ export class MyTangram extends CGFobject {
     }
 
     display() {
+        this.setupY = 0.70;
 
         // Green Diamond 
         this.scene.setDiffuse(0.0, 1, 0.0, 1.0);

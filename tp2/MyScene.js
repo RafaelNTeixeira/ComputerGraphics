@@ -27,14 +27,12 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.tangram = new MyTangram(this);
-    this.diamond = new MyDiamond(this);
+    //this.diamond = new MyDiamond(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
     this.tangramVisible = true;
-
-    this.setupY = 0.70;
   }
 
   initLights() {

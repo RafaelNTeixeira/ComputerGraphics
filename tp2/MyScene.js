@@ -1,9 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
-import { MyDiamond } from "./MyDiamond.js";
-import { MyTriangle } from "./MyTriangle.js";
-import { MyParallelogram } from "./MyParallelogram.js";
-import { MyTriangleSmall } from "./MyTriangleSmall.js";
-import { MyTriangleBig } from "./MyTriangleBig.js";
+import { MyTangram } from "./MyTangram.js";
 
 /**
  * MyScene
@@ -29,25 +25,12 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
-    this.parallelogram = new MyParallelogram(this);
-    this.smallTriangle1 = new MyTriangleSmall(this);
-    this.smallTriangle2 = new MyTriangleSmall(this);
-    this.bigTriangle1 = new MyTriangleBig(this);
-    this.bigTriangle2 = new MyTriangleBig(this);
-    
+    this.tangram = new MyTangram(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
-    this.diamondVisible = true;
-    this.triangleVisible = true;
-    this.parallelogramVisible = true;
-    this.smallTriangle1Visible = true;
-    this.bigTriangle1Visible = true;
-    this.smallTriangle2Visible = true;
-    this.bigTriangle2Visible = true;
+    this.tangramVisible = true;
 
     this.setupY = 0.70;
   }
@@ -116,195 +99,11 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     // Draw Elements
-    if (this.diamondVisible) {
-      this.setDiffuse(0.0, 1, 0.0, 1.0);
-  
-      var rad = 45 * Math.PI / 180; 
-      var rotDiamond = [
-          Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-          Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-          0.0, 0.0, 1.0, 0.0,
-          0.0, 0.0, 0.0, 1.0
-      ];
-
-      var transDiamond = [
-        1.0, 0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        0.0, this.setupY, 0.0, 1.0,
-      ]
-
-      this.pushMatrix();
-      this.multMatrix(transDiamond);
-      this.multMatrix(rotDiamond);
-      this.diamond.display();
-      this.popMatrix();
+    if (this.tangramVisible) {
+      this.tangram.display();
     }  
 
-    if (this.smallTriangle1Visible) {
-      this.setDiffuse(0.5, 0.0, 0.5, 1.0);
-
-      var rad = 45 * Math.PI / 180; 
-
-      var rotsmallTriangle1 = [
-        Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-        Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        0.0, -this.setupY, 0.0, 1.0
-      ];
-
-      var transmallTriangle1 = [
-        1.0, 0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        0.0, 0.0, 0.0, 1.0,
-      ]
-      /* Não sei é bom fazer assim */
-      this.pushMatrix();
-      this.multMatrix(rotsmallTriangle1);
-      //this.multMatrix(transmallTriangle1);
-      this.smallTriangle1.display();
-      this.popMatrix();
-    }
-
-    if (this.parallelogramVisible) {
-      this.setDiffuse(1.0, 1.0, 0.0, 1.0);
-
-      var rad = 45 * Math.PI / 180;
-
-      var rotParallelogram = [
-        Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-        Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        0.0, 0.0, 0.0, 1.0
-      ];
-
-      var transParallelogram = [
-        1.0, 0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        this.setupY, -4*this.setupY, 0.0, 1.0
-      ]
-
-      var scaleParallelogram = [
-        -1.0, 0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        0.0, 0.0, 0.0, 1.0
-      ]
-
-      this.pushMatrix();
-      this.multMatrix(transParallelogram);
-      this.multMatrix(rotParallelogram);
-      this.multMatrix(scaleParallelogram);
-      this.parallelogram.display();
-      this.popMatrix();
-    }
-  
-    if (this.triangleVisible) {
-      this.setDiffuse(1.0, 0.5, 0.5, 1.0);
-
-      var rad = - 135 * Math.PI / 180; 
-
-      var rotTriangle = [
-          Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-          Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-          0.0, 0.0, 1.0, 0.0,
-          0.0, 0.0, 0.0, 1.0
-      ];
-
-      var transTriangle = [
-        1.0, 0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        -this.setupY, -4*this.setupY, 0.0, 1.0
-      ]
-
-      this.pushMatrix();
-      this.multMatrix(transTriangle);
-      this.multMatrix(rotTriangle);
-      this.triangle.display();
-      this.popMatrix();
-    }
-
-    if (this.bigTriangle1Visible) {
-      this.setDiffuse(0.2, 0.4, 0.8, 1.0);
-
-      var rad = 90 * Math.PI / 180; 
-
-      var rotBigTriangle1 = [
-          Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-          Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-          0.0, 0.0, 1.0, 0.0,
-          0.0, 0.0, 0.0, 1.0
-      ];
-
-      var transBigTriangle1 = [
-        1.0, 0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        this.setupY, 2.0, 0.0, 1.0,
-      ]
-
-      this.pushMatrix();
-      this.multMatrix(transBigTriangle1);
-      this.multMatrix(rotBigTriangle1);
-      this.bigTriangle1.display();
-      this.popMatrix();
-    }
-
-    if (this.bigTriangle2Visible) {
-      this.setDiffuse(1.0, 0.5, 0.0, 1.0);
-
-      var rad = - 90 * Math.PI / 180; 
-
-      var rotBigTriangle2 = [
-          Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-          Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-          0.0, 0.0, 1.0, 0.0,
-          0.0, 0.0, 0.0, 1.0
-      ];
-
-      var transBigTriangle2 = [
-        1.0, 0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        -this.setupY, 2.0, 0.0, 1.0,
-      ]
-
-      this.pushMatrix();
-      this.multMatrix(transBigTriangle2);
-      this.multMatrix(rotBigTriangle2);
-      this.bigTriangle2.display();
-      this.popMatrix();
-    }
-
-    if (this.smallTriangle2Visible) {
-      this.setDiffuse(1.0, 0.0, 0.0, 1.0);
-
-      var rad = 135 * Math.PI / 180; 
-
-      var rotSmallTriangle2 = [
-        Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-        Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        0.0, 0.0, 0.0, 1.0
-      ];
-
-      var transSmallTriangle2 = [
-        1.0, 0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0,
-        0.0, -5*this.setupY, 0.0, 1.0
-      ];
-
-      this.pushMatrix();
-      this.multMatrix(transSmallTriangle2);
-      this.multMatrix(rotSmallTriangle2);
-      this.smallTriangle2.display();
-      this.popMatrix();
-    }
-
+    this.tangram.display();
 
     // ---- END Primitive drawing section
   }

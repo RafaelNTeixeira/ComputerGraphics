@@ -18,13 +18,7 @@ export class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
 
         // Boolean controls in GUI to toggle visibility of scene elements
-        this.gui.add(this.scene, 'diamondVisible').name('Diamond Visible');
-        this.gui.add(this.scene, 'triangleVisible').name('Triangle Visible');
-        this.gui.add(this.scene, 'parallelogramVisible').name('Parallelogram Visible');
-        this.gui.add(this.scene, 'smallTriangle1Visible').name('Small Triangle 1 Visible');
-        this.gui.add(this.scene, 'bigTriangle1Visible').name('Big Triangle 1 Visible');
-        this.gui.add(this.scene, 'smallTriangle2Visible').name('Small Triangle 2 Visible');
-        this.gui.add(this.scene, 'bigTriangle2Visible').name('Big Triangle 2 Visible');
+        this.gui.add(this.scene, 'tangramVisible').name('Tangram Visible');
         
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');

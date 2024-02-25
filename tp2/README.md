@@ -14,3 +14,11 @@
 
 ![Screenshot 1](screenshots/cg-t09-g12-tp2-1.png)
 
+
+### Exercício 3
+
+- No ponto 1 criou-se um ficheiro **MyUnitCube.js** e nele foram definidos 8 vértices e suas ligações para criação de um cubo dentro da função **initbuffers()**. 
+
+- No ponto 2 importou-se o ficheiro **MyUnitCube.js** no **MyScene.js**
+
+- No ponto 3, dentro do **MyScene**, criou-se um objeto do tipo **MyUnitCube** na função **init()** e invocou-se a função **display()** desse objeto na função **display()** do **MyScene**. Desta forma, foi apresentado na tela um cubo centrado na origem.

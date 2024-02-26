@@ -34,6 +34,7 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.scaleFactor = 1;
     this.tangramVisible = true;
+    this.cubeVisible = true;
   }
 
   initLights() {
@@ -99,15 +100,54 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
+    var rad = 90 * Math.PI / 180;
+
+    var rotationGroup = [
+      1.0, 0.0, 0.0, 0.0,
+      0.0, Math.cos(rad), -Math.sin(rad), 0.0,
+      0.0, Math.sin(rad), Math.cos(rad), 0.0,
+      0.0, 0.0, 0.0, 1.0
+    ]
+
     // Draw Elements
-    /*if (this.tangramVisible) {
+    if (this.cubeVisible) {
       this.pushMatrix();
+
+      var transCube = [
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        5.0, -1.0, 5.0, 1.0,
+      ]
+
+      var scaleCube = [
+        10.0, 0.0, 0.0, 0.0,
+        0.0, 10.0, 0.0, 0.0,
+        0.0, 0.0, 2.0, 0.0,
+        0.0, 0.0, 0.0, 1.0,
+      ]
+
+      this.multMatrix(transCube);
+      this.multMatrix(rotationGroup);
+      this.multMatrix(scaleCube);
+      this.cube.display();
+      this.popMatrix();
+    }
+
+    if (this.tangramVisible) {
+      var transTangram = [
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        5.0, 0.01, 5.0, 1.0,
+      ]
+
+      this.pushMatrix();
+      this.multMatrix(transTangram);
+      this.multMatrix(rotationGroup);
       this.tangram.display();
       this.popMatrix();
-    }*/
-
-    this.cube.display();
-
+    }
     // ---- END Primitive drawing section
   }
 }

@@ -17,8 +17,14 @@
 
 ### Exercício 3
 
-- No ponto 1 criou-se um ficheiro **MyUnitCube.js** e nele foram definidos 8 vértices e suas ligações para criação de um cubo dentro da função **initbuffers()**. 
+- No ponto 1 criou-se um ficheiro **MyUnitCube.js** e nele foram definidos 8 vértices e suas ligações para criação de um cubo com 1 unidade de medida de lado dentro da função **initbuffers()**. 
 
-- No ponto 2 importou-se o ficheiro **MyUnitCube.js** no **MyScene.js**
+- No ponto 2 importou-se o ficheiro **MyUnitCube.js** no **MyScene.js**.
 
-- No ponto 3, dentro do **MyScene**, criou-se um objeto do tipo **MyUnitCube** na função **init()** e invocou-se a função **display()** desse objeto na função **display()** do **MyScene**. Desta forma, foi apresentado na tela um cubo centrado na origem.
+- No ponto 3, dentro do **MyScene**, criou-se um objeto do tipo **MyUnitCube** na função **init()** e invocou-se a função **display()** desse objeto na função **display()** do **MyScene**. Desta forma, foi apresentado na tela um cubo unitário centrado na origem.
+
+- No ponto 4 foram aplicadas transformações de forma a que o cubo ficasse inserido atrás do tangram, servindo como base. Para tal foram aplicadas transformações de translação e escalamento.
+
+- No ponto 5 alteramos o cubo para uma estrutura com menos profundidade **(transformação de escalamento)**, do género de um tabuleiro para facilitar a observação do conjunto, paralelizámo-lo ao plano XZ **(transformação de rotação)** e inserimos o seu canto frontal superior esquerdo na coordenada (0,0,0) **(transformação de translação)**. De seguida, foram aplicadas transformações ao tangram de forma a que este ficasse centrado e colado à base.
+
+![Screenshot 2.1](screenshots/cg-t09-g12-tp2-2.png)

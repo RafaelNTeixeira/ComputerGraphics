@@ -20,6 +20,7 @@ export class MyInterface extends CGFinterface {
         // Boolean controls in GUI to toggle visibility of scene elements
         this.gui.add(this.scene, 'tangramVisible').name('Tangram Visible');
         this.gui.add(this.scene, 'cubeVisible').name('Cube Visible');
+        this.gui.add(this.scene, 'cubeQuadVisible').name('CubeQuad Visible');
         
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');

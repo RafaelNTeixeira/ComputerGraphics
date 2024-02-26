@@ -1,7 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyTangram } from "./MyTangram.js";
 import { MyUnitCube } from "./MyUnitCube.js";
-import { MyDiamond } from "./MyDiamond.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -29,12 +29,14 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.tangram = new MyTangram(this);
     this.cube = new MyUnitCube(this);
+    this.cubeQuad = new MyUnitCubeQuad(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
-    this.tangramVisible = true;
-    this.cubeVisible = true;
+    this.tangramVisible = false;
+    this.cubeVisible = false;
+    this.cubeQuadVisible = true;
   }
 
   initLights() {
@@ -111,6 +113,7 @@ export class MyScene extends CGFscene {
 
     // Draw Elements
     if (this.cubeVisible) {
+      this.setDefaultAppearance();
       this.pushMatrix();
 
       var transCube = [
@@ -146,6 +149,31 @@ export class MyScene extends CGFscene {
       this.multMatrix(transTangram);
       this.multMatrix(rotationGroup);
       this.tangram.display();
+      this.popMatrix();
+    }
+
+    if (this.cubeQuadVisible) {
+      this.setDefaultAppearance();
+      this.pushMatrix();
+
+      var transCube = [
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        5.0, -1.0, 5.0, 1.0,
+      ]
+
+      var scaleCube = [
+        10.0, 0.0, 0.0, 0.0,
+        0.0, 10.0, 0.0, 0.0,
+        0.0, 0.0, 2.0, 0.0,
+        0.0, 0.0, 0.0, 1.0,
+      ]
+
+      this.multMatrix(transCube);
+      this.multMatrix(rotationGroup);
+      this.multMatrix(scaleCube);
+      this.cubeQuad.display();
       this.popMatrix();
     }
     // ---- END Primitive drawing section

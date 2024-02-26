@@ -27,4 +27,15 @@
 
 - No ponto 5 alteramos o cubo para uma estrutura com menos profundidade **(transformação de escalamento)**, do género de um tabuleiro para facilitar a observação do conjunto, paralelizámo-lo ao plano XZ **(transformação de rotação)** e inserimos o seu canto frontal superior esquerdo na coordenada (0,0,0) **(transformação de translação)**. De seguida, foram aplicadas transformações ao tangram de forma a que este ficasse centrado e colado à base.
 
-![Screenshot 2.1](screenshots/cg-t09-g12-tp2-2.png)
+![Screenshot 2](screenshots/cg-t09-g12-tp2-2.png)
+
+
+### Exercício 4
+
+- No ponto 1 criou-se uma classe `MyQuad`, que constitui um quadrado com lados de medida 1, para futura construção de um cubo unitário.
+
+- No ponto 2 criou-se uma classe `MyUnitCubeQuad` que constitui um cubo criado através da classe `MyQuad`.
+
+- No ponto 3, substituindo o cubo criado no exercício anterior pelo cubo criado no ponto anterior da classe `MyUnitCubeQuad`, não se verificam nenhumas diferenças uma vez que estes ocupam exatamente a mesma posição no espaço.
+
+![Screenshot 3](screenshots/cg-t09-g12-tp2-3.png)

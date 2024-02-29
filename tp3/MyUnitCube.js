@@ -22,6 +22,26 @@ export class MyUnitCube extends CGFobject {
 			-0.5, 0.5, -0.5,	// 5 - Top-Left Back Vertice
 			0.5, 0.5, -0.5,     // 6 - Top-Right Back Vertice
             0.5, 0.5, 0.5       // 7 - Top-Right Front Vertice
+			,
+			-0.5, -0.5, 0.5,	
+			-0.5, -0.5, -0.5,	
+			0.5, -0.5, -0.5,    
+            0.5, -0.5, 0.5      
+            ,
+            -0.5, 0.5, 0.5,	    
+			-0.5, 0.5, -0.5,	
+			0.5, 0.5, -0.5,     
+            0.5, 0.5, 0.5
+			,
+			-0.5, -0.5, 0.5,	
+			-0.5, -0.5, -0.5,	
+			0.5, -0.5, -0.5,    
+            0.5, -0.5, 0.5      
+            ,
+            -0.5, 0.5, 0.5,	    
+			-0.5, 0.5, -0.5,	
+			0.5, 0.5, -0.5,     
+            0.5, 0.5, 0.5
 		];
 
 		// Counter-clockwise reference of vertices
@@ -50,6 +70,36 @@ export class MyUnitCube extends CGFobject {
             4, 7, 6,
             6, 5, 4,
 		];
+
+		this.normals = [
+			0, 0, 1,
+			0, 0, -1,
+			0, 0, -1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, -1,
+			0, 0, -1,
+			0, 0, 1
+			,
+			0, -1, 0,
+			0, -1, 0,
+			0, -1, 0,
+			0, -1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0
+			,
+			-1, 0, 0,
+			-1, 0, 0,
+			1, 0, 0,
+			1, 0, 0
+			,
+			-1, 0, 0,
+			-1, 0, 0,
+			1, 0, 0,
+			1, 0, 0
+		]
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles

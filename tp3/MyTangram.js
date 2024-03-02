@@ -1,4 +1,4 @@
-import { CGFobject } from '../lib/CGF.js';
+import { CGFobject, CGFappearance } from '../lib/CGF.js';
 import { MyDiamond } from "./MyDiamond.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyParallelogram } from "./MyParallelogram.js";
@@ -20,13 +20,65 @@ export class MyTangram extends CGFobject {
         this.smallTriangle2 = new MyTriangleSmall(this.scene);
         this.bigTriangle1 = new MyTriangleBig(this.scene);
         this.bigTriangle2 = new MyTriangleBig(this.scene);
+        this.initMaterials();
+    }
+
+    initMaterials(){
+        // Green color
+        this.green = new CGFappearance(this.scene);
+        this.green.setAmbient(0.1,0.1,0.1,1.0);
+        this.green.setDiffuse(0,1,0,1.0);
+        this.green.setSpecular(1,1,1,1.0);
+        this.green.setShininess(10.0);
+
+        // Blue color
+        this.blue = new CGFappearance(this.scene);
+        this.blue.setAmbient(0.1,0.1,0.1,1.0);
+        this.blue.setDiffuse(0,0.749*0.7,1*0.7,1.0);
+        this.blue.setSpecular(1,1,1,1.0);
+        this.blue.setShininess(10.0);
+
+        // Pink color
+        this.pink = new CGFappearance(this.scene);
+        this.pink.setAmbient(0.1,0.1,0.1,1.0);
+        this.pink.setDiffuse(1*0.7,0.714*0.7,0.757*0.7,1.0);
+        this.pink.setSpecular(1,1,1,0);
+        this.pink.setShininess(10.0);
+
+        // orange color
+        this.orange = new CGFappearance(this.scene);
+        this.orange.setAmbient(0.1,0.1,0.1,1.0);
+        this.orange.setDiffuse(1*0.7,0.647*0.7,0,1.0);
+        this.orange.setSpecular(1,1,1,0);
+        this.orange.setShininess(10.0);
+
+        // yellow color
+        this.yellow = new CGFappearance(this.scene);
+        this.yellow.setAmbient(0.1,0.1,0.1,1.0);
+        this.yellow.setDiffuse(1*0.7,1*0.7,0,1.0);
+        this.yellow.setSpecular(1,1,1,0);
+        this.yellow.setShininess(10.0);
+
+        // red color
+        this.red = new CGFappearance(this.scene);
+        this.red.setAmbient(0.1,0.1,0.1,1.0);
+        this.red.setDiffuse(1*0.7,0,0,1.0);
+        this.red.setSpecular(1,1,1,0);
+        this.red.setShininess(10.0);
+
+        // purple color
+        this.purple = new CGFappearance(this.scene);
+        this.purple.setAmbient(0.1,0.1,0.1,1.0);
+        this.purple.setDiffuse(0.58*0.7,0,0.827*0.7,1.0);
+        this.purple.setSpecular(1,1,1,1.0);
+        this.purple.setShininess(10.0);
     }
 
     display() {
         this.setupY = 0.70;
 
         // Green Diamond 
-        this.scene.setDiffuse(0.0, 1, 0.0, 1.0);
+        //this.scene.setDiffuse(0.0, 1, 0.0, 1.0);
   
         var rad = 45 * Math.PI / 180; 
         var rotDiamond = [
@@ -46,13 +98,15 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(transDiamond);
         this.scene.multMatrix(rotDiamond);
+        //this.diamondMaterial.apply();
+        this.scene.customMaterial.apply();
         this.diamond.display();
         this.scene.popMatrix();
         // -----------------------------------------------
 
 
         // Purple Small Triangle
-        this.scene.setDiffuse(0.5, 0.0, 0.5, 1.0);
+        //this.scene.setDiffuse(0.5, 0.0, 0.5, 1.0);
 
         var rad = 45 * Math.PI / 180; 
 
@@ -65,13 +119,14 @@ export class MyTangram extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.multMatrix(rotsmallTriangle1);
+        this.purple.apply();
         this.smallTriangle1.display();
         this.scene.popMatrix();
         // -----------------------------------------------
 
 
         // Yellow Parallelogram
-        this.scene.setDiffuse(1.0, 1.0, 0.0, 1.0);
+        //this.scene.setDiffuse(1.0, 1.0, 0.0, 1.0);
 
         var rad = 45 * Math.PI / 180;
 
@@ -100,13 +155,14 @@ export class MyTangram extends CGFobject {
         this.scene.multMatrix(transParallelogram);
         this.scene.multMatrix(rotParallelogram);
         this.scene.multMatrix(scaleParallelogram);
+        this.yellow.apply();
         this.parallelogram.display();
         this.scene.popMatrix();
         // -----------------------------------------------
 
 
         // Pink Triangle
-        this.scene.setDiffuse(1.0, 0.5, 0.5, 1.0);
+        //this.scene.setDiffuse(1.0, 0.5, 0.5, 1.0);
 
         var rad = - 135 * Math.PI / 180; 
 
@@ -127,13 +183,14 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(transTriangle);
         this.scene.multMatrix(rotTriangle);
+        this.pink.apply();
         this.triangle.display();
         this.scene.popMatrix();
         // -----------------------------------------------
 
 
         // Blue Big Triangle
-        this.scene.setDiffuse(0.2, 0.4, 0.8, 1.0);
+        //this.scene.setDiffuse(0.2, 0.4, 0.8, 1.0);
 
         var rad = 90 * Math.PI / 180; 
 
@@ -154,13 +211,14 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(transBigTriangle1);
         this.scene.multMatrix(rotBigTriangle1);
+        this.blue.apply();
         this.bigTriangle1.display();
         this.scene.popMatrix();
         // -----------------------------------------------
 
 
         // Orange Big Triangle
-        this.scene.setDiffuse(1.0, 0.5, 0.0, 1.0);
+        //this.scene.setDiffuse(1.0, 0.5, 0.0, 1.0);
 
         var rad = -90 * Math.PI / 180; 
 
@@ -181,11 +239,12 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(transBigTriangle2);
         this.scene.multMatrix(rotBigTriangle2);
+        this.orange.apply();
         this.bigTriangle2.display();
         this.scene.popMatrix();
 
         // Red Small Triangle
-        this.scene.setDiffuse(1.0, 0.0, 0.0, 1.0);
+        //this.scene.setDiffuse(1.0, 0.0, 0.0, 1.0);
 
         var rad = 135 * Math.PI / 180; 
 
@@ -206,6 +265,7 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(transSmallTriangle2);
         this.scene.multMatrix(rotSmallTriangle2);
+        this.red.apply();
         this.smallTriangle2.display();
         this.scene.popMatrix();
         // -----------------------------------------------

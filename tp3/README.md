@@ -22,6 +22,7 @@
 
 ![Screenshot 1b](screenshots/cg-t09-g12-tp3-1b.png)
 
+
 ### Exercício 2
 
 - No ponto 7 criamos a instancia do `MyPrism` com um número variável de slices e stacks, depois criamos as normais do prisma.
@@ -32,3 +33,13 @@
 
 ![Screenshot 2](screenshots/cg-t09-g12-tp3-2.png)
 
+
+### Exercício 3
+
+- No ponto 10 e 11 criamos uma nova classe `MyCylinder` aproveitando a classe `MyPrism` desenvolvida anteriormente. Nesta, foram determinados os respetivos vértices, índices e normais (perpendiculares à superfície do circulo perfeito em que o prisma original está inscrito) de acordo com um número variável de slices e stacks.
+
+- No ponto 12 importamos o ficheiro **MyCylinder.js** na classe `MyScene` e criamos uma instância `MyCylinder` na função `init()` com **8 slices** e **20 stacks**. Por último, adicionamos a instância à lista de objetos disponibilizados para display. Este foi o resultado observado até ao momento:
+
+![Screenshot 3](screenshots/cg-t09-g12-tp3-3.png)
+
+- No ponto 13 verificamos que, através da aplicação desta metodologia, é possível adquirir uma maior suavidade nas arestas e fornecer ao observador uma perceção curvilínea da superfície dos objetos.

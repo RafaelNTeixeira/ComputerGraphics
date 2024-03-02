@@ -21,3 +21,14 @@
 - No ponto 6 aplicamos o material **Custom** na peça `MyDiamond`, sendo este material controlável na interface:
 
 ![Screenshot 1b](screenshots/cg-t09-g12-tp3-1b.png)
+
+### Exercício 2
+
+- No ponto 7 criamos a instancia do `MyPrism` com um número variável de slices e stacks, depois criamos as normais do prisma.
+
+- No ponto 8 importamos o `MyPrism` para a `MyScene`, onde criamos um prima com 8 lados e display do prisma.
+
+- No ponto 9 implementamos um suporte para o desenho de vários andares e desenhamos com 20 andares.
+
+![Screenshot 2](screenshots/cg-t09-g12-tp3-2.png)
+

@@ -50,6 +50,10 @@ export class MyPrism extends CGFobject {
 	}
 
     updateBuffers(complexity){
+        this.slices = 3 + Math.round(9 * complexity);
+        
+        this.initBuffers();
+        this.initNormalVizBuffers();
     }
     
 }

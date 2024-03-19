@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
 import { MyTangram } from "./MyTangram.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -25,10 +26,20 @@ export class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
+        //------ Textures
+        this.texture1 = new CGFtexture(this, 'images/board.jpg');
+        this.texture2 = new CGFtexture(this, 'images/floor.png');
+        this.texture3 = new CGFtexture(this, 'images/window.jpg');
+        this.topTex = new CGFtexture(this, 'images/mineTop.png');
+        this.bottomTex = new CGFtexture(this, 'images/mineBottom.png');
+        this.sideTex = new CGFtexture(this, 'images/mineSide.png');
+        //-------
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
+        this.unitCube = new MyUnitCubeQuad(this, this.topTex, this.sideTex, this.sideTex, this.sideTex, this.sideTex, this.bottomTex);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -40,18 +51,13 @@ export class MyScene extends CGFscene {
         this.quadMaterial.setTextureWrap('REPEAT', 'REPEAT');
         //------
 
-        //------ Textures
-        this.texture1 = new CGFtexture(this, 'images/board.jpg');
-        this.texture2 = new CGFtexture(this, 'images/floor.png');
-        this.texture3 = new CGFtexture(this, 'images/window.jpg');
-        //-------
-
         //-------Objects connected to MyInterface
         this.displayAxis = true;
         this.scaleFactor = 5;
         this.selectedTexture = -1;     
-        this.tangramVisible = true;  
+        this.tangramVisible = false;  
         this.quadVisible = false;
+        this.unitCubeVisible = true;
         this.wrapS = 0;
         this.wrapT = 0;
 
@@ -134,6 +140,10 @@ export class MyScene extends CGFscene {
 
         if (this.tangramVisible) {
             this.tangram.display();
+        }
+
+        if (this.unitCubeVisible) {
+            this.unitCube.display();
         }
         // ---- END Primitive drawing section
     }

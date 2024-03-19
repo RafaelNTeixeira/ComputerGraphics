@@ -13,3 +13,8 @@
 - No ponto 3, definimos as coordenadas de textura das restantes peças do tangram. Para o caso de elementos repetidos, como o caso do `MyTriangleBig`, estavamos com dificuldades em descobrir como criar dois objetos do mesmo tipo com **texCoords** diferentes. Como solução, acabamos por acrescentar um parâmetro no construtor do objeto `MyTriangleBig` que irá receber as **texCoords**, de forma a que possamos realizar um mapeamento distinto das coordenadas de textura para cada objeto criado.
 
 ![Screenshot 1](screenshots/cg-t09-g12-tp4-1.png)
+
+
+### Exercício 2
+
+- No ponto 4, copiamos a class MyUnitCubeQuad desenvolvida no **tp2**. Como o objeto `MyQuad`, já disponibilizado nesta aula, possui configurações diferentes ao nosso `MyQuad` desenvolvido na **tp2**, o nosso `MyUnitCubeQuad` ficou mal construído, sendo necessário alterar as configurações do mesmo.

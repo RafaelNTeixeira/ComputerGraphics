@@ -16,8 +16,24 @@ export class MyTangram extends CGFobject {
         this.diamond = new MyDiamond(this.scene);
         this.triangle = new MyTriangle(this.scene);
         this.parallelogram = new MyParallelogram(this.scene);
-        this.smallTriangle1 = new MyTriangleSmall(this.scene);
-        this.smallTriangle2 = new MyTriangleSmall(this.scene);
+        this.smallTriangle1 = new MyTriangleSmall(this.scene, [
+			0, 0,
+			0.25, 0.25,
+			0, 0.5
+			,
+			0, 0,
+			0.25, 0.25,
+			0, 0.5
+		]);
+        this.smallTriangle2 = new MyTriangleSmall(this.scene, [
+			0.25, 0.75,
+			0.5, 0.5,
+			0.75, 0.75
+			,
+			0.25, 0.75,
+			0.5, 0.5,
+			0.75, 0.75 
+		]);
         this.bigTriangle1 = new MyTriangleBig(this.scene, [
 			1.0, 0,
 			0.5, 0.5,
@@ -154,46 +170,12 @@ export class MyTangram extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.multMatrix(rotsmallTriangle1);
-        this.purple.apply();
+        //this.purple.apply();
+        this.texture.apply();
         this.smallTriangle1.display();
         this.scene.popMatrix();
         // -----------------------------------------------
 
-
-        // Yellow Parallelogram
-        //this.scene.setDiffuse(1.0, 1.0, 0.0, 1.0);
-
-        var rad = 45 * Math.PI / 180;
-
-        var rotParallelogram = [
-            Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-            Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, 0.0, 0.0, 1.0
-        ];
-
-        var transParallelogram = [
-            1.0, 0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            this.setupY, -4*this.setupY, 0.0, 1.0
-        ]
-
-        var scaleParallelogram = [
-            -1.0, 0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, 0.0, 0.0, 1.0
-        ]
-
-        this.scene.pushMatrix();
-        this.scene.multMatrix(transParallelogram);
-        this.scene.multMatrix(rotParallelogram);
-        this.scene.multMatrix(scaleParallelogram);
-        this.yellow.apply();
-        this.parallelogram.display();
-        this.scene.popMatrix();
-        // -----------------------------------------------
 
 
         // Pink Triangle
@@ -218,7 +200,8 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(transTriangle);
         this.scene.multMatrix(rotTriangle);
-        this.pink.apply();
+        this.texture.apply();
+        //this.pink.apply();
         this.triangle.display();
         this.scene.popMatrix();
         // -----------------------------------------------
@@ -302,7 +285,8 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(transSmallTriangle2);
         this.scene.multMatrix(rotSmallTriangle2);
-        this.red.apply();
+        // this.red.apply();
+        this.texture.apply();
         this.smallTriangle2.display();
         this.scene.popMatrix();
         // -----------------------------------------------

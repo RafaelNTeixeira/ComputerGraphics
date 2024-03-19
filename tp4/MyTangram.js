@@ -162,8 +162,7 @@ export class MyTangram extends CGFobject {
 
         // Yellow Parallelogram
         //this.scene.setDiffuse(1.0, 1.0, 0.0, 1.0);
-
-        var rad = 45 * Math.PI / 180;
+        var rad = -45 * Math.PI / 180;
 
         var rotParallelogram = [
             Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
@@ -187,12 +186,17 @@ export class MyTangram extends CGFobject {
         ]
 
         this.scene.pushMatrix();
+        
         this.scene.multMatrix(transParallelogram);
         this.scene.multMatrix(rotParallelogram);
-        this.scene.multMatrix(scaleParallelogram);
+        //this.scene.multMatrix(scaleParallelogram);
         this.yellow.apply();
+        this.texture.apply();
         this.parallelogram.display();
         this.scene.popMatrix();
+        
+
+
         // -----------------------------------------------
 
 
@@ -246,8 +250,8 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(transBigTriangle1);
         this.scene.multMatrix(rotBigTriangle1);
+        this.blue.apply();
         this.texture.apply();
-        //this.blue.apply();
         this.bigTriangle1.display();
         this.scene.popMatrix();
         // -----------------------------------------------
@@ -275,8 +279,8 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(transBigTriangle2);
         this.scene.multMatrix(rotBigTriangle2);
+        this.orange.apply();
         this.texture.apply();
-        //this.orange.apply();
         this.bigTriangle2.display();
         this.scene.popMatrix();
 

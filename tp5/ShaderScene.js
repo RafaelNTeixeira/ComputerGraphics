@@ -90,6 +90,7 @@ export class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
 			new CGFshader(this.gl, "shaders/teapot.vert", "shaders/teapot.frag"),
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/graysepia.frag"),
 			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag")
 		];
 
@@ -98,7 +99,9 @@ export class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
-		this.testShaders[10].setUniformsValues({ timeFactor: 0.5 });
+		this.testShaders[10].setUniformsValues({ timeFactor: 0 });
+		this.testShaders[11].setUniformsValues({ timeFactor: 0.5 });
+		
 
 
 		// Shaders interface variables
@@ -114,7 +117,9 @@ export class ShaderScene extends CGFscene {
 			'Sepia': 7,
 			'Convolution': 8,
 			'Bule': 9,
-			'Water': 10
+			'GreySepia' : 10,
+			'Water': 11
+			
 		};
 
 		// shader code panels references
@@ -201,6 +206,8 @@ export class ShaderScene extends CGFscene {
 			// ( so the loop period of timeFactor is 100 times 100 ms = 10s ; the actual animation loop depends on how timeFactor is used in the shader )
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 100 });
 			this.testShaders[10].setUniformsValues({ timeFactor: t / 100 % 100 });
+			this.testShaders[11].setUniformsValues({ timeFactor: t / 100 % 100 });
+			
 	}
 
 	// main display function

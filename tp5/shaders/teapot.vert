@@ -12,6 +12,7 @@ varying vec4 vertice;
 
 void main() {
     // y e z mantêm-se, x altera-se
-    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition.x, aVertexPosition.y, aVertexPosition.z, 1.0);
+    float sinWave = normScale + sin(timeFactor);
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition.x + sinWave, aVertexPosition.y, aVertexPosition.z, 1.0);
     vertice = gl_Position;
 }

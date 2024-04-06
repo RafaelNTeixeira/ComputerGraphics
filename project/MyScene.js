@@ -79,6 +79,11 @@ export class MyScene extends CGFscene {
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
+    if (this.displayNormals)
+      this.sphere.enableNormalViz();
+    else
+      this.sphere.disableNormalViz();
+
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();
@@ -89,17 +94,12 @@ export class MyScene extends CGFscene {
     this.plane.display();
     this.popMatrix();
 
-    // ---- END Primitive drawing section
-
-    if (this.displayNormals)
-            this.sphere.enableNormalViz();
-        else
-            this.sphere.disableNormalViz();
-
     this.pushMatrix();
     this.earthTexture.bind();
     this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
     this.sphere.display();
     this.popMatrix();
+
+    // ---- END Primitive drawing section
   }
 }

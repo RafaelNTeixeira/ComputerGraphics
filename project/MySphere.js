@@ -19,7 +19,7 @@ export class MySphere extends CGFobject {
         this.texCoords = [];
         
         const angSlice = 2 * Math.PI / this.slices; // Angular increment for slicing the sphere horizontally (around the equator)
-        const angStack = Math.PI / (2 * this.stacks); // Angular increment for slicing the sphere vertically (pole to pole)
+        const angStack = Math.PI / (this.stacks); // Angular increment for slicing the sphere vertically (pole to pole)
 
         // Iterate over each stack and slice to calculate the vertices, normals, and texture coordinates
         for (let i = 0; i <= this.stacks; i++) {
@@ -81,11 +81,6 @@ export class MySphere extends CGFobject {
 
             this.indices.push(firstVertexIndex, secondVertexIndex, thirdVertexIndex);
         }
-
-        console.log(this.vertices);
-        console.log(this.normals);
-        console.log(this.texCoords);
-        console.log(this.indices);
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();

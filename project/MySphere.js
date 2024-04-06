@@ -18,8 +18,8 @@ export class MySphere extends CGFobject {
         this.normals = [];
         this.texCoords = [];
         
-        const angSlice = 2 * Math.PI / this.slices; // Angular increment for slicing the sphere horizontally (around the equator)
-        const angStack = Math.PI / (this.stacks); // Angular increment for slicing the sphere vertically (pole to pole)
+        const angSlice = 2 * Math.PI / this.slices; // Angular division for slicing the sphere horizontally (around the equator)
+        const angStack = Math.PI / (this.stacks); // Angular division for slicing the sphere vertically (pole to pole)
 
         // Iterate over each stack and slice to calculate the vertices, normals, and texture coordinates
         for (let i = 0; i <= this.stacks; i++) {
@@ -67,7 +67,7 @@ export class MySphere extends CGFobject {
         for (let j = 0; j < this.slices; j++) {
             const firstVertexIndex = j;
             const secondVertexIndex = j + 1;
-            const thirdVertexIndex = northPoleIndex;
+            const thirdVertexIndex = northPoleIndex; // To connect to the north pole
 
             this.indices.push(firstVertexIndex, secondVertexIndex, thirdVertexIndex);
         }
@@ -77,7 +77,7 @@ export class MySphere extends CGFobject {
         for (let j = 0; j < this.slices; j++) {
             const firstVertexIndex = lastIndex + j;
             const secondVertexIndex = lastIndex + j + 1;
-            const thirdVertexIndex = southPoleIndex;
+            const thirdVertexIndex = southPoleIndex; // To connect to the south pole
 
             this.indices.push(firstVertexIndex, secondVertexIndex, thirdVertexIndex);
         }

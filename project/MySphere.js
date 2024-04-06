@@ -43,7 +43,7 @@ export class MySphere extends CGFobject {
 
                 // Create the indices for the current slice and stack
                 if (i < this.stacks && j < this.slices) {
-                    const current = i * (this.slices + 1) + j;
+                    const current = i * (this.slices) + j;
                     const next = current + this.slices + 1;
                     this.indices.push(current + 1, next, current);
                     this.indices.push(current + 1, next + 1, next);

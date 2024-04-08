@@ -21,7 +21,7 @@ export class MySphere extends CGFobject {
         const angSlice = 2 * Math.PI / this.slices; // Angular division for slicing the sphere horizontally (around the equator)
         const angStack = Math.PI / (this.stacks); // Angular division for slicing the sphere vertically (pole to pole)
 
-        // Iterate over each stack and slice to calculate the vertices, normals, and texture coordinates
+        // Iterate over each stack and slice to calculate the vertices, normals and texture coordinates
         for (let i = 0; i <= this.stacks; i++) {
             const stackRadius = Math.sin(i * angStack);
             const stackY = Math.cos(i * angStack);
@@ -39,7 +39,7 @@ export class MySphere extends CGFobject {
                 // Vertices are in places that point directly outwards from the center of the sphere so their values are utilized for the normals too
                 this.vertices.push(nx, ny, nz);
                 this.normals.push(nx, ny, nz);
-                this.texCoords.push(j / this.slices, i / this.stacks);
+                this.texCoords.push(-j / this.slices, i / this.stacks);
 
                 // Create the indices for the current slice and stack
                 if (i < this.stacks && j < this.slices) {

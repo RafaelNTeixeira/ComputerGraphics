@@ -1,11 +1,12 @@
 import { CGFobject } from '../lib/CGF.js';
 
 export class MySphere extends CGFobject {
-    constructor(scene, radius, slices, stacks) {
+    constructor(scene, radius, slices, stacks, viewInside=false) {
         super(scene);
         this.radius = radius;
         this.slices = slices;
         this.stacks = stacks;
+        this.viewInside = viewInside ? -1 : 1;
         this.initBuffers();
     }
     /**
@@ -32,14 +33,14 @@ export class MySphere extends CGFobject {
                 const z = Math.sin(j * angSlice) * stackRadius;
 
                 // Normal coord values of current slice
-                const nx = x / this.radius; // Normalized
-                const ny = stackY / this.radius;  // Normalized. All the slices in a stack have the same Y value of the current stack
-                const nz = z / this.radius; // Normalized
+                const nx = (x / this.radius) * this.viewInside; // Normalized
+                const ny = (stackY / this.radius) * this.viewInside;  // Normalized. All the slices in a stack have the same Y value of the current stack
+                const nz = (z / this.radius) * this.viewInside; // Normalized
     
                 // Add the vertex, normal, and texture coordinate to their respective arrays
-                // Vertices are in places that point directly outwards from the center of the sphere so their values are utilized for the normals too
                 this.vertices.push(x, stackY, z);
                 this.normals.push(nx, ny, nz);
+                
                 this.texCoords.push(-j / this.slices, i / this.stacks);
 
                 // Create the indices for the current slice and stack
@@ -54,13 +55,13 @@ export class MySphere extends CGFobject {
 
         // Connect north pole to first stack
         this.vertices.push(0, this.radius, 0);
-        this.normals.push(0, 1, 0);
+        this.normals.push(0, 1 * this.viewInside, 0);
         this.texCoords.push(0.5, 0);
         const northPoleIndex = this.vertices.length / 3 - 1;
         
         // Connect south pole to last stack
         this.vertices.push(0, -this.radius, 0);
-        this.normals.push(0, -1, 0);
+        this.normals.push(0, -1 * this.viewInside, 0);
         this.texCoords.push(0.5, 1);
         const southPoleIndex = this.vertices.length / 3 - 1;
 

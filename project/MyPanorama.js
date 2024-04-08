@@ -8,15 +8,12 @@ export class MyPanorama extends CGFobject {
         this.appearance = new CGFappearance(this.scene);
         this.appearance.setEmission(1, 1, 1, 1);
         this.appearance.setTexture(panoramaTexture);
+        this.scaleFactor = 1;
     }
     
     display() {
         this.scene.pushMatrix();
         this.appearance.apply();
-
-        if (this.scene.viewPanorama) {
-            this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2])
-        }
 
         this.sphere.display()
         this.scene.popMatrix();

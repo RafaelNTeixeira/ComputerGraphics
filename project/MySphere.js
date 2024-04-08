@@ -1,8 +1,9 @@
 import { CGFobject } from '../lib/CGF.js';
 
 export class MySphere extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, radius, slices, stacks) {
         super(scene);
+        this.radius = radius;
         this.slices = slices;
         this.stacks = stacks;
         this.initBuffers();
@@ -23,21 +24,21 @@ export class MySphere extends CGFobject {
 
         // Iterate over each stack and slice to calculate the vertices, normals and texture coordinates
         for (let i = 0; i <= this.stacks; i++) {
-            const stackRadius = Math.sin(i * angStack);
-            const stackY = Math.cos(i * angStack);
+            const stackRadius = Math.sin(i * angStack) * this.radius;
+            const stackY = Math.cos(i * angStack) * this.radius;
 
             for (let j = 0; j <= this.slices; j++) {
-                const x = Math.cos(j * angSlice);
-                const z = Math.sin(j * angSlice);
+                const x = Math.cos(j * angSlice) * stackRadius;
+                const z = Math.sin(j * angSlice) * stackRadius;
 
                 // Normal coord values of current slice
-                const nx = stackRadius * x;
-                const ny = stackY;  // All the slices in a stack have the same Y value of the current stack
-                const nz = stackRadius * z;
+                const nx = x / this.radius; // Normalized
+                const ny = stackY / this.radius;  // Normalized. All the slices in a stack have the same Y value of the current stack
+                const nz = z / this.radius; // Normalized
     
                 // Add the vertex, normal, and texture coordinate to their respective arrays
                 // Vertices are in places that point directly outwards from the center of the sphere so their values are utilized for the normals too
-                this.vertices.push(nx, ny, nz);
+                this.vertices.push(x, stackY, z);
                 this.normals.push(nx, ny, nz);
                 this.texCoords.push(-j / this.slices, i / this.stacks);
 
@@ -52,13 +53,13 @@ export class MySphere extends CGFobject {
         }
 
         // Connect north pole to first stack
-        this.vertices.push(0, 1, 0);
+        this.vertices.push(0, this.radius, 0);
         this.normals.push(0, 1, 0);
         this.texCoords.push(0.5, 0);
         const northPoleIndex = this.vertices.length / 3 - 1;
         
         // Connect south pole to last stack
-        this.vertices.push(0, -1, 0);
+        this.vertices.push(0, -this.radius, 0);
         this.normals.push(0, -1, 0);
         this.texCoords.push(0.5, 1);
         const southPoleIndex = this.vertices.length / 3 - 1;

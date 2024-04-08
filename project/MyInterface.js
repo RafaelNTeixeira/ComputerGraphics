@@ -22,7 +22,7 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayNormals').name("Display normals");
 
         //Slider element in GUI
-        this.gui.add(this.scene, 'scaleFactor', 1, 10).name('Scale Factor');
+        this.gui.add(this.scene, 'scaleFactor', 0.1, 1).name('Scale Factor');
 
         return true;
     }

@@ -28,7 +28,7 @@ export class MyScene extends CGFscene {
     this.enableTextures(true);
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.earthTexture = new CGFtexture(this, 'images/earth.jpg');
-    this.panoramaTexture = new CGFtexture(this, 'images/panorama.jpg');
+    this.panoramaTexture = new CGFtexture(this, 'images/panorama4.jpg');
     console.log(this.panoramaTexture);
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);

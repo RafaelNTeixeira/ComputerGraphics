@@ -46,8 +46,15 @@ export class MySphere extends CGFobject {
                 if (i < this.stacks && j < this.slices) {
                     const current = i * (this.slices) + j;
                     const next = current + this.slices + 1;
-                    this.indices.push(current + 1, next, current);
-                    this.indices.push(current + 1, next + 1, next);
+                    if (this.viewInside == -1){
+                        this.indices.push(current, next, current+1);
+                        this.indices.push(next, next + 1, current+1);
+                    }
+                    else{
+                        this.indices.push(current + 1, next, current);
+                        this.indices.push(current + 1, next + 1, next);
+                    }
+                    
                 }
             }
         }

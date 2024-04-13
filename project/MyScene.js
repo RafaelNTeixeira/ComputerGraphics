@@ -5,6 +5,7 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyPetal } from "./MyPetal.js";
 import { MyReceptacle } from "./MyReceptacle.js";
 import { MyStem } from "./MyStem.js";
+import { MyFlower } from "./MyFlower.js";
 
 /**
  * MyScene
@@ -45,6 +46,7 @@ export class MyScene extends CGFscene {
     this.petal =  new MyPetal(this);
     this.receptacle = new MyReceptacle(this);
     this.stem = new MyStem(this);
+    this.flower = new MyFlower(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -114,7 +116,8 @@ export class MyScene extends CGFscene {
     }
     //this.petal.display();
     //this.receptacle.display();
-    this.stem.display();
+    //this.stem.display();
+    this.flower.display();
 
     // ---- END Primitive drawing section
   }

@@ -9,7 +9,7 @@ export class MyStem extends CGFobject {
     initBuffers(){
         const numSegments = 30; // Number of segments to approximate the circular base of the cylinder
         const height = 2.5; // Height of the cylinder
-        const radius = 0.25; // Radius of the circular base
+        const radius = 0.2; // Radius of the circular base
 
         // Define vertices for the cylinder
         this.vertices = [];

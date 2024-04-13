@@ -65,4 +65,10 @@ export class MyStem extends CGFobject {
         this.initGLBuffers();
     }    
 
+    setRadiusandHeight(radius, height) {
+        this.radius = radius;
+        this.height = height;
+        this.initBuffers();
+    }
+
 }

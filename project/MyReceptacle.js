@@ -31,4 +31,9 @@ export class MyReceptacle extends CGFobject {
         this.initGLBuffers();
     }
 
+    setRadius(radius) {
+        this.radius = radius;
+        this.initBuffers();
+    }
+
 }

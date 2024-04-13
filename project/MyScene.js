@@ -38,16 +38,6 @@ export class MyScene extends CGFscene {
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    //Initialize scene objects
-    this.axis = new CGFaxis(this);
-    this.plane = new MyPlane(this, 30);
-    //this.sphere = new MySphere(this, 200, 50, 50);
-    this.panorama = new MyPanorama(this, this.panoramaTexture);
-    this.petal =  new MyPetal(this);
-    this.receptacle = new MyReceptacle(this);
-    this.stem = new MyStem(this);
-    this.flower = new MyFlower(this, 6, 0.7, 0.5, 0.2, 2.5);
-
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
@@ -64,6 +54,17 @@ export class MyScene extends CGFscene {
     this.displayPanorama = true;
     this.displayFlower = true;
     this.centerView = false;
+
+
+    //Initialize scene objects
+    this.axis = new CGFaxis(this);
+    this.plane = new MyPlane(this, 30);
+    //this.sphere = new MySphere(this, 200, 50, 50);
+    this.panorama = new MyPanorama(this, this.panoramaTexture);
+    this.petal =  new MyPetal(this);
+    this.receptacle = new MyReceptacle(this);
+    this.stem = new MyStem(this);
+    this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);

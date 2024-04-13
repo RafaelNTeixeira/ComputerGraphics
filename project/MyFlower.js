@@ -12,9 +12,18 @@ export class MyFlower extends CGFobject {
 		this.petal = new MyPetal(this.scene);
         this.receptacle = new MyReceptacle(this.scene, radiusCenter);
         this.stem = new MyStem(this.scene, radiusStem, heightStem);
+        this.updateFlowerParameters(this.receptacle, this.stem, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem);
+	}
+
+    updateFlowerParameters(receptacle, stem, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem) {
+        this.receptacle.setRadius(radiusCenter);
+        this.stem.setRadiusandHeight(radiusStem, heightStem);
         this.numPetals = numPetals;
         this.radiusPetals = radiusPetals;
-	}
+        this.radiusCenter = radiusCenter;
+        this.radiusStem = radiusStem;
+        this.heightStem = heightStem;
+    }
 
     display() {
         this.receptacle.display();

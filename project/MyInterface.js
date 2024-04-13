@@ -35,8 +35,6 @@ export class MyInterface extends CGFinterface {
         // Set up callback functions to update flower parameters
         numPetalsController.onChange((value) => {
             this.scene.flower.updateFlowerParameters(
-                this.scene.receptacle,
-                this.scene.stem,
                 value,
                 this.scene.radiusPetals,
                 this.scene.radiusCenter,
@@ -47,8 +45,6 @@ export class MyInterface extends CGFinterface {
 
         radiusPetalsController.onChange((value) => {
             this.scene.flower.updateFlowerParameters(
-                this.scene.receptacle,
-                this.scene.stem,
                 this.scene.numPetals,
                 value,
                 this.scene.radiusCenter,
@@ -59,8 +55,6 @@ export class MyInterface extends CGFinterface {
 
         radiusCenterController.onChange((value) => {
             this.scene.flower.updateFlowerParameters(
-                this.scene.receptacle,
-                this.scene.stem,
                 this.scene.numPetals,
                 this.scene.radiusPetals,
                 value,
@@ -71,8 +65,6 @@ export class MyInterface extends CGFinterface {
 
         radiusStemController.onChange((value) => {
             this.scene.flower.updateFlowerParameters(
-                this.scene.receptacle,
-                this.scene.stem,
                 this.scene.numPetals,
                 this.scene.radiusPetals,
                 this.scene.radiusCenter,
@@ -83,8 +75,6 @@ export class MyInterface extends CGFinterface {
 
         heightStemController.onChange((value) => {
             this.scene.flower.updateFlowerParameters(
-                this.scene.receptacle,
-                this.scene.stem,
                 this.scene.numPetals,
                 this.scene.radiusPetals,
                 this.scene.radiusCenter,

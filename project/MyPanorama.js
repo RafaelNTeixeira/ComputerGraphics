@@ -4,7 +4,7 @@ import { MySphere } from './MySphere.js';
 export class MyPanorama extends CGFobject {
     constructor(scene, panoramaTexture) {
         super(scene);
-        this.sphere = new MySphere(this.scene, 50, 50, 50, true);
+        this.sphere = new MySphere(this.scene, 200, 50, 50, true);
         this.appearance = new CGFappearance(this.scene);
         this.appearance.setEmission(1, 1, 1, 1);
         this.appearance.setTexture(panoramaTexture);

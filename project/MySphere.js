@@ -43,10 +43,10 @@ export class MySphere extends CGFobject {
                 this.texCoords.push(-j / this.slices, i / this.stacks);
 
                 // Create the indices for the current slice and stack
-                if (i < this.stacks && j < this.slices) {
+                if (i <= this.stacks && j <= this.slices) {
                     const current = i * (this.slices) + j;
                     const next = current + this.slices + 1;
-                    if (this.viewInside == -1){
+                    if (this.viewInside == -1) {
                         this.indices.push(current, next, current+1);
                         this.indices.push(next, next + 1, current+1);
                     }
@@ -54,40 +54,8 @@ export class MySphere extends CGFobject {
                         this.indices.push(current + 1, next, current);
                         this.indices.push(current + 1, next + 1, next);
                     }
-                    
                 }
             }
-        }
-
-        // Connect north pole to first stack
-        this.vertices.push(0, this.radius, 0);
-        this.normals.push(0, 1 * this.viewInside, 0);
-        this.texCoords.push(0.5, 0);
-        const northPoleIndex = this.vertices.length / 3 - 1;
-        
-        // Connect south pole to last stack
-        this.vertices.push(0, -this.radius, 0);
-        this.normals.push(0, -1 * this.viewInside, 0);
-        this.texCoords.push(0.5, 1);
-        const southPoleIndex = this.vertices.length / 3 - 1;
-
-        // Connect the north pole with the first stack
-        for (let j = 0; j < this.slices; j++) {
-            const firstVertexIndex = j;
-            const secondVertexIndex = j + 1;
-            const thirdVertexIndex = northPoleIndex; // To connect to the north pole
-
-            this.indices.push(firstVertexIndex, secondVertexIndex, thirdVertexIndex);
-        }
-        
-        // Connect the south pole with the last stack
-        const lastIndex = (this.stacks - 1) * (this.slices + 1);
-        for (let j = 0; j < this.slices; j++) {
-            const firstVertexIndex = lastIndex + j;
-            const secondVertexIndex = lastIndex + j + 1;
-            const thirdVertexIndex = southPoleIndex; // To connect to the south pole
-
-            this.indices.push(firstVertexIndex, secondVertexIndex, thirdVertexIndex);
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;

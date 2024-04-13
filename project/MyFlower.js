@@ -17,7 +17,7 @@ export class MyFlower extends CGFobject {
 
     updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem) {
         this.receptacle.setRadius(radiusCenter);
-        this.stem.setRadiusandHeight(radiusStem, heightStem);
+        this.stem.setRadiusAndHeight(radiusStem, heightStem);
         this.numPetals = numPetals;
         this.radiusPetals = radiusPetals;
         this.radiusCenter = radiusCenter;

@@ -15,13 +15,18 @@ export class MyPanorama extends CGFobject {
         this.scene.pushMatrix();
         this.appearance.apply();
 
+        if (this.scene.infiniteView)
+            this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2])
+
+        if (this.scene.displayNormals) {
+            this.sphere.enableNormalViz();
+        }
+        else {
+            this.sphere.disableNormalViz();
+        }
+
         this.sphere.display()
         this.scene.popMatrix();
-
-        if (this.scene.displayNormals)
-            this.sphere.enableNormalViz();
-        else
-            this.sphere.disableNormalViz();
     }
     
 }

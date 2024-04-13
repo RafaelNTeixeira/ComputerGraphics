@@ -41,11 +41,11 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panoramaTexture);
 
     //Objects connected to MyInterface
-    this.displayAxis = true;
+    this.displayAxis = false;
     this.scaleFactor = 1;
     this.displayNormals = false;
     this.displayPanorama = true;
-    this.centerView = false;
+    this.infiniteView = false;
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -58,7 +58,7 @@ export class MyScene extends CGFscene {
       1.0,
       0.1,
       1000,
-      vec3.fromValues(15, 10, 15),
+      vec3.fromValues(40, 40, 10),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -87,7 +87,6 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    
     this.pushMatrix();
     this.appearance.apply();
     this.translate(0,-250,0);

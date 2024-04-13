@@ -40,7 +40,7 @@ export class MySphere extends CGFobject {
                 // Add the vertex, normal, and texture coordinate to their respective arrays
                 this.vertices.push(x, stackY, z);
                 this.normals.push(nx, ny, nz);
-                this.texCoords.push(-j / this.slices, i / this.stacks);
+                this.texCoords.push(j / this.slices, i / this.stacks);
 
                 // Create the indices for the current slice and stack
                 if (i <= this.stacks && j <= this.slices) {

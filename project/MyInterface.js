@@ -21,6 +21,12 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
         this.gui.add(this.scene, 'displayNormals').name("Display normals");
         this.gui.add(this.scene, 'displayPanorama').name("Display Panorama");
+        this.gui.add(this.scene, 'displayFlower').name("Display Flower");
+        this.gui.add(this.scene, 'numPetals', 1, 10, 1).name('Number of Petals');
+        this.gui.add(this.scene, 'radiusPetals', 0.1, 1).name('Outer radius Flower');
+        this.gui.add(this.scene, 'radiusCenter', 0.1, 1).name('Radius Receplacle');
+        this.gui.add(this.scene, 'radiusStem', 0.01, 1).name('Radius Stem');
+        this.gui.add(this.scene, 'heightStem', 0.5, 8).name('Height Stem');
         //this.gui.add(this.scene, 'centerView').name("Center View");
 
         //Slider element in GUI

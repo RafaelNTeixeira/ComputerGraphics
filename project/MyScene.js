@@ -46,13 +46,23 @@ export class MyScene extends CGFscene {
     this.petal =  new MyPetal(this);
     this.receptacle = new MyReceptacle(this);
     this.stem = new MyStem(this);
-    this.flower = new MyFlower(this);
+    this.flower = new MyFlower(this, 6, 0.7, 0.5, 0.2, 2.5);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
+
+    /* ---------- Os valores --------------*/
+    this.numPetals = 6;
+    this.radiusPetals = 0.7;
+    this.radiusCenter = 0.5;
+    this.radiusStem = 0.2;
+    this.heightStem = 2.5;
+    /* ----------------------------------- */
+
     this.displayNormals = false;
     this.displayPanorama = true;
+    this.displayFlower = true;
     this.centerView = false;
   }
   initLights() {
@@ -114,10 +124,11 @@ export class MyScene extends CGFscene {
     if (this.displayPanorama) {
       this.panorama.display();
     }
-    //this.petal.display();
-    //this.receptacle.display();
-    //this.stem.display();
-    this.flower.display();
+
+    if (this.displayFlower) {
+      this.flower.display();
+    }
+    
 
     // ---- END Primitive drawing section
   }

@@ -1,40 +1,41 @@
 import { CGFappearance, CGFobject } from '../lib/CGF.js';
 
 export class MyStem extends CGFobject {
-    constructor(scene) {
+    constructor(scene, radius, height) {
 		super(scene);
+        this.radius = radius;
+        this.height = height;
 		this.initBuffers();
 	}
 
     initBuffers(){
         const numSegments = 30; // Number of segments to approximate the circular base of the cylinder
-        const height = 2.5; // Height of the cylinder
-        const radius = 0.2; // Radius of the circular base
-
+        //const height = 2.5; 
+        //const radius = 0.2;
         // Define vertices for the cylinder
         this.vertices = [];
 
         // Vertices for the bottom circular base
         for (let i = 0; i < numSegments; i++) {
             const theta = (i / numSegments) * Math.PI * 2;
-            const x = radius * Math.cos(theta);
-            const y = radius * Math.sin(theta);
+            const x = this.radius * Math.cos(theta);
+            const y = this.radius * Math.sin(theta);
             this.vertices.push(x, y, 0); // Bottom circular base
         }
 
         // Vertices for the top circular base
         for (let i = 0; i < numSegments; i++) {
             const theta = (i / numSegments) * Math.PI * 2;
-            const x = radius * Math.cos(theta);
-            const y = radius * Math.sin(theta);
-            this.vertices.push(x, y, height); // Top circular base
+            const x = this.radius * Math.cos(theta);
+            const y = this.radius * Math.sin(theta);
+            this.vertices.push(x, y, this.height); // Top circular base
         }
 
         // Vertex for the center of the bottom circular base
         this.vertices.push(0, 0, 0);
 
         // Vertex for the center of the top circular base
-        this.vertices.push(0, 0, height);
+        this.vertices.push(0, 0, this.height);
 
         // Define indices to connect the vertices into triangles
         this.indices = [];

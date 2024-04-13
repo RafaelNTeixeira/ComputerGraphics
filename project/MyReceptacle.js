@@ -1,21 +1,22 @@
 import { CGFappearance, CGFobject } from '../lib/CGF.js';
 
 export class MyReceptacle extends CGFobject {
-    constructor(scene) {
+    constructor(scene, radius) {
 		super(scene);
+        this.radius = radius;
 		this.initBuffers();
 	}
 
     initBuffers() {
         const numSegments = 50; // Number of segments to approximate the circle
-        const radius = 0.5; // Radius of the smaller circle (mudar para ter outro tamanho)
+        //this.radius = 0.5;
 
         // Define vertices for the circle
         this.vertices = [];
         for (let i = 0; i < numSegments; i++) {
             const theta = (i / numSegments) * Math.PI * 2;
-            const x = radius * Math.cos(theta); // Scale down the x coordinate
-            const y = radius * Math.sin(theta); // Scale down the y coordinate
+            const x = this.radius * Math.cos(theta); // Scale down the x coordinate
+            const y = this.radius * Math.sin(theta); // Scale down the y coordinate
             this.vertices.push(x, y, 0);
         }
 

@@ -5,11 +5,15 @@ import { MyStem } from "./MyStem.js";
 
 
 export class MyFlower extends CGFobject {
-    constructor(scene) {
+    constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem) {
 		super(scene);
+        this.numPetals = numPetals;
+        this.radiusPetals = radiusPetals;
 		this.petal = new MyPetal(this.scene);
-        this.receptacle = new MyReceptacle(this.scene);
-        this.stem = new MyStem(this.scene);
+        this.receptacle = new MyReceptacle(this.scene, radiusCenter);
+        this.stem = new MyStem(this.scene, radiusStem, heightStem);
+        this.numPetals = numPetals;
+        this.radiusPetals = radiusPetals;
 	}
 
     display() {
@@ -38,24 +42,23 @@ export class MyFlower extends CGFobject {
         this.scene.popMatrix();     
         
         //Petals
-        const numPetals = 6; 
-        const angleIncrement = (2 * Math.PI) / numPetals;
+        const angleIncrement = (2 * Math.PI) / (this.numPetals);
 
-        for (let i = 0; i < numPetals + 1; i++) {
+        for (let i = 0; i < this.numPetals + 1; i++) {
             // Calculate the angle for this petal
             const angle = i * angleIncrement;
     
             // Calculate the position of the petal relative to the receptacle
-            const offsetX = Math.cos(angle) * 0.7; // Adjust the radius as needed
-            const offsetY = Math.sin(angle) * 0.7; // Adjust the radius as needed
+            const offsetX = Math.cos(angle) * this.radiusPetals; // Adjust the radius as needed
+            const offsetY = Math.sin(angle) * this.radiusPetals; // Adjust the radius as needed
     
             // Calculate the rotation angle for the petal
-            const rotationAngle = angle + 45 + Math.PI / 6; // Adjust the rotation as needed
+            const rotationAngle = angle + 45 + Math.PI / this.numPetals; // Adjust the rotation as needed
     
             // Apply transformations to position and rotate the petal
         
             this.scene.pushMatrix();
-            this.scene.translate(offsetX, offsetY, 0); // Translate to position
+            this.scene.translate(offsetX, offsetY, -0.001); // Translate to position
             this.scene.rotate(rotationAngle, 0, 0, 1); // Rotate around the z-axis
 
             // Scale

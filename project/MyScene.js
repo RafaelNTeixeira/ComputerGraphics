@@ -6,6 +6,7 @@ import { MyPetal } from "./MyPetal.js";
 import { MyReceptacle } from "./MyReceptacle.js";
 import { MyStem } from "./MyStem.js";
 import { MyFlower } from "./MyFlower.js";
+import { MyGarden } from "./MyGarden.js";
 
 /**
  * MyScene
@@ -24,7 +25,6 @@ export class MyScene extends CGFscene {
       const b = Math.floor(Math.random() * 256);
       return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`; // Garantir que cor criada é compatível com hexToRgbA()
     };
-
 
     const randPetalColor = generateRandomColor();
     const randCenterColor = generateRandomColor();
@@ -82,16 +82,19 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
 
     /* ---------- Os valores --------------*/
-    this.numPetals = 6;
-    this.radiusPetals = 0.7;
-    this.radiusCenter = 0.5;
-    this.radiusStem = 0.2;
-    this.heightStem = 2.5;
+    this.numPetals = Math.floor(Math.random() * 10) + 1;
+    this.radiusPetals = Math.random() * 0.9 + 0.1;
+    this.radiusCenter = Math.random() * 0.5 + 0.5;
+    this.radiusStem = Math.random() * 0.25 + 0.25;
+    this.heightStem = Math.random() * (8 - 2.5) + 2.5;
+    this.gardenRows = 5;
+    this.gardenCols = 5;
     /* ----------------------------------- */
 
     this.displayNormals = false;
     this.displayPanorama = false;
-    this.displayFlower = true;
+    this.displayFlower = false;
+    this.displayGarden = true;
     this.centerView = false;
 
 
@@ -104,6 +107,7 @@ export class MyScene extends CGFscene {
     this.receptacle = new MyReceptacle(this);
     this.stem = new MyStem(this);
     this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem']);
+    this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
   }
 
   initLights() {
@@ -191,11 +195,11 @@ export class MyScene extends CGFscene {
     }
 
     if (this.displayFlower) {
-      this.petalsMaterial.apply();
-      this.centerMaterial.apply();
-      this.stemMaterial.apply();
-      this.leavesMaterial.apply();
       this.flower.display();
+    }
+
+    if (this.displayGarden) {
+      this.garden.display();
     }
     
     // ---- END Primitive drawing section

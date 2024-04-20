@@ -17,11 +17,25 @@ export class MyScene extends CGFscene {
   }
 
   initMaterials() {
+    // Gerar cor aleatória
+    const generateRandomColor = () => {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`; // Garantir que cor criada é compatível com hexToRgbA()
+    };
+
+
+    const randPetalColor = generateRandomColor();
+    const randCenterColor = generateRandomColor();
+    const randStemColor = generateRandomColor();
+    const randLeavesColor = generateRandomColor();
+
     this.customMaterialValues = {
-      'Color Petals': '#ff0000',
-      'Color Center': '#ffffe0',
-      'Color Stem': '#90ee90',
-      'Color Leaves': '#008000'
+      'Color Petals': randPetalColor,
+      'Color Center': randCenterColor,
+      'Color Stem': randStemColor,
+      'Color Leaves': randLeavesColor
     }
 
     this.petalsMaterial = new CGFappearance(this);

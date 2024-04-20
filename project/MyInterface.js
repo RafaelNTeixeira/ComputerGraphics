@@ -25,12 +25,15 @@ export class MyInterface extends CGFinterface {
         var f0 = this.gui.addFolder('Flower ');
         const numPetalsController = f0.add(this.scene, 'numPetals', 1, 10, 1).name('Number of Petals');
         const radiusPetalsController = f0.add(this.scene, 'radiusPetals', 0.1, 1).name('Outer radius Flower');
-        const radiusCenterController = f0.add(this.scene, 'radiusCenter', 0.1, 1).name('Radius Receplacle');
-        const radiusStemController = f0.add(this.scene, 'radiusStem', 0.01, 1).name('Radius Stem');
-        const heightStemController = f0.add(this.scene, 'heightStem', 0.5, 8).name('Height Stem');
+        const radiusCenterController = f0.add(this.scene, 'radiusCenter', 0.5, 1).name('Radius Receplacle');
+        const radiusStemController = f0.add(this.scene, 'radiusStem', 0.25, 0.5).name('Radius Stem');
+        const heightStemController = f0.add(this.scene, 'heightStem', 2.5, 8).name('Height Stem');
         //this.gui.add(this.scene, 'centerView').name("Center View");
-        var f1 = this.gui.addFolder('Color Flower ');
-        f1.addColor(this.scene.customMaterialValues,'Diffuse').onChange(this.scene.updateCustomMaterial.bind(this.scene));
+        var f1 = this.gui.addFolder('Color Flower');
+        const flowerPetalsColorController = f1.addColor(this.scene.customMaterialValues,'Color Petals').onChange(this.scene.updateCustomMaterial.bind(this.scene));
+        const flowerCenterColorController = f1.addColor(this.scene.customMaterialValues,'Color Center').onChange(this.scene.updateCustomMaterial.bind(this.scene));
+        const flowerStemColorController = f1.addColor(this.scene.customMaterialValues,'Color Stem').onChange(this.scene.updateCustomMaterial.bind(this.scene));
+        const flowerLeavesColorController = f1.addColor(this.scene.customMaterialValues,'Color Leaves').onChange(this.scene.updateCustomMaterial.bind(this.scene));
 
         //Slider element in GUI
         //this.gui.add(this.scene, 'scaleFactor', 0.1, 1).name('Scale Factor');
@@ -42,7 +45,11 @@ export class MyInterface extends CGFinterface {
                 this.scene.radiusPetals,
                 this.scene.radiusCenter,
                 this.scene.radiusStem,
-                this.scene.heightStem
+                this.scene.heightStem,
+                this.scene.customMaterialValues['Color Petals'],
+                this.scene.customMaterialValues['Color Center'],
+                this.scene.customMaterialValues['Color Stem'],
+                this.scene.customMaterialValues['Color Leaves']
             );
         });
 
@@ -52,7 +59,11 @@ export class MyInterface extends CGFinterface {
                 value,
                 this.scene.radiusCenter,
                 this.scene.radiusStem,
-                this.scene.heightStem
+                this.scene.heightStem,
+                this.scene.customMaterialValues['Color Petals'],
+                this.scene.customMaterialValues['Color Center'],
+                this.scene.customMaterialValues['Color Stem'],
+                this.scene.customMaterialValues['Color Leaves']
             );
         });
 
@@ -62,7 +73,11 @@ export class MyInterface extends CGFinterface {
                 this.scene.radiusPetals,
                 value,
                 this.scene.radiusStem,
-                this.scene.heightStem
+                this.scene.heightStem,
+                this.scene.customMaterialValues['Color Petals'],
+                this.scene.customMaterialValues['Color Center'],
+                this.scene.customMaterialValues['Color Stem'],
+                this.scene.customMaterialValues['Color Leaves']
             );
         });
 
@@ -72,7 +87,11 @@ export class MyInterface extends CGFinterface {
                 this.scene.radiusPetals,
                 this.scene.radiusCenter,
                 value,
-                this.scene.heightStem
+                this.scene.heightStem,
+                this.scene.customMaterialValues['Color Petals'],
+                this.scene.customMaterialValues['Color Center'],
+                this.scene.customMaterialValues['Color Stem'],
+                this.scene.customMaterialValues['Color Leaves']
             );
         });
 
@@ -82,9 +101,70 @@ export class MyInterface extends CGFinterface {
                 this.scene.radiusPetals,
                 this.scene.radiusCenter,
                 this.scene.radiusStem,
+                value,
+                this.scene.customMaterialValues['Color Petals'],
+                this.scene.customMaterialValues['Color Center'],
+                this.scene.customMaterialValues['Color Stem'],
+                this.scene.customMaterialValues['Color Leaves']
+            );
+        });
+
+        flowerPetalsColorController.onChange((value) => {
+            this.scene.flower.updateFlowerParameters(
+                this.scene.numPetals,
+                this.scene.radiusPetals,
+                this.scene.radiusCenter,
+                this.scene.radiusStem,
+                this.scene.heightStem,
+                value,
+                this.scene.customMaterialValues['Color Center'],
+                this.scene.customMaterialValues['Color Stem'],
+                this.scene.customMaterialValues['Color Leaves']
+            );
+        });
+
+        flowerCenterColorController.onChange((value) => {
+            this.scene.flower.updateFlowerParameters(
+                this.scene.numPetals,
+                this.scene.radiusPetals,
+                this.scene.radiusCenter,
+                this.scene.radiusStem,
+                this.scene.heightStem,
+                this.scene.customMaterialValues['Color Petals'],
+                value,
+                this.scene.customMaterialValues['Color Stem'],
+                this.scene.customMaterialValues['Color Leaves']
+            );
+        });
+
+        flowerStemColorController.onChange((value) => {
+            this.scene.flower.updateFlowerParameters(
+                this.scene.numPetals,
+                this.scene.radiusPetals,
+                this.scene.radiusCenter,
+                this.scene.radiusStem,
+                this.scene.heightStem,
+                this.scene.customMaterialValues['Color Petals'],
+                this.scene.customMaterialValues['Color Center'],
+                value,
+                this.scene.customMaterialValues['Color Leaves']
+            );
+        });
+
+        flowerLeavesColorController.onChange((value) => {
+            this.scene.flower.updateFlowerParameters(
+                this.scene.numPetals,
+                this.scene.radiusPetals,
+                this.scene.radiusCenter,
+                this.scene.radiusStem,
+                this.scene.heightStem,
+                this.scene.customMaterialValues['Color Petals'],
+                this.scene.customMaterialValues['Color Center'],
+                this.scene.customMaterialValues['Color Stem'],
                 value
             );
         });
+
 
         return true;
     }

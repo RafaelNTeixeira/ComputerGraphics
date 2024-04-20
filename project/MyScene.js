@@ -15,6 +15,30 @@ export class MyScene extends CGFscene {
   constructor() {
     super();
   }
+
+  initMaterials() {
+    this.customMaterialValues = {
+      'Color Petals': '#ff0000',
+      'Color Center': '#ffffe0',
+      'Color Stem': '#90ee90',
+      'Color Leaves': '#008000'
+    }
+
+    this.petalsMaterial = new CGFappearance(this);
+    this.centerMaterial = new CGFappearance(this);
+    this.stemMaterial = new CGFappearance(this);
+    this.leavesMaterial = new CGFappearance(this);
+
+    this.updateCustomMaterial();
+  }
+
+  updateCustomMaterial() {
+    this.petalsMaterial.setDiffuse(...this.hexToRgbA(this.customMaterialValues['Color Petals']));
+    this.centerMaterial.setDiffuse(...this.hexToRgbA(this.customMaterialValues['Color Center']));
+    this.stemMaterial.setDiffuse(...this.hexToRgbA(this.customMaterialValues['Color Stem']));
+    this.leavesMaterial.setDiffuse(...this.hexToRgbA(this.customMaterialValues['Color Leaves']));
+  };
+  
   init(application) {
     super.init(application);
     
@@ -65,7 +89,7 @@ export class MyScene extends CGFscene {
     this.petal =  new MyPetal(this);
     this.receptacle = new MyReceptacle(this);
     this.stem = new MyStem(this);
-    this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem);
+    this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem']);
   }
 
   initLights() {
@@ -94,35 +118,25 @@ export class MyScene extends CGFscene {
 
 
   hexToRgbA(hex) {
-        var ret;
-        //either we receive a html/css color or a RGB vector
-        if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-            ret=[
-                parseInt(hex.substring(1,3),16).toPrecision()/255.0,
-                parseInt(hex.substring(3,5),16).toPrecision()/255.0,
-                parseInt(hex.substring(5,7),16).toPrecision()/255.0,
-                1.0
-            ];
-        }
-        else
-            ret=[
-                hex[0].toPrecision()/255.0,
-                hex[1].toPrecision()/255.0,
-                hex[2].toPrecision()/255.0,
-                1.0
-            ];
-        return ret;
-    }
-
-    updateCustomMaterial() {
-        //this.customMaterial.setDiffuse(...this.hexToRgbA(this.customMaterialValues['Diffuse']));;
-    };
-
-    initMaterials() {
-      this.customMaterialValues = {
-        'Diffuse': '#ff0000',
+      var ret;
+      //either we receive a html/css color or a RGB vector
+      if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+          ret=[
+              parseInt(hex.substring(1,3),16).toPrecision()/255.0,
+              parseInt(hex.substring(3,5),16).toPrecision()/255.0,
+              parseInt(hex.substring(5,7),16).toPrecision()/255.0,
+              1.0
+          ];
       }
-    }
+      else
+          ret=[
+              hex[0].toPrecision()/255.0,
+              hex[1].toPrecision()/255.0,
+              hex[2].toPrecision()/255.0,
+              1.0
+          ];
+      return ret;
+  }
 
   display() {
     // ---- BEGIN Background, camera and axis setup
@@ -139,7 +153,6 @@ export class MyScene extends CGFscene {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
-
 
     // ---- BEGIN Primitive drawing section
 
@@ -164,6 +177,10 @@ export class MyScene extends CGFscene {
     }
 
     if (this.displayFlower) {
+      this.petalsMaterial.apply();
+      this.centerMaterial.apply();
+      this.stemMaterial.apply();
+      this.leavesMaterial.apply();
       this.flower.display();
     }
     

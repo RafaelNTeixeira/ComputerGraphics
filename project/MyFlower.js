@@ -5,17 +5,21 @@ import { MyStem } from "./MyStem.js";
 
 
 export class MyFlower extends CGFobject {
-    constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem) {
+    constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem) {
 		super(scene);
         this.numPetals = numPetals;
         this.radiusPetals = radiusPetals;
 		this.petal = new MyPetal(this.scene);
         this.receptacle = new MyReceptacle(this.scene, radiusCenter);
         this.stem = new MyStem(this.scene, radiusStem, heightStem);
-        this.updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem);
+        this.colorPetals = colorPetals;
+        this.colorCenter = colorCenter;
+        this.colorStem = colorStem;
+        this.updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem);
+
 	}
 
-    updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem) {
+    updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem) {
         this.receptacle.setRadius(radiusCenter);
         this.stem.setRadiusAndHeight(radiusStem, heightStem);
         this.numPetals = numPetals;
@@ -23,14 +27,17 @@ export class MyFlower extends CGFobject {
         this.radiusCenter = radiusCenter;
         this.radiusStem = radiusStem;
         this.heightStem = heightStem;
+        this.colorPetals = colorPetals;
+        this.colorCenter = colorCenter;
+        this.colorStem = colorStem;
     }
 
     display() {
-        this.scene.setDiffuse(1.0, 1.0, 0.0, 1.0);
+        this.scene.setDiffuse(...this.scene.hexToRgbA(this.colorCenter));
         this.receptacle.display();
 
         // Stem
-        this.scene.setDiffuse(0.0, 1, 0.0, 1.0);
+        this.scene.setDiffuse(...this.scene.hexToRgbA(this.colorStem));
         var rad = -90 * Math.PI / 180;
         var rotStem = [
             1.0, 0.0, 0.0, 0.0, 
@@ -52,11 +59,11 @@ export class MyFlower extends CGFobject {
         this.stem.display();
         this.scene.popMatrix();     
         
-        //Petals
-        this.scene.setDiffuse(0.5, 0.0, 0.5, 1.0);
+        // Petals
+        this.scene.setDiffuse(...this.scene.hexToRgbA(this.colorPetals));
         const angleIncrement = (2 * Math.PI) / (this.numPetals);
 
-        for (let i = 0; i < this.numPetals + 1; i++) {
+        for (let i = 0; i < this.numPetals; i++) {
             // Calculate the angle for this petal
             const angle = i * angleIncrement;
     
@@ -80,9 +87,7 @@ export class MyFlower extends CGFobject {
             // Display the petal
             this.petal.display();
             this.scene.popMatrix();
-
         }
-        
     }
 
 }

@@ -20,6 +20,7 @@ export class MyScene extends CGFscene {
     
     this.initCameras();
     this.initLights();
+    this.initMaterials();
 
     //Background color
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -51,7 +52,7 @@ export class MyScene extends CGFscene {
     /* ----------------------------------- */
 
     this.displayNormals = false;
-    this.displayPanorama = true;
+    this.displayPanorama = false;
     this.displayFlower = true;
     this.centerView = false;
 
@@ -66,12 +67,14 @@ export class MyScene extends CGFscene {
     this.stem = new MyStem(this);
     this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem);
   }
+
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
   }
+
   initCameras() {
     this.camera = new CGFcamera(
       1.0,
@@ -81,12 +84,46 @@ export class MyScene extends CGFscene {
       vec3.fromValues(0, 0, 0)
     );
   }
+
   setDefaultAppearance() {
     this.setAmbient(0.2, 0.4, 0.8, 1.0);
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+
+
+  hexToRgbA(hex) {
+        var ret;
+        //either we receive a html/css color or a RGB vector
+        if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+            ret=[
+                parseInt(hex.substring(1,3),16).toPrecision()/255.0,
+                parseInt(hex.substring(3,5),16).toPrecision()/255.0,
+                parseInt(hex.substring(5,7),16).toPrecision()/255.0,
+                1.0
+            ];
+        }
+        else
+            ret=[
+                hex[0].toPrecision()/255.0,
+                hex[1].toPrecision()/255.0,
+                hex[2].toPrecision()/255.0,
+                1.0
+            ];
+        return ret;
+    }
+
+    updateCustomMaterial() {
+        //this.customMaterial.setDiffuse(...this.hexToRgbA(this.customMaterialValues['Diffuse']));;
+    };
+
+    initMaterials() {
+      this.customMaterialValues = {
+        'Diffuse': '#ff0000',
+      }
+    }
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -130,7 +167,6 @@ export class MyScene extends CGFscene {
       this.flower.display();
     }
     
-
     // ---- END Primitive drawing section
   }
 }

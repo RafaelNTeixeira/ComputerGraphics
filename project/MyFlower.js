@@ -26,9 +26,11 @@ export class MyFlower extends CGFobject {
     }
 
     display() {
+        this.scene.setDiffuse(1.0, 1.0, 0.0, 1.0);
         this.receptacle.display();
 
         // Stem
+        this.scene.setDiffuse(0.0, 1, 0.0, 1.0);
         var rad = -90 * Math.PI / 180;
         var rotStem = [
             1.0, 0.0, 0.0, 0.0, 
@@ -51,6 +53,7 @@ export class MyFlower extends CGFobject {
         this.scene.popMatrix();     
         
         //Petals
+        this.scene.setDiffuse(0.5, 0.0, 0.5, 1.0);
         const angleIncrement = (2 * Math.PI) / (this.numPetals);
 
         for (let i = 0; i < this.numPetals + 1; i++) {

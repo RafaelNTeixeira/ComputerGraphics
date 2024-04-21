@@ -20,7 +20,7 @@ export class MyGarden extends CGFobject {
         this.flowers = [];
     
         const generateRandomFlower = () => {
-            const randNumPetals = Math.floor(Math.random() * 10) + 1;
+            const randNumPetals = Math.floor(Math.random() * 7) + 4;
             const randRadiusPetals = Math.random() * 0.9 + 0.1;
             const randRadiusCenter = Math.random() * 0.5 + 0.5;
             const randRadiusStem = Math.random() * 0.25 + 0.25;

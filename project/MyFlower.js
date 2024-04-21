@@ -9,7 +9,7 @@ export class MyFlower extends CGFobject {
 		super(scene);
         this.numPetals = numPetals;
         this.radiusPetals = radiusPetals;
-		this.petal = new MyPetal(this.scene);
+		this.petal = new MyPetal(this.scene, (Math.random() * 3.01));
         this.receptacle = new MyReceptacle(this.scene, radiusCenter);
         this.stem = new MyStem(this.scene, radiusStem, heightStem);
         this.colorPetals = colorPetals;
@@ -50,7 +50,7 @@ export class MyFlower extends CGFobject {
             1.0, 0.0, 0.0, 0.0,
             0.0, 1.0, 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
-            0.0, -0.25, 0.0, 1.0,
+            0.0, -this.radiusStem, 0.0, 1.0,
         ]
 
         this.scene.pushMatrix();

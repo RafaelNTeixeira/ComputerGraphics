@@ -1,10 +1,11 @@
 import { CGFappearance, CGFobject } from '../lib/CGF.js';
 
 export class MyStem extends CGFobject {
-    constructor(scene, radius, height) {
+    constructor(scene, radius, height, obliquity) {
 		super(scene);
         this.radius = radius;
         this.height = height;
+        this.obliquity = obliquity; // Obliquity angle in radians
 		this.initBuffers();
 	}
 
@@ -20,7 +21,8 @@ export class MyStem extends CGFobject {
             const theta = (i / numSegments) * Math.PI * 2;
             const x = this.radius * Math.cos(theta);
             const y = this.radius * Math.sin(theta);
-            this.vertices.push(x, y, 0); // Bottom circular base
+            const z = 0; // Bottom is at z = 0
+            this.vertices.push(x, y, z); // Bottom circular base
         }
 
         // Vertices for the top circular base
@@ -28,30 +30,31 @@ export class MyStem extends CGFobject {
             const theta = (i / numSegments) * Math.PI * 2;
             const x = this.radius * Math.cos(theta);
             const y = this.radius * Math.sin(theta);
-            this.vertices.push(x, y, this.height); // Top circular base
+            const z = this.height; // Top is at z = height
+            this.vertices.push(x + Math.cos(this.obliquity), y, z); // Top circular base
         }
 
         // Vertex for the center of the bottom circular base
-        this.vertices.push(0, 0, 0);
+        //this.vertices.push(0, 0, 0);
 
         // Vertex for the center of the top circular base
-        this.vertices.push(0, 0, this.height);
+        //this.vertices.push(0, 0, this.height);
 
         // Define indices to connect the vertices into triangles
         this.indices = [];
 
         // Indices for the bottom circular base
         for (let i = 0; i < numSegments - 1; i++) {
-            this.indices.push(i, i + 1, 2 * numSegments); // Connect to the center of the bottom circular base
+            this.indices.push(i, i + 1, numSegments); // Connect to the center of the bottom circular base
         }
-        this.indices.push(numSegments - 1, 0, 2 * numSegments); // Connect the last vertex to the first vertex
+        this.indices.push(numSegments - 1, 0, numSegments);
 
         // Indices for the top circular base
         const offset = numSegments;
-        for (let i = offset; i < 2 * numSegments - 1; i++) {
-            this.indices.push(i, i + 1, offset + 1 + numSegments); // Connect to the center of the top circular base
+        for (let i = 0; i < numSegments - 1; i++) {
+            this.indices.push(i, i + 1, numSegments - 1); // Connect to the center of the top circular base
         }
-        this.indices.push(2 * numSegments - 1, offset, offset + 1 + numSegments); // Connect the last vertex to the first vertex
+        this.indices.push(numSegments - 1, 0, numSegments);
 
         // Indices for the side faces
         for (let i = 0; i < numSegments; i++) {
@@ -65,10 +68,10 @@ export class MyStem extends CGFobject {
         this.initGLBuffers();
     }    
 
-    setRadiusAndHeight(radius, height) {
+    setRadiusHeightAndObliquity(radius, height, obliquity) {
         this.radius = radius;
         this.height = height;
+        this.obliquity = obliquity;
         this.initBuffers();
     }
-
 }

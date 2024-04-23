@@ -2,7 +2,7 @@ import { CGFappearance, CGFobject } from '../lib/CGF.js';
 import { MyPetal } from "./MyPetal.js";
 import { MyReceptacle } from "./MyReceptacle.js";
 import { MyStem } from "./MyStem.js";
-
+import { MyCylinder } from "./MyCylinder.js";
 
 export class MyFlower extends CGFobject {
     constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem) {
@@ -11,7 +11,8 @@ export class MyFlower extends CGFobject {
         this.radiusPetals = radiusPetals;
 		this.petal = new MyPetal(this.scene, (Math.random() * 3.01));
         this.receptacle = new MyReceptacle(this.scene, radiusCenter);
-        this.stem = new MyStem(this.scene, radiusStem, heightStem);
+        this.cylinder = new MyCylinder(this.scene, radiusStem, heightStem);
+        //this.stem = new MyStem(this.scene, radiusStem, heightStem);
         this.colorPetals = colorPetals;
         this.colorCenter = colorCenter;
         this.colorStem = colorStem;
@@ -21,7 +22,7 @@ export class MyFlower extends CGFobject {
 
     updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem) {
         this.receptacle.setRadius(radiusCenter);
-        this.stem.setRadiusAndHeight(radiusStem, heightStem);
+        this.cylinder.setRadiusAndHeight(radiusStem, heightStem);
         this.numPetals = numPetals;
         this.radiusPetals = radiusPetals;
         this.radiusCenter = radiusCenter;
@@ -37,6 +38,7 @@ export class MyFlower extends CGFobject {
         this.receptacle.display();
 
         // Stem
+      
         this.scene.setDiffuse(...this.scene.hexToRgbA(this.colorStem));
         var rad = -90 * Math.PI / 180;
         var rotStem = [
@@ -56,7 +58,7 @@ export class MyFlower extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(rotStem);
         this.scene.multMatrix(transStem);
-        this.stem.display();
+        this.cylinder.display();
         this.scene.popMatrix();     
         
         // Petals

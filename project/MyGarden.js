@@ -2,10 +2,13 @@ import { CGFobject } from '../lib/CGF.js';
 import { MyFlower } from './MyFlower.js';
 
 export class MyGarden extends CGFobject {
-    constructor(scene, numRows, numCols) {
+    constructor(scene, numRows, numCols, petalTextures, receptacleTextures, stemTextures) {
         super(scene);
         this.numRows = numRows;
         this.numCols = numCols;
+        this.petalTextures = petalTextures;
+        this.receptacleTextures = receptacleTextures;
+        this.stemTextures = stemTextures;
         this.initGarden();
     }
 
@@ -44,6 +47,9 @@ export class MyGarden extends CGFobject {
                 generateRandomColor(),
                 generateRandomColor(),
                 generateRandomColor(),
+                this.petalTextures,
+                this.receptacleTextures,
+                this.stemTextures
             );
         };
     

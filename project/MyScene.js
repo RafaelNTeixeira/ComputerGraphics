@@ -72,7 +72,33 @@ export class MyScene extends CGFscene {
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.earthTexture = new CGFtexture(this, 'images/earth.jpg');
     this.panoramaTexture = new CGFtexture(this, 'images/panorama4.jpg');
-    console.log(this.panoramaTexture);
+    this.petalTextures = [
+      new CGFtexture(this, 'images/petals/petal1.jpg'),
+      new CGFtexture(this, 'images/petals/petal2.jpg'),
+      new CGFtexture(this, 'images/petals/petal3.jpg')
+    ];
+    this.receptacleTextures = [
+      new CGFtexture(this, 'images/receptacles/receptacle1.jpg'),
+      new CGFtexture(this, 'images/receptacles/receptacle2.jpg'),
+      new CGFtexture(this, 'images/receptacles/receptacle3.jpg')
+    ];
+    this.stemTextures = [
+      new CGFtexture(this, 'images/stems/stem1.jpg'),
+      new CGFtexture(this, 'images/stems/stem2.jpg'),
+      new CGFtexture(this, 'images/stems/stem3.jpg')
+    ];
+    this.leafTextures = [
+      new CGFtexture(this, 'images/leaves/leaf1.jpg'),
+      new CGFtexture(this, 'images/leaves/leaf2.jpg')
+    ]
+    this.randomPetalTexture = this.petalTextures[Math.floor(Math.random() * this.petalTextures.length)];
+    this.randomReceptacleTexture = this.receptacleTextures[Math.floor(Math.random() * this.receptacleTextures.length)];
+    this.randomStemTexture = this.receptacleTextures[Math.floor(Math.random() * this.receptacleTextures.length)];
+
+    this.petalsMaterial.setTexture(this.randomPetalTexture);
+    this.centerMaterial.setTexture(this.randomReceptacleTexture);
+    this.stemMaterial.setTexture(this.randomStemTexture);
+
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -98,17 +124,15 @@ export class MyScene extends CGFscene {
     this.displayGarden = false;
     this.centerView = false;
 
-
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
     //this.sphere = new MySphere(this, 200, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaTexture);
-    this.petal =  new MyPetal(this);
-    this.receptacle = new MyReceptacle(this);
-    this.stem = new MyStem(this);
-    this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem']);
-    this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
+    this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, 
+      this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem'], 
+      this.randomPetalTexture, this.randomReceptacleTexture, this.randomStemTexture);
+    this.garden = new MyGarden(this, this.gardenRows, this.gardenCols, this.petalTextures, this.receptacleTextures, this.stemTextures);
   }
 
   initLights() {
@@ -134,7 +158,6 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
-
 
   hexToRgbA(hex) {
       var ret;

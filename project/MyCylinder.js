@@ -17,7 +17,7 @@ export class MyCylinder extends CGFobject {
         const times = parseInt(this.height / 2);
         this.stem.display();
         var bot = 2;
-        for (let i = 1; i < times; i++){
+        for (let i = 1; i < times; i++) {
             this.leaf(-2, this.radius - 0.1);
             var transCy = [
                 1.0, 0.0, 0.0, 0.0,
@@ -48,10 +48,9 @@ export class MyCylinder extends CGFobject {
                 this.scene.multMatrix(transCy1);
                 this.leaf(-1 - Math.cos(Math.PI), this.radius - 0.1, -1);
             }
+            this.scene.stemMaterial.apply();
             this.stem1.display();
             this.scene.popMatrix();
-
-            
         }
         
     }
@@ -94,6 +93,7 @@ export class MyCylinder extends CGFobject {
         }
         this.scene.multMatrix(rotPetal);
         this.scene.multMatrix(scalePetal);
+        this.scene.leavesMaterial.apply();
         this.petalLeaf.display();
         this.scene.popMatrix();
 

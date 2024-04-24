@@ -26,6 +26,14 @@ export class MyReceptacle extends CGFobject {
             this.indices.push(0, i, i + 1);
         }
 
+        this.texCoords = [];
+        for (let i = 0; i < numSegments; i++) {
+            const theta = (i / numSegments) * Math.PI * 2;
+            const s = 0.5 + 0.5 * Math.cos(theta); // Scale the texture coordinate in the s direction
+            const t = 0.5 + 0.5 * Math.sin(theta); // Scale the texture coordinate in the t direction
+            this.texCoords.push(s, t);
+        }
+
         this.primitiveType = this.scene.gl.TRIANGLES;
 
         this.initGLBuffers();
@@ -35,5 +43,4 @@ export class MyReceptacle extends CGFobject {
         this.radius = radius;
         this.initBuffers();
     }
-
 }

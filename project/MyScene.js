@@ -191,10 +191,6 @@ export class MyScene extends CGFscene {
     this.popMatrix();
     */
 
-    if (this.displayPanorama) {
-      this.panorama.display();
-    }
-
     if (this.displayFlower) {
       this.flower.display();
     }
@@ -202,6 +198,10 @@ export class MyScene extends CGFscene {
     if (this.displayGarden) {
       this.garden.display();
     }
+
+    if (this.displayPanorama) {
+      this.panorama.display();
+    }    
     
     // ---- END Primitive drawing section
   }

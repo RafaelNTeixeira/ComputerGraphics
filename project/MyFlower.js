@@ -1,7 +1,7 @@
 import { CGFappearance, CGFobject } from '../lib/CGF.js';
 import { MyPetal } from "./MyPetal.js";
 import { MyReceptacle } from "./MyReceptacle.js";
-import { MyStem } from "./MyStem.js";
+import { MyLeaf} from "./MyLeaf.js";
 import { MyCylinder } from "./MyCylinder.js";
 
 export class MyFlower extends CGFobject {

@@ -93,11 +93,13 @@ export class MyScene extends CGFscene {
     ]
     this.randomPetalTexture = this.petalTextures[Math.floor(Math.random() * this.petalTextures.length)];
     this.randomReceptacleTexture = this.receptacleTextures[Math.floor(Math.random() * this.receptacleTextures.length)];
-    this.randomStemTexture = this.receptacleTextures[Math.floor(Math.random() * this.receptacleTextures.length)];
+    this.randomStemTexture = this.stemTextures[Math.floor(Math.random() * this.stemTextures.length)];
+    this.randomLeafTexture = this.leafTextures[Math.floor(Math.random() * this.leafTextures.length)];
 
     this.petalsMaterial.setTexture(this.randomPetalTexture);
     this.centerMaterial.setTexture(this.randomReceptacleTexture);
     this.stemMaterial.setTexture(this.randomStemTexture);
+    this.leavesMaterial.setTexture(this.randomLeafTexture);
 
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
@@ -108,7 +110,7 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
 
     /* ---------- Os valores --------------*/
-    this.numPetals = Math.floor(Math.random() * 10) + 1;
+    this.numPetals = Math.floor(Math.random() * 6) + 5;
     this.radiusPetals = Math.random() * 1 + 0.1;
     this.radiusCenter = Math.random() * 0.13 + 0.5;
     this.radiusStem = Math.random() * 0.25 + 0.25;

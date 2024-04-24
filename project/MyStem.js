@@ -24,7 +24,7 @@ export class MyStem extends CGFobject {
             const y = this.radius * Math.sin(theta);
             const z = 0; // Bottom is at z = 0
             this.vertices.push(x, y, z); // Bottom circular base
-            this.texCoords.push(0.5 + 0.5 * Math.cos(theta), 0.5 + 0.5 * Math.sin(theta));
+            this.texCoords.push(0.5 + 0.5 * Math.cos(theta), 0.5 - 0.5 * Math.sin(theta));
         }
 
         // Vertices for the top circular base
@@ -34,7 +34,7 @@ export class MyStem extends CGFobject {
             const y = this.radius * Math.sin(theta);
             const z = this.height; // Top is at z = height
             this.vertices.push(x + Math.cos(this.obliquity), y, z); // Top circular base
-            this.texCoords.push(0.5 + 0.5 * Math.cos(theta), 0.5 + 0.5 * Math.sin(theta));
+            this.texCoords.push(0.5 - 0.5 * Math.cos(theta), 0.5 - 0.5 * Math.sin(theta));
         }
 
         // Vertex for the center of the bottom circular base

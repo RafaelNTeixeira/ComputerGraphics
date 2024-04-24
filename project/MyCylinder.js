@@ -117,7 +117,6 @@ export class MyCylinder extends CGFobject {
         this.scene.multMatrix(rotLeafStem);
         this.leafStem.display();
         this.scene.popMatrix();
-
     }
 
     setRadiusAndHeight(radius, height) {

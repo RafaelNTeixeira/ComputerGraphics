@@ -44,7 +44,8 @@ export class MyFlower extends CGFobject {
         this.receptacle.display();
 
         // Stem
-        this.scene.setDiffuse(...this.scene.hexToRgbA(this.colorStem));
+        this.scene.stemMaterial.setDiffuse(...this.scene.hexToRgbA(this.colorStem));
+        this.scene.stemMaterial.apply();
         var rad = -90 * Math.PI / 180;
         var rotStem = [
             1.0, 0.0, 0.0, 0.0, 

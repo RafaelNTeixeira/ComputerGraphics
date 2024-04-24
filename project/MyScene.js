@@ -114,7 +114,7 @@ export class MyScene extends CGFscene {
     this.radiusPetals = Math.random() * 1 + 0.1;
     this.radiusCenter = Math.random() * 0.13 + 0.5;
     this.radiusStem = Math.random() * 0.25 + 0.25;
-    const values = [2, 4, 6, 8];
+    const values = [4, 6, 8];
     this.heightStem = values[Math.floor(Math.random() * values.length)];
     this.gardenRows = 5;
     this.gardenCols = 5;
@@ -132,7 +132,7 @@ export class MyScene extends CGFscene {
     //this.sphere = new MySphere(this, 200, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaTexture);
     this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, 
-      this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem']);
+      this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem'], this.customMaterialValues['Color Leaves']);
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
   }
 

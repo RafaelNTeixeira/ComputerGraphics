@@ -3,14 +3,14 @@ import { MyStem } from "./MyStem.js";
 import { MyPetal } from "./MyPetal.js";
 
 export class MyCylinder extends CGFobject {
-    constructor(scene, radius, height){
+    constructor(scene, radius, height, colorLeaves){
         super(scene);
         this.height = height;
         this.stem = new MyStem(this.scene, radius, 2, Math.PI / 2);
         this.stem1 = new MyStem(this.scene, radius, 2, Math.PI);
-        this.stem2 = new MyStem(this.scene, radius, 2, Math.PI);
         this.leafStem = new MyStem(this.scene, 0.2, 0.7, Math.PI / 2);
         this.petalLeaf = new MyPetal(this.scene, 0);
+        this.colorLeaves = colorLeaves;
     }
 
     display() {
@@ -93,6 +93,7 @@ export class MyCylinder extends CGFobject {
         }
         this.scene.multMatrix(rotPetal);
         this.scene.multMatrix(scalePetal);
+        this.scene.leavesMaterial.setDiffuse(...this.scene.hexToRgbA(this.colorLeaves));
         this.scene.leavesMaterial.apply();
         this.petalLeaf.display();
         this.scene.popMatrix();
@@ -125,4 +126,7 @@ export class MyCylinder extends CGFobject {
         this.initBuffers();
     }
 
+    setLeavesColor(colorLeaves) {
+        this.colorLeaves = colorLeaves;
+    }
 }

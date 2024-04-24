@@ -3,27 +3,30 @@ import { MyPetal } from "./MyPetal.js";
 import { MyReceptacle } from "./MyReceptacle.js";
 import { MyLeaf} from "./MyLeaf.js";
 import { MyCylinder } from "./MyCylinder.js";
+import { color } from '../lib/dat.gui.module.min.js';
 
 export class MyFlower extends CGFobject {
-    constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem) {
+    constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, colorLeaves) {
 		super(scene);
         this.numPetals = numPetals;
         this.radiusPetals = radiusPetals;
 
         this.receptacle = new MyReceptacle(this.scene, radiusCenter);
-        this.cylinder = new MyCylinder(this.scene, radiusStem, heightStem);
+        this.cylinder = new MyCylinder(this.scene, radiusStem, heightStem, colorLeaves);
         this.petal = new MyPetal(this.scene, (Math.random() * 3.01));
         //this.stem = new MyStem(this.scene, radiusStem, heightStem);
         this.colorPetals = colorPetals;
         this.colorCenter = colorCenter;
         this.colorStem = colorStem;
+        this.colorLeaves = colorLeaves;
         
-        this.updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem);
+        this.updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, colorLeaves);
 	}
 
-    updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem) {
+    updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, colorLeaves) {
         this.receptacle.setRadius(radiusCenter);
         this.cylinder.setRadiusAndHeight(radiusStem, heightStem);
+        this.cylinder.setLeavesColor(colorLeaves);
         this.numPetals = numPetals;
         this.radiusPetals = radiusPetals;
         this.radiusCenter = radiusCenter;
@@ -32,6 +35,7 @@ export class MyFlower extends CGFobject {
         this.colorPetals = colorPetals;
         this.colorCenter = colorCenter;
         this.colorStem = colorStem;
+        this.colorLeaves = colorLeaves;
     }
 
     display() {
@@ -66,7 +70,6 @@ export class MyFlower extends CGFobject {
         // Petals
         this.scene.pushMatrix();
         this.scene.petalsMaterial.setDiffuse(...this.scene.hexToRgbA(this.colorPetals));
-        this.updateFlowerParameters(this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, this.colorPetals, this.colorCenter, this.colorStem);
         this.scene.petalsMaterial.apply();
         this.scene.popMatrix();
         const angleIncrement = (2 * Math.PI) / (this.numPetals);

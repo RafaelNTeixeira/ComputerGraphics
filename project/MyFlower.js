@@ -5,14 +5,10 @@ import { MyLeaf} from "./MyLeaf.js";
 import { MyCylinder } from "./MyCylinder.js";
 
 export class MyFlower extends CGFobject {
-    constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, petalTexture, receptacleTexture, stemTexture) {
+    constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem) {
 		super(scene);
         this.numPetals = numPetals;
         this.radiusPetals = radiusPetals;
-
-        this.petalTexture = petalTexture;
-        this.receptacleTexture = receptacleTexture; 
-        this.stemTexture = stemTexture;
 
         this.receptacle = new MyReceptacle(this.scene, radiusCenter);
         this.cylinder = new MyCylinder(this.scene, radiusStem, heightStem);
@@ -22,10 +18,10 @@ export class MyFlower extends CGFobject {
         this.colorCenter = colorCenter;
         this.colorStem = colorStem;
         
-        this.updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, petalTexture, receptacleTexture, stemTexture);
+        this.updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem);
 	}
 
-    updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, petalTexture, receptacleTexture, stemTexture) {
+    updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem) {
         this.receptacle.setRadius(radiusCenter);
         this.cylinder.setRadiusAndHeight(radiusStem, heightStem);
         this.numPetals = numPetals;

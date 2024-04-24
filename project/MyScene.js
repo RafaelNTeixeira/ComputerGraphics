@@ -130,9 +130,8 @@ export class MyScene extends CGFscene {
     //this.sphere = new MySphere(this, 200, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaTexture);
     this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, 
-      this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem'], 
-      this.randomPetalTexture, this.randomReceptacleTexture, this.randomStemTexture);
-    this.garden = new MyGarden(this, this.gardenRows, this.gardenCols, this.petalTextures, this.receptacleTextures, this.stemTextures);
+      this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem']);
+    this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
   }
 
   initLights() {

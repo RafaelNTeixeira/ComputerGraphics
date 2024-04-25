@@ -2,6 +2,8 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MySphere } from "./MySphere.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyPanorama } from "./MyPanorama.js";
+import { MyRock } from "./MyRock.js";
+import { MyRockSet } from "./MyRockSet.js";
 
 /**
  * MyScene
@@ -29,6 +31,7 @@ export class MyScene extends CGFscene {
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.earthTexture = new CGFtexture(this, 'images/earth.jpg');
     this.panoramaTexture = new CGFtexture(this, 'images/panorama4.jpg');
+    this.rockTexture = new CGFtexture(this, 'images/rock.jpg');
 
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
@@ -39,6 +42,8 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 200, 50, 50, false);
     this.panorama = new MyPanorama(this, this.panoramaTexture);
+    this.rock = new MyRock(this, 3, 10, 10, false);
+    this.rockSet = new MyRockSet(this);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -101,7 +106,18 @@ export class MyScene extends CGFscene {
     this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
     this.sphere.display();
     this.popMatrix();
+
+    this.rockSet.display();
     
+    /*
+    this.pushMatrix();
+    this.rockTexture.bind(); 
+    this.scale(1, 0.8, 1.2); 
+    this.rock.display();
+    this.popMatrix();
+    */
+
+
     if (this.displayPanorama) {
       this.panorama.display();
     }

@@ -54,16 +54,8 @@ export class MyFlower extends CGFobject {
             0.0, 0.0, 0.0, 1.0
         ]
 
-        var transStem = [
-            1.0, 0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, -this.radiusStem, 0.0, 1.0,
-        ]
-
         this.scene.pushMatrix();
         this.scene.multMatrix(rotStem);
-        this.scene.multMatrix(transStem);
         this.cylinder.display();
         this.scene.popMatrix();
         

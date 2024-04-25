@@ -27,7 +27,7 @@
             const numPetalsController = f0.add(this.scene, 'numPetals', 5, 10, 1).name('Number of Petals');
             const radiusPetalsController = f0.add(this.scene, 'radiusPetals', 0.1, 1).name('Outer radius Flower');
             const radiusCenterController = f0.add(this.scene, 'radiusCenter', 0.5, 1).name('Radius Receplacle');
-            const radiusStemController = f0.add(this.scene, 'radiusStem', 0.25, 0.5).name('Radius Stem');
+            const radiusStemController = f0.add(this.scene, 'radiusStem', 0.05, 0.15).name('Radius Stem');
             const heightStemController = f0.add(this.scene, 'heightStem', 2.5, 8).name('Height Stem');
             //this.gui.add(this.scene, 'centerView').name("Center View");
             var f1 = this.gui.addFolder('Color Flower');

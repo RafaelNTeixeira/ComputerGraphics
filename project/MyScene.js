@@ -113,7 +113,8 @@ export class MyScene extends CGFscene {
     this.numPetals = Math.floor(Math.random() * 6) + 5;
     this.radiusPetals = Math.random() * 1 + 0.1;
     this.radiusCenter = Math.random() * 0.13 + 0.5;
-    this.radiusStem = Math.random() * 0.25 + 0.25;
+    this.radiusStem = Math.random() * 0.1 + 0.05;
+    this.scaleFactor = Math.random() * 0.95 + 0.05;
     const values = [4, 6, 8];
     this.heightStem = values[Math.floor(Math.random() * values.length)];
     this.gardenRows = 5;

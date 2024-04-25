@@ -8,9 +8,10 @@ export class MyCylinder extends CGFobject {
         this.height = height;
         this.stem = new MyStem(this.scene, radius, 2, Math.PI / 2);
         this.stem1 = new MyStem(this.scene, radius, 2, Math.PI);
-        this.leafStem = new MyStem(this.scene, 0.2, 0.7, Math.PI / 2);
-        this.petalLeaf = new MyPetal(this.scene, 0);
+        this.leafStem = new MyStem(this.scene, 0.075, 0.7, Math.PI / 2);
+        this.petalLeaf = new MyPetal(this.scene, Math.PI / 2);
         this.colorLeaves = colorLeaves;
+        this.radius = radius;
     }
 
     display() {
@@ -18,7 +19,7 @@ export class MyCylinder extends CGFobject {
         this.stem.display();
         var bot = 2;
         for (let i = 1; i < times; i++) {
-            this.leaf(-2, this.radius - 0.1);
+            this.leaf(-2, 0);
             var transCy = [
                 1.0, 0.0, 0.0, 0.0,
                 0.0, 1.0, 0.0, 0.0,
@@ -37,7 +38,7 @@ export class MyCylinder extends CGFobject {
             
             this.scene.pushMatrix();
             this.scene.multMatrix(transCy);
-            if (i % 2 == 0){
+            if (i % 2 == 0) {
                 var transCy1 = [
                     1.0, 0.0, 0.0, 0.0,
                     0.0, 1.0, 0.0, 0.0,
@@ -46,7 +47,7 @@ export class MyCylinder extends CGFobject {
                 ]
                 this.scene.multMatrix(scaleCy);
                 this.scene.multMatrix(transCy1);
-                this.leaf(-1 - Math.cos(Math.PI), this.radius - 0.1, -1);
+                this.leaf(-1 - Math.cos(Math.PI), 0, -1);   
             }
             this.scene.stemMaterial.apply();
             this.stem1.display();
@@ -67,14 +68,14 @@ export class MyCylinder extends CGFobject {
             1.0, 0.0, 0.0, 0.0, 
             0.0, 1.0, 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
-            posy + 0.7, 0.0, -posx - 0.2, 1.0
+            posy + 0.7, 0.0, -posx - 0.3, 1.0
         ]
 
         var transPetal1 = [
             1.0, 0.0, 0.0, 0.0, 
             0.0, 1.0, 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
-            posy + 0.7, 0.0, -posx + 0.2, 1.0
+            posy + 0.7, 0.0, -posx + 0.3, 1.0
         ]
 
         var rad = 90 * Math.PI / 180;
@@ -123,6 +124,8 @@ export class MyCylinder extends CGFobject {
     setRadiusAndHeight(radius, height) {
         this.radius = radius;
         this.height = height;
+        this.stem.setRadius(radius);
+        this.stem1.setRadius(radius);
         this.initBuffers();
     }
 

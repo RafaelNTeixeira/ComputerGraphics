@@ -11,9 +11,6 @@ export class MyStem extends CGFobject {
 
     initBuffers(){
         const numSegments = 30; // Number of segments to approximate the circular base of the cylinder
-        //const height = 2.5; 
-        //const radius = 0.2;
-        // Define vertices for the cylinder
         this.vertices = [];
         this.texCoords = [];
 
@@ -37,15 +34,6 @@ export class MyStem extends CGFobject {
             this.texCoords.push(i / numSegments, 1); // Vertical mapping
         }
 
-
-
-        // Vertex for the center of the bottom circular base
-        //this.vertices.push(0, 0, 0);
-
-        // Vertex for the center of the top circular base
-        //this.vertices.push(0, 0, this.height);
-
-        // Define indices to connect the vertices into triangles
         this.indices = [];
 
         // Indices for the bottom circular base
@@ -73,10 +61,8 @@ export class MyStem extends CGFobject {
         this.initGLBuffers();
     }    
 
-    setRadiusHeightAndObliquity(radius, height, obliquity) {
+    setRadius(radius) {
         this.radius = radius;
-        this.height = height;
-        this.obliquity = obliquity;
         this.initBuffers();
     }
 }

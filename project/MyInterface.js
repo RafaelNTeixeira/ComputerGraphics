@@ -19,14 +19,14 @@
 
             //Checkbox element in GUI
             this.gui.add(this.scene, 'displayAxis').name('Display Axis');
-            this.gui.add(this.scene, 'displayNormals').name("Display normals");
+            this.gui.add(this.scene, 'displayNormals').name("Display Normals");
             this.gui.add(this.scene, 'displayPanorama').name("Display Panorama");
-            this.gui.add(this.scene, 'infiniteView').name('infiniteView');
+            this.gui.add(this.scene, 'infiniteView').name('Infinite View');
             this.gui.add(this.scene, 'displayFlower').name("Display Flower");
             this.gui.add(this.scene, 'displayGarden').name("Display Garden");
             var f0 = this.gui.addFolder('Flower');
             const numPetalsController = f0.add(this.scene, 'numPetals', 5, 10, 1).name('Number of Petals');
-            const radiusPetalsController = f0.add(this.scene, 'radiusPetals', 0.1, 1).name('Outer radius Flower');
+            const radiusPetalsController = f0.add(this.scene, 'radiusPetals', 0.1, 1).name('Outer Radius Flower');
             const radiusCenterController = f0.add(this.scene, 'radiusCenter', 0.5, 1).name('Radius Receplacle');
             const radiusStemController = f0.add(this.scene, 'radiusStem', 0.05, 0.15).name('Radius Stem');
             const heightStemController = f0.add(this.scene, 'heightStem', 2.5, 8).name('Height Stem');

@@ -97,9 +97,14 @@ export class MyScene extends CGFscene {
     this.randomLeafTexture = this.leafTextures[Math.floor(Math.random() * this.leafTextures.length)];
 
     this.petalsMaterial.setTexture(this.randomPetalTexture);
+    this.petalsMaterial.setTextureWrap('REPEAT', 'REPEAT');
     this.centerMaterial.setTexture(this.randomReceptacleTexture);
+    this.centerMaterial.setTextureWrap('REPEAT', 'REPEAT');
     this.stemMaterial.setTexture(this.randomStemTexture);
+    this.stemMaterial.setTextureWrap('REPEAT', 'REPEAT');
     this.leavesMaterial.setTexture(this.randomLeafTexture);
+    this.leavesMaterial.setTextureWrap('REPEAT', 'REPEAT');
+    
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');

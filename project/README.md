@@ -34,3 +34,11 @@ Com `infiniteView`:
 ![Screenshot 3](screenshots/project-t09g12-2a.png)
 
 ![Screenshot 4](screenshots/project-t09g12-2b.png)
+
+
+### 3. Pedras e penedos
+
+- No ponto 3 criamos primeiro a classe `MyRock` , semelhante ao `MySphere`, mas onde alteramos a inclinação das normais de forma a criar ligeiras diformações e tornar as pedras mais realistas. De seguida criamos a classe `MyRockSet` onde geramos 10 pedras da classe `MyRock` e metemos em posições diferentes e com texturas diferentes.
+
+![Screenshot 5](screenshots/project-t09g12-3.png)
+

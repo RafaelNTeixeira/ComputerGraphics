@@ -7,6 +7,9 @@ import { MyReceptacle } from "./MyReceptacle.js";
 import { MyStem } from "./MyStem.js";
 import { MyFlower } from "./MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
+import { MyRock } from "./MyRock.js";
+import { MyRockSet } from "./MyRockSet.js";
+
 
 /**
  * MyScene
@@ -72,6 +75,7 @@ export class MyScene extends CGFscene {
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.earthTexture = new CGFtexture(this, 'images/earth.jpg');
     this.panoramaTexture = new CGFtexture(this, 'images/panorama4.jpg');
+
     this.petalTextures = [
       new CGFtexture(this, 'images/petals/petal1.jpg'),
       new CGFtexture(this, 'images/petals/petal2.jpg'),
@@ -95,6 +99,8 @@ export class MyScene extends CGFscene {
     this.randomReceptacleTexture = this.receptacleTextures[Math.floor(Math.random() * this.receptacleTextures.length)];
     this.randomStemTexture = this.stemTextures[Math.floor(Math.random() * this.stemTextures.length)];
     this.randomLeafTexture = this.leafTextures[Math.floor(Math.random() * this.leafTextures.length)];
+
+    this.rockTexture = new CGFtexture(this, 'images/rock.jpg');
 
     this.petalsMaterial.setTexture(this.randomPetalTexture);
     this.petalsMaterial.setTextureWrap('REPEAT', 'REPEAT');
@@ -123,8 +129,9 @@ export class MyScene extends CGFscene {
 
     this.displayNormals = false;
     this.displayPanorama = false;
-    this.displayFlower = true;
+    this.displayFlower = false;
     this.displayGarden = false;
+    this.displayRocks = true;
     this.centerView = false;
 
     //Initialize scene objects
@@ -132,6 +139,8 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 200, 50, 50, false);
     this.panorama = new MyPanorama(this, this.panoramaTexture);
+    this.rock = new MyRock(this, 3, 10, 10, false);
+    this.rockSet = new MyRockSet(this);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -223,6 +232,18 @@ export class MyScene extends CGFscene {
     this.sphere.display();
     this.popMatrix();
 
+    if (this.displayRocks){
+      this.rockSet.display();
+    }
+    
+    
+    /*
+    this.pushMatrix();
+    this.rockTexture.bind(); 
+    this.scale(1, 0.8, 1.2); 
+    this.rock.display();
+    this.popMatrix();
+    */
     if (this.displayPanorama) {
       this.panorama.display();
     }    

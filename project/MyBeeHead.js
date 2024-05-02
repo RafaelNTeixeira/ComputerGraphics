@@ -16,6 +16,8 @@ export class MyBeeHead extends CGFobject {
         this.antennaSphere1 = new MySphere(this.scene, 0.25, 20, 20);
         this.antennaSphere2 = new MySphere(this.scene, 0.25, 20, 20);
         this.smile = new MySmile(this.scene, 5, 20);
+        this.smileSphere1 = new MySphere(this.scene, 0.4, 20, 20);
+        this.smileSphere2 = new MySphere(this.scene, 0.4, 20, 20);
     }
     display(){
         let headAppearance = new CGFappearance(this.scene);
@@ -45,6 +47,22 @@ export class MyBeeHead extends CGFobject {
 
         var rad = -90 * Math.PI / 180;
         var rotsmile = [
+            Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
+            Math.sin(rad), Math.cos(rad), 0.0, 0.0,
+            0.0, 0.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0
+        ]
+
+        var rad = 105 * Math.PI / 180;
+        var roteyebrow1 = [
+            Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
+            Math.sin(rad), Math.cos(rad), 0.0, 0.0,
+            0.0, 0.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0
+        ]
+
+        var rad = 75 * Math.PI / 180;
+        var roteyebrow2 = [
             Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
             Math.sin(rad), Math.cos(rad), 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
@@ -85,15 +103,26 @@ export class MyBeeHead extends CGFobject {
         this.antennaSphere2.display();
         this.scene.popMatrix();
 
-        this.scene.setDiffuse(1, 0.1, 0.1, 1.0);
+        this.scene.setDiffuse(0.7, 0, 0, 1.0);
         this.scene.pushMatrix();
-        this.scene.scale(5, 3, 5);
-        this.scene.translate(0.25, 0, 0.985);
+        this.scene.scale(5, 3.5, 5);
+        this.scene.translate(0.25, -0.2, 0.95);
         this.scene.multMatrix(rotsmile);
         this.smile.display();
         this.scene.popMatrix();
 
+        this.scene.setDiffuse(1, 0.1, 0.1, 1.0);
+        this.scene.pushMatrix();
+        this.scene.translate(1.25, -0.5, 4.5);
+        this.scene.multMatrix(rotsmile);
+        this.smileSphere1.display();
+        this.scene.popMatrix();
 
-        
+        this.scene.setDiffuse(1, 0.1, 0.1, 1.0);
+        this.scene.pushMatrix();
+        this.scene.translate(-1.75, -0.5, 4.3);
+        this.scene.multMatrix(rotsmile);
+        this.smileSphere2.display();
+        this.scene.popMatrix();
     }
 }

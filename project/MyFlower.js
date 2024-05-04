@@ -1,9 +1,8 @@
-import { CGFappearance, CGFobject } from '../lib/CGF.js';
+import { CGFappearance, CGFobject, CGFtexture } from '../lib/CGF.js';
 import { MyPetal } from "./MyPetal.js";
 import { MyReceptacle } from "./MyReceptacle.js";
-import { MyLeaf} from "./MyLeaf.js";
 import { MyCylinder } from "./MyCylinder.js";
-import { color } from '../lib/dat.gui.module.min.js';
+import { MyPolen } from "./MyPolen.js";
 
 export class MyFlower extends CGFobject {
     constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, colorLeaves) {
@@ -14,7 +13,8 @@ export class MyFlower extends CGFobject {
         this.receptacle = new MyReceptacle(this.scene, radiusCenter);
         this.cylinder = new MyCylinder(this.scene, radiusStem, heightStem, colorLeaves);
         this.petal = new MyPetal(this.scene, (Math.random() * 3.01));
-        //this.stem = new MyStem(this.scene, radiusStem, heightStem);
+        this.polen = new MyPolen(this.scene, 0.2, 50, 50);
+        this.polenTexture = new CGFtexture(this.scene, 'images/bee/polen.png');
         this.colorPetals = colorPetals;
         this.colorCenter = colorCenter;
         this.colorStem = colorStem;
@@ -91,6 +91,18 @@ export class MyFlower extends CGFobject {
             this.petal.display();
             this.scene.popMatrix();
         }
+
+        let polenAppearance = new CGFappearance(this.scene);
+        polenAppearance.setTexture(this.polenTexture);
+        polenAppearance.apply();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.3, 0.3, 0);
+        this.polen.display();
+        this.scene.popMatrix();
+
+        let appearance = new CGFappearance(this.scene);
+        appearance.apply();
     }
 
 }

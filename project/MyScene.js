@@ -10,6 +10,7 @@ import { MyGarden } from "./MyGarden.js";
 import { MyRock } from "./MyRock.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyBeeHead } from "./MyBeeHead.js";
+import { MyBee } from "./MyBee.js";
 
 
 /**
@@ -133,6 +134,7 @@ export class MyScene extends CGFscene {
     this.displayFlower = false;
     this.displayGarden = false;
     this.displayRocks = false;
+    this.displayBee = true;
     this.centerView = false;
 
     //Initialize scene objects
@@ -143,6 +145,7 @@ export class MyScene extends CGFscene {
     this.rock = new MyRock(this, 3, 10, 10, false);
     this.rockSet = new MyRockSet(this);
     this.beeHead = new MyBeeHead(this);
+    this.bee = new MyBee(this);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -236,21 +239,15 @@ export class MyScene extends CGFscene {
 
     if (this.displayRocks){
       this.rockSet.display();
-    }
+    }  
 
-    this.beeHead.display();
-    
-    
-    /*
-    this.pushMatrix();
-    this.rockTexture.bind(); 
-    this.scale(1, 0.8, 1.2); 
-    this.rock.display();
-    this.popMatrix();
-    */
     if (this.displayPanorama) {
       this.panorama.display();
     }    
+
+    if (this.displayBee){
+      this.bee.display();
+    }
 
     if (this.displayFlower) {
       this.flower.display();

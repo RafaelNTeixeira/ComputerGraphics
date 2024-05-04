@@ -81,6 +81,9 @@ export class MyBeeHead extends CGFobject {
         this.eye2.display();
         this.scene.popMatrix();
 
+        let appearance = new CGFappearance(this.scene);
+        appearance.apply();
+
         this.scene.pushMatrix();
         this.scene.translate(-4, 4.5, 0);
         this.scene.scale(2, 2, 2);

@@ -25,6 +25,7 @@
             this.gui.add(this.scene, 'displayFlower').name("Display Flower");
             this.gui.add(this.scene, 'displayGarden').name("Display Garden");
             this.gui.add(this.scene, 'displayRocks').name("Display Rocks");
+            this.gui.add(this.scene, 'displayBee').name("Display Bee");
             var f0 = this.gui.addFolder('Flower');
             const numPetalsController = f0.add(this.scene, 'numPetals', 5, 10, 1).name('Number of Petals');
             const radiusPetalsController = f0.add(this.scene, 'radiusPetals', 0.1, 1).name('Outer Radius Flower');

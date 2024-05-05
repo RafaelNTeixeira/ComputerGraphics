@@ -53,22 +53,6 @@ export class MyBeeHead extends CGFobject {
             0.0, 0.0, 0.0, 1.0
         ]
 
-        var rad = 105 * Math.PI / 180;
-        var roteyebrow1 = [
-            Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-            Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, 0.0, 0.0, 1.0
-        ]
-
-        var rad = 75 * Math.PI / 180;
-        var roteyebrow2 = [
-            Math.cos(rad), -Math.sin(rad), 0.0, 0.0, 
-            Math.sin(rad), Math.cos(rad), 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, 0.0, 0.0, 1.0
-        ]
-
         this.scene.pushMatrix();
         this.scene.translate(-2, 1.5, 4.1);
         this.scene.multMatrix(roteye1);
@@ -116,14 +100,14 @@ export class MyBeeHead extends CGFobject {
 
         this.scene.setDiffuse(1, 0.1, 0.1, 1.0);
         this.scene.pushMatrix();
-        this.scene.translate(1.25, -0.5, 4.5);
+        this.scene.translate(2.25, -0.5, 4.1);
         this.scene.multMatrix(rotsmile);
         this.smileSphere1.display();
         this.scene.popMatrix();
 
         this.scene.setDiffuse(1, 0.1, 0.1, 1.0);
         this.scene.pushMatrix();
-        this.scene.translate(-1.75, -0.5, 4.3);
+        this.scene.translate(-2.75, -0.5, 3.8);
         this.scene.multMatrix(rotsmile);
         this.smileSphere2.display();
         this.scene.popMatrix();

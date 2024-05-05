@@ -133,9 +133,9 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.displayPanorama = false;
     this.displayFlower = false;
-    this.displayGarden = true;
+    this.displayGarden = false;
     this.displayRocks = false;
-    this.displayBee = false;
+    this.displayBee = true;
     this.centerView = false;
 
     //Initialize scene objects
@@ -146,8 +146,8 @@ export class MyScene extends CGFscene {
     this.rock = new MyRock(this, 3, 10, 10, false);
     this.rockSet = new MyRockSet(this);
     this.beeHead = new MyBeeHead(this);
-    this.bee = new MyBee(this);
     this.polen = new MyPolen(this, 3, 50, 50);
+    this.bee = new MyBee(this);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -232,7 +232,6 @@ export class MyScene extends CGFscene {
     this.plane.display();
     this.popMatrix();
     
-    
     this.pushMatrix();
     this.earthTexture.bind();
     this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
@@ -250,7 +249,10 @@ export class MyScene extends CGFscene {
     }    
 
     if (this.displayBee){
+      this.pushMatrix();
+      this.rotate(Math.PI / 2, 1, 0, 0);
       this.bee.display();
+      this.popMatrix();
     }
 
     if (this.displayFlower) {

@@ -4,6 +4,7 @@ import { MySphere } from "./MySphere.js";
 import { MyCone } from "./MyCone.js";
 import { MyWing } from "./MyWing.js";
 import { MyStem } from './MyStem.js';
+import { MyBeeArm } from './MyBeeArm.js';
 
 export class MyBee extends CGFobject {
     constructor(scene){
@@ -16,11 +17,18 @@ export class MyBee extends CGFobject {
         this.wing2 = new MyWing(this.scene, 30, 5);
         this.leg = new MyStem(this.scene, 0.5, 7, Math.PI / 2);
         this.foot = new MySphere(this.scene, 0.5, 30, 30);
-        this.lowerArm = new MyStem(this.scene, 0.5, 4, Math.PI / 2);
+        this.beeArm1 = new MyBeeArm(this.scene);
+        this.beeArm2 = new MyBeeArm(this.scene);
+        this.beeArm3 = new MyBeeArm(this.scene);
+        this.beeArm4 = new MyBeeArm(this.scene);
     }
 
     display(){
+        this.scene.pushMatrix();
+        this.scene.translate(0, -1, -1);
+        this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.head.display();
+        this.scene.popMatrix();
 
         let bobyAppearance = new CGFappearance(this.scene);
         bobyAppearance.setTexture(this.bobyTexture);
@@ -47,19 +55,6 @@ export class MyBee extends CGFobject {
         this.scene.translate(0, -17, 0);
         this.scene.multMatrix(rotecone);
         this.cone.display();
-        this.scene.popMatrix();
-
-        //this.scene.setDiffuse(1.0, 1.0, 1.0, 0.2);
-        this.scene.pushMatrix();
-        this.scene.translate(7, -5, -2);
-        this.scene.scale(1.3, 1, 1);
-        this.wing1.display();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(-7, -5, -2);
-        this.scene.scale(1.3, 1, 1);
-        this.wing2.display();
         this.scene.popMatrix();
 
         var rad = -90 * Math.PI / 180;
@@ -93,76 +88,54 @@ export class MyBee extends CGFobject {
         this.foot.display();
         this.scene.popMatrix();
 
-        /* Upper Arm */
-
-        var rad = -90 * Math.PI / 180;
-        var rotArm = [
-            Math.cos(rad), 0.0, Math.sin(rad), 0.0, 
-            0.0, 1.0, 0.0, 0.0,
-            -Math.sin(rad), 0.0, Math.cos(rad), 0.0,
-            0.0, 0.0, 0.0, 1.0
-        ]
-
         this.scene.pushMatrix();
-        this.scene.translate(3, -6.5, 0);
-        this.scene.multMatrix(rotArm);
-        this.leg.display();
-        this.scene.popMatrix();
-
-        var rad = 90 * Math.PI / 180;
-        var rotArm = [
-            Math.cos(rad), 0.0, Math.sin(rad), 0.0, 
-            0.0, 1.0, 0.0, 0.0,
-            -Math.sin(rad), 0.0, Math.cos(rad), 0.0,
-            0.0, 0.0, 0.0, 1.0
-        ]
-
-        this.scene.pushMatrix();
-        this.scene.translate(-3, -6.5, 0);
-        this.scene.multMatrix(rotArm);
-        this.leg.display();
+        this.scene.translate(-6, -7, 14);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.rotate(Math.PI / 4, 0, 0, 1);
+        this.beeArm1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(10, -6.5, 0);
-        this.foot.display();
+        this.scene.translate(6, -7, 14);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.rotate(Math.PI / 4, 0, 0, 1);
+        this.beeArm2.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-10, -6.5, 0);
-        this.foot.display();
-        this.scene.popMatrix();
-
-        /* Lower Arm */
-        var rad = 90 * Math.PI / 180;
-        var rotArm1 = [
-            1.0, 0.0, 0.0, 0.0, 
-            0.0, Math.cos(rad), -Math.sin(rad), 0.0,
-            0.0, Math.sin(rad), Math.cos(rad), 0.0,
-            0.0, 0.0, 0.0, 1.0
-        ]
-
-        this.scene.pushMatrix();
-        this.scene.translate(10, -10.5, 0);
-        this.scene.multMatrix(rotArm1);
-        this.lowerArm.display();
+        this.scene.translate(-7, -14, 14);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.rotate(Math.PI / 4, 0, 0, 1);
+        this.beeArm3.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-10, -10.5, 0);
-        this.scene.multMatrix(rotArm1);
-        this.lowerArm.display();
+        this.scene.translate(7, -14, 14);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.rotate(Math.PI / 4, 0, 0, 1);
+        this.beeArm4.display();
+        this.scene.popMatrix();
+
+
+        this.scene.setEmission(0.0, 0.0, 0.0, 0.0);
+        this.scene.setDiffuse(0.0, 0.0, 0.0, 0.5);
+        this.scene.setAmbient(0.0, 0.0, 0.0, 0.0);
+        this.scene.setSpecular(0.0, 0.0, 0.0, 0.0);
+
+        this.scene.gl.blendFunc(this.scene.gl.SRC_ALPHA, this.scene.gl.ONE_MINUS_SRC_ALPHA);
+        this.scene.gl.enable(this.scene.gl.BLEND);
+
+        this.scene.pushMatrix();
+        this.scene.setShininess(1.0);
+        this.scene.translate(7, -5, -2);
+        this.scene.scale(1.3, 1, 1);
+        this.wing1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(10, -10.5, 0);
-        this.foot.display();
+        this.scene.translate(-7, -5, -2);
+        this.scene.scale(1.3, 1, 1);
+        this.wing2.display();
         this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(-10, -10.5, 0);
-        this.foot.display();
-        this.scene.popMatrix();
-
     }
 }

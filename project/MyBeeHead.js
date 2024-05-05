@@ -6,18 +6,18 @@ import { MySmile } from "./MySmile.js";
 export class MyBeeHead extends CGFobject {
     constructor(scene){
         super(scene);
-        this.head = new MySphere(this.scene, 5, 20, 20);
+        this.head = new MySphere(this.scene, 6, 20, 20);
         this.headTexture = new CGFtexture(this.scene, 'images/bee/head.png');
-        this.eye1 = new MySphere(this.scene, 1, 20, 20);
-        this.eye2 = new MySphere(this.scene, 1, 20, 20);
+        this.eye1 = new MySphere(this.scene, 2, 20, 20);
+        this.eye2 = new MySphere(this.scene, 2, 20, 20);
         this.eyeTexture = new CGFtexture(this.scene, 'images/bee/eye.png');
         this.antenna1 = new MyAntenna(this.scene, 2, 20);
         this.antenna2 = new MyAntenna(this.scene, 2, 20);
-        this.antennaSphere1 = new MySphere(this.scene, 0.25, 20, 20);
-        this.antennaSphere2 = new MySphere(this.scene, 0.25, 20, 20);
+        this.antennaSphere1 = new MySphere(this.scene, 0.4, 20, 20);
+        this.antennaSphere2 = new MySphere(this.scene, 0.4, 20, 20);
         this.smile = new MySmile(this.scene, 5, 20);
-        this.smileSphere1 = new MySphere(this.scene, 0.4, 20, 20);
-        this.smileSphere2 = new MySphere(this.scene, 0.4, 20, 20);
+        this.smileSphere1 = new MySphere(this.scene, 1, 20, 20);
+        this.smileSphere2 = new MySphere(this.scene, 1, 20, 20);
     }
     display(){
         let headAppearance = new CGFappearance(this.scene);
@@ -54,13 +54,13 @@ export class MyBeeHead extends CGFobject {
         ]
 
         this.scene.pushMatrix();
-        this.scene.translate(-2, 1.5, 4.1);
+        this.scene.translate(-2, 2.5, 3.1);
         this.scene.multMatrix(roteye1);
         this.eye1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(2, 1.5, 4.1);
+        this.scene.translate(2, 2.5, 3.1);
         this.scene.multMatrix(roteye2);
         this.eye2.display();
         this.scene.popMatrix();
@@ -93,21 +93,21 @@ export class MyBeeHead extends CGFobject {
         this.scene.setDiffuse(0.7, 0, 0, 1.0);
         this.scene.pushMatrix();
         this.scene.scale(5, 3.5, 5);
-        this.scene.translate(0.25, -0.2, 0.95);
+        this.scene.translate(0.25, -0.25, 1.2);
         this.scene.multMatrix(rotsmile);
         this.smile.display();
         this.scene.popMatrix();
 
         this.scene.setDiffuse(1, 0.1, 0.1, 1.0);
         this.scene.pushMatrix();
-        this.scene.translate(2.25, -0.5, 4.1);
+        this.scene.translate(2.5, 0, 4.5);
         this.scene.multMatrix(rotsmile);
         this.smileSphere1.display();
         this.scene.popMatrix();
 
         this.scene.setDiffuse(1, 0.1, 0.1, 1.0);
         this.scene.pushMatrix();
-        this.scene.translate(-2.75, -0.5, 3.8);
+        this.scene.translate(-3, 0, 4.25);
         this.scene.multMatrix(rotsmile);
         this.smileSphere2.display();
         this.scene.popMatrix();

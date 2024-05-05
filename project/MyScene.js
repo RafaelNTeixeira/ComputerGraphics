@@ -13,7 +13,6 @@ import { MyBeeHead } from "./MyBeeHead.js";
 import { MyBee } from "./MyBee.js";
 import { MyPolen } from "./MyPolen.js";
 
-
 /**
  * MyScene
  * @constructor
@@ -159,6 +158,20 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, 
       this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem'], this.customMaterialValues['Color Leaves']);
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
+
+    this.startTime = Date.now();
+    this.startRenderingLoop();
+  }
+
+  startRenderingLoop() {
+   
+    const renderLoop = () => {
+
+        this.display();
+
+        requestAnimationFrame(renderLoop);
+    };
+    renderLoop();
   }
 
   initLights() {
@@ -240,6 +253,8 @@ export class MyScene extends CGFscene {
 
     //this.polen.display();
 
+    let time = Date.now();
+ 
     if (this.displayRocks){
       this.rockSet.display();
     }  
@@ -248,8 +263,10 @@ export class MyScene extends CGFscene {
       this.panorama.display();
     }    
 
-    if (this.displayBee){
+    if (this.displayBee) {
+      this.updateBee(time);
       this.pushMatrix();
+      //this.scale(0.2, 0.2, 0.2);
       this.rotate(Math.PI / 2, 1, 0, 0);
       this.bee.display();
       this.popMatrix();
@@ -265,4 +282,20 @@ export class MyScene extends CGFscene {
     
     // ---- END Primitive drawing section
   }
+
+  updateBee(t){
+    this.bee.updateBeeMovement(t);
+  }
+  /*
+  update(t) {
+    let deltaTime = t - this.time;
+    this.time = t;
+
+    this.beeVerticalDisplacement = 1 * deltaTime;
+    this.wingAngle = Math.sin(t * 0.01);
+
+    console.log("New Y position:", this.beeVerticalDisplacement);
+    console.log("New wing angle:", this.wingAngle);
+ }
+ */
 }

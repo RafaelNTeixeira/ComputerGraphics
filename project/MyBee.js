@@ -21,11 +21,14 @@ export class MyBee extends CGFobject {
         this.beeArm2 = new MyBeeArm(this.scene);
         this.beeArm3 = new MyBeeArm(this.scene);
         this.beeArm4 = new MyBeeArm(this.scene);
+        this.oscilatingMove = 0;
+        this.wingAngle = 0;
+        this.time = 1000000;
     }
 
-    display(){
+    display() {
         this.scene.pushMatrix();
-        this.scene.translate(0, -1, -1);
+        this.scene.translate(0, -1, this.oscilatingMove-1);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.head.display();
         this.scene.popMatrix();
@@ -34,9 +37,8 @@ export class MyBee extends CGFobject {
         bobyAppearance.setTexture(this.bobyTexture);
         bobyAppearance.apply();
 
-
         this.scene.pushMatrix();
-        this.scene.translate(0, -11, 0);
+        this.scene.translate(0, -11, this.oscilatingMove);
         this.boby.display();
         this.scene.popMatrix();
 
@@ -52,7 +54,7 @@ export class MyBee extends CGFobject {
         ]
         
         this.scene.pushMatrix();
-        this.scene.translate(0, -17, 0);
+        this.scene.translate(0, -17, this.oscilatingMove);
         this.scene.multMatrix(rotecone);
         this.cone.display();
         this.scene.popMatrix();
@@ -68,49 +70,49 @@ export class MyBee extends CGFobject {
         this.scene.setDiffuse(0.0, 0.0, 0.0, 1.0);
         this.scene.pushMatrix();
         this.scene.multMatrix(rotLeg);
-        this.scene.translate(3, 0, 15);
+        this.scene.translate(3, this.oscilatingMove, 15);
         this.leg.display();
         this.scene.popMatrix();
         
         this.scene.pushMatrix();
         this.scene.multMatrix(rotLeg);
-        this.scene.translate(-3, 0, 15);
+        this.scene.translate(-3, this.oscilatingMove, 15);
         this.leg.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(3, -22, 0);
+        this.scene.translate(3, -22, this.oscilatingMove);
         this.foot.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-3, -22, 0);
+        this.scene.translate(-3, -22, this.oscilatingMove);
         this.foot.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-6, -7, 14);
+        this.scene.translate(-6, -7, this.oscilatingMove+14);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.rotate(Math.PI / 4, 0, 0, 1);
         this.beeArm1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(6, -7, 14);
+        this.scene.translate(6, -7, this.oscilatingMove+14);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.rotate(Math.PI / 4, 0, 0, 1);
         this.beeArm2.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-7, -14, 14);
+        this.scene.translate(-7, -14, this.oscilatingMove+14);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.rotate(Math.PI / 4, 0, 0, 1);
         this.beeArm3.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(7, -14, 14);
+        this.scene.translate(7, -14, this.oscilatingMove+14);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.rotate(Math.PI / 4, 0, 0, 1);
         this.beeArm4.display();
@@ -127,15 +129,37 @@ export class MyBee extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.setShininess(1.0);
-        this.scene.translate(7, -5, -2);
+        this.scene.translate(5, -5, this.oscilatingMove-2);
+        this.scene.rotate(this.wingAngle, 0, 1, 0);
         this.scene.scale(1.3, 1, 1);
         this.wing1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-7, -5, -2);
+        this.scene.translate(-5, -5, this.oscilatingMove-2);
+        this.scene.rotate(-this.wingAngle, 0, 1, 0);
         this.scene.scale(1.3, 1, 1);
         this.wing2.display();
         this.scene.popMatrix();
     }
+
+    updateBeeMovement(t) {
+        if (!this.startTime) {
+            this.startTime = t;
+        }
+    
+        let elapsedTime = t - this.startTime;
+    
+        let amplitude = 5; 
+        let frequency = 0.5;
+    
+        this.oscilatingMove = amplitude * Math.sin(2 * Math.PI * frequency * (elapsedTime / 1000));
+    
+        // Update the wing angle (if needed)
+        this.wingAngle = Math.sin(t * 0.05);
+    
+        console.log("New Y position:", this.oscilatingMove);
+        console.log("New wing angle:", this.wingAngle);
+    }
+    
 }

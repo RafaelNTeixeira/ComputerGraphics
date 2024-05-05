@@ -12,6 +12,7 @@ import { MyRockSet } from "./MyRockSet.js";
 import { MyBeeHead } from "./MyBeeHead.js";
 import { MyBee } from "./MyBee.js";
 import { MyPolen } from "./MyPolen.js";
+import { MyHive } from "./MyHive.js";
 
 /**
  * MyScene
@@ -103,6 +104,10 @@ export class MyScene extends CGFscene {
     this.randomLeafTexture = this.leafTextures[Math.floor(Math.random() * this.leafTextures.length)];
 
     this.rockTexture = new CGFtexture(this, 'images/rock.jpg');
+    this.topTex = new CGFtexture(this, 'images/hive/beehive_end.png');
+    this.bottomTex = new CGFtexture(this, 'images/hive/hive_side.jpg');
+    this.sideTex = new CGFtexture(this, 'images/hive/beehive_side.png');
+    this.frontTex = new CGFtexture(this, 'images/hive/beehive_front.png');
 
     this.petalsMaterial.setTexture(this.randomPetalTexture);
     this.petalsMaterial.setTextureWrap('REPEAT', 'REPEAT');
@@ -134,7 +139,8 @@ export class MyScene extends CGFscene {
     this.displayFlower = false;
     this.displayGarden = false;
     this.displayRocks = false;
-    this.displayBee = true;
+    this.displayBee = false;
+    this.displayHive = true;
     this.centerView = false;
 
     //Initialize scene objects
@@ -147,6 +153,7 @@ export class MyScene extends CGFscene {
     this.beeHead = new MyBeeHead(this);
     this.polen = new MyPolen(this, 3, 50, 50);
     this.bee = new MyBee(this);
+    this.hive = new MyHive(this, this.topTex, this.frontTex, this.sideTex, this.sideTex, this.sideTex, this.bottomTex);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -251,17 +258,24 @@ export class MyScene extends CGFscene {
     this.sphere.display();
     this.popMatrix();
 
-    //this.polen.display();
 
     let time = Date.now();
  
     if (this.displayRocks){
       this.rockSet.display();
     }  
+    
+    if (this.displayHive){
+      this.pushMatrix();
+      this.scale(5, 5, 5);
+      this.hive.display();
+      this.popMatrix();
+    }
 
     if (this.displayPanorama) {
       this.panorama.display();
-    }    
+    } 
+    
 
     if (this.displayBee) {
       this.updateBee(time);

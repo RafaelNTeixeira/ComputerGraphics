@@ -166,20 +166,6 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, 
       this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem'], this.customMaterialValues['Color Leaves']);
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
-
-    this.startTime = Date.now();
-    this.startRenderingLoop();
-  }
-
-  startRenderingLoop() {
-   
-    const renderLoop = () => {
-
-        this.display();
-
-        requestAnimationFrame(renderLoop);
-    };
-    renderLoop();
   }
 
   initLights() {

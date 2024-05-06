@@ -169,8 +169,6 @@ export class MyScene extends CGFscene {
 
     this.startTime = Date.now();
     this.startRenderingLoop();
-
-    this.update();
   }
 
   startRenderingLoop() {
@@ -242,6 +240,8 @@ export class MyScene extends CGFscene {
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
 
+    this.update();
+
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
@@ -303,7 +303,6 @@ export class MyScene extends CGFscene {
     this.bee.updateBeeMovement(t);
   }
 
-
   checkKeys() {
     var text="Keys pressed: ";
     var keysPressed=false;
@@ -323,7 +322,6 @@ export class MyScene extends CGFscene {
     if (keysPressed) console.log(text);
   }
 
-  
   update() {
     this.checkKeys();
   }

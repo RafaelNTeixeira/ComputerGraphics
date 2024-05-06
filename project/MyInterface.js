@@ -127,11 +127,13 @@ export class MyInterface extends CGFinterface {
         };
         rowsGardenController.onChange(gardenSizeChangeHandler);
         colsGardenController.onChange(gardenSizeChangeHandler);
-        
+
+        this.initKeys();
+              
         return true;
     }
 
-    /*
+    
     initKeys() {
         // create reference from the scene to the GUI
         this.scene.gui = this;
@@ -147,18 +149,18 @@ export class MyInterface extends CGFinterface {
         // called when a key is pressed down
         // mark it as active in the array
         this.activeKeys[event.code] = true;
-    };
+    }
 
 
     processKeyUp(event) {
         // called when a key is released, mark it as inactive in the array
         this.activeKeys[event.code] = false;
-    };
+    }
 
 
     isKeyPressed(keyCode) {
         // returns true if a key is marked as pressed, false otherwise
         return this.activeKeys[keyCode] || false;
     }
-    */
+    
 }

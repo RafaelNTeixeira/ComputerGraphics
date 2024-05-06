@@ -157,8 +157,8 @@ export class MyBee extends CGFobject {
     
         this.wingAngle = Math.sin(t * 0.05);
     
-        console.log("New Y position:", this.oscilatingMove);
-        console.log("New wing angle:", this.wingAngle);
+        //console.log("New Y position:", this.oscilatingMove);
+        //console.log("New wing angle:", this.wingAngle);
     }
     
 }

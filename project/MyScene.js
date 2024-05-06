@@ -22,7 +22,6 @@ import { MyInterface } from "./MyInterface.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
-    this.gui = new MyInterface();
   }
 
   initMaterials() {
@@ -170,6 +169,8 @@ export class MyScene extends CGFscene {
 
     this.startTime = Date.now();
     this.startRenderingLoop();
+
+    this.update();
   }
 
   startRenderingLoop() {
@@ -261,7 +262,6 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     let time = Date.now();
-    //this.update();
  
     if (this.displayRocks){
       this.rockSet.display();
@@ -303,27 +303,29 @@ export class MyScene extends CGFscene {
     this.bee.updateBeeMovement(t);
   }
 
-  /*
+
   checkKeys() {
     var text="Keys pressed: ";
     var keysPressed=false;
+  
 
     // Check for key codes e.g. in https://keycode.info/
-    if (this.gui.isKeyPressed("KeyW")) {
-      text += "W";
+    if ( this.gui.isKeyPressed("KeyW") ) {
+      text += " W ";
       keysPressed=true;
     }
 
-    if (this.gui.isKeyPressed("KeyS")) {
-      text += "S";
+    if ( this.gui.isKeyPressed("KeyS") ) {
+      text += " S ";
       keysPressed=true;
     }
 
     if (keysPressed) console.log(text);
   }
 
+  
   update() {
     this.checkKeys();
   }
-  */
+  
 }

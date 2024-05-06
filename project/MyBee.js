@@ -23,7 +23,6 @@ export class MyBee extends CGFobject {
         this.beeArm4 = new MyBeeArm(this.scene);
         this.oscilatingMove = 0;
         this.wingAngle = 0;
-        this.time = 1000000;
     }
 
     display() {
@@ -143,6 +142,7 @@ export class MyBee extends CGFobject {
         this.scene.popMatrix();
     }
 
+
     updateBeeMovement(t) {
         if (!this.startTime) {
             this.startTime = t;
@@ -155,7 +155,6 @@ export class MyBee extends CGFobject {
     
         this.oscilatingMove = amplitude * Math.sin(2 * Math.PI * frequency * (elapsedTime / 1000));
     
-        // Update the wing angle (if needed)
         this.wingAngle = Math.sin(t * 0.05);
     
         console.log("New Y position:", this.oscilatingMove);

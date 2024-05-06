@@ -13,6 +13,7 @@ import { MyBeeHead } from "./MyBeeHead.js";
 import { MyBee } from "./MyBee.js";
 import { MyPolen } from "./MyPolen.js";
 import { MyHive } from "./MyHive.js";
+import { MyInterface } from "./MyInterface.js";
 
 /**
  * MyScene
@@ -21,6 +22,7 @@ import { MyHive } from "./MyHive.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
+    this.gui = new MyInterface();
   }
 
   initMaterials() {
@@ -139,8 +141,8 @@ export class MyScene extends CGFscene {
     this.displayFlower = false;
     this.displayGarden = false;
     this.displayRocks = false;
-    this.displayBee = false;
-    this.displayHive = true;
+    this.displayBee = true;
+    this.displayHive = false;
     this.centerView = false;
 
     //Initialize scene objects
@@ -258,8 +260,8 @@ export class MyScene extends CGFscene {
     this.sphere.display();
     this.popMatrix();
 
-
     let time = Date.now();
+    //this.update();
  
     if (this.displayRocks){
       this.rockSet.display();
@@ -300,16 +302,28 @@ export class MyScene extends CGFscene {
   updateBee(t){
     this.bee.updateBeeMovement(t);
   }
+
   /*
-  update(t) {
-    let deltaTime = t - this.time;
-    this.time = t;
+  checkKeys() {
+    var text="Keys pressed: ";
+    var keysPressed=false;
 
-    this.beeVerticalDisplacement = 1 * deltaTime;
-    this.wingAngle = Math.sin(t * 0.01);
+    // Check for key codes e.g. in https://keycode.info/
+    if (this.gui.isKeyPressed("KeyW")) {
+      text += "W";
+      keysPressed=true;
+    }
 
-    console.log("New Y position:", this.beeVerticalDisplacement);
-    console.log("New wing angle:", this.wingAngle);
- }
- */
+    if (this.gui.isKeyPressed("KeyS")) {
+      text += "S";
+      keysPressed=true;
+    }
+
+    if (keysPressed) console.log(text);
+  }
+
+  update() {
+    this.checkKeys();
+  }
+  */
 }

@@ -12,7 +12,6 @@ export class MyInterface extends CGFinterface {
     init(application) {
         // call CGFinterface init
         super.init(application);
-        //this.initKeys();
         this.gui = new dat.GUI();
 
         //Checkbox element in GUI
@@ -32,7 +31,6 @@ export class MyInterface extends CGFinterface {
         const radiusCenterController = f0.add(this.scene, 'radiusCenter', 0.5, 1).name('Radius Receplacle');
         const radiusStemController = f0.add(this.scene, 'radiusStem', 0.05, 0.15).name('Radius Stem');
         const heightStemController = f0.add(this.scene, 'heightStem', 2.5, 8).name('Height Stem');
-        //this.gui.add(this.scene, 'centerView').name("Center View");
         
         var f1 = this.gui.addFolder('Color Flower');
         const flowerPetalsColorController = f1.addColor(this.scene.customMaterialValues,'Color Petals').onChange(this.scene.updateCustomMaterial.bind(this.scene));
@@ -43,6 +41,10 @@ export class MyInterface extends CGFinterface {
         var f2 = this.gui.addFolder('Garden');
         const rowsGardenController = f2.add(this.scene, 'gardenRows', 5, 10, 1).name('Garden Rows');
         const colsGardenController = f2.add(this.scene, 'gardenCols', 5, 10, 1).name('Garden Cols');
+
+        var f3 = this.gui.addFolder('Bee');
+        f3.add(this.scene, 'beeSizeFactor', 0.5, 3).name('Scale Factor');
+        f3.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
 
         // Set up callback functions to update flower parameters
         const flowerParameterChangeHandler = () => {

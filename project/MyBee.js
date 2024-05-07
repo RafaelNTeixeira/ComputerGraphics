@@ -7,7 +7,7 @@ import { MyStem } from './MyStem.js';
 import { MyBeeArm } from './MyBeeArm.js';
 
 export class MyBee extends CGFobject {
-    constructor(scene){
+    constructor(scene, x, y, z){
         super(scene);
         this.head = new MyBeeHead(this.scene);
         this.boby = new MySphere(this.scene, 7, 50, 50);
@@ -23,9 +23,26 @@ export class MyBee extends CGFobject {
         this.beeArm4 = new MyBeeArm(this.scene);
         this.oscilatingMove = 0;
         this.wingAngle = 0;
+        this.beeSizeFactor = 1;
+
+        this.speed = 0;
+        this.speedFactor = 1;
+        this.position = {x: x, y: y, z: z};
+        this.initialPosition = {x: x, y: y, z: z};
+        this.beeAngle = 0;
     }
 
     display() {
+        this.scene.pushMatrix();
+        this.scene.scale(this.beeSizeFactor, this.beeSizeFactor, this.beeSizeFactor);
+        this.scene.translate(this.position.x, this.position.y, this.position.z)
+        this.scene.rotate(this.beeAngle, 0, 1, 0);
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.drawBee();
+        this.scene.popMatrix();
+    }
+
+    drawBee() {
         this.scene.pushMatrix();
         this.scene.translate(0, -1, this.oscilatingMove-1);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
@@ -142,11 +159,61 @@ export class MyBee extends CGFobject {
         this.scene.popMatrix();
     }
 
+    turn(v) {
+        this.beeAngle += v;
+    }
 
-    updateBeeMovement(t) {
+    accelerate(v) {
+        if (this.speed + v <= 0) {
+            this.speed = 0;
+        }
+        else {
+            this.speed += v;
+        }
+    }
+
+    reset() {
+        this.speed = 0;
+        this.beeAngle = 0;
+        this.position = {
+            x: this.initialPosition.x,
+             y: this.initialPosition.y,
+              z: this.initialPosition.z
+            }
+    }
+
+    keysLogic(value) {
+        if (this.scene.gui.isKeyPressed("KeyW")) {
+            this.accelerate(value);
+        }
+        if (this.scene.gui.isKeyPressed("KeyS")) {
+            this.accelerate(value);
+        }
+        if (this.scene.gui.isKeyPressed("KeyR")) {
+            this.reset();
+        }
+        if (this.scene.gui.isKeyPressed("KeyA")) {
+            this.turn(value/3);
+        }
+        if (this.scene.gui.isKeyPressed("KeyD")) {
+            this.turn(-value/3);
+        }
+    }
+
+    updateBeeValues() {
+        this.position.x = this.beeMovementAnimator.x;
+        this.position.y = this.beeMovementAnimator.y;
+        this.position.z = this.beeMovementAnimator.z;
+    }
+
+    updateBee(t, speedFactor, beeSizeFactor) {
         if (!this.startTime) {
             this.startTime = t;
         }
+
+        this.beeSizeFactor = beeSizeFactor;
+
+        this.keysLogic(speedFactor/5);
     
         let elapsedTime = t - this.startTime;
     
@@ -156,9 +223,6 @@ export class MyBee extends CGFobject {
         this.oscilatingMove = amplitude * Math.sin(2 * Math.PI * frequency * (elapsedTime / 1000));
     
         this.wingAngle = Math.sin(t * 0.05);
-    
-        //console.log("New Y position:", this.oscilatingMove);
-        //console.log("New wing angle:", this.wingAngle);
     }
     
 }

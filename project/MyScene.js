@@ -2,9 +2,6 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MySphere } from "./MySphere.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyPanorama } from "./MyPanorama.js";
-import { MyPetal } from "./MyPetal.js";
-import { MyReceptacle } from "./MyReceptacle.js";
-import { MyStem } from "./MyStem.js";
 import { MyFlower } from "./MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRock } from "./MyRock.js";
@@ -13,7 +10,6 @@ import { MyBeeHead } from "./MyBeeHead.js";
 import { MyBee } from "./MyBee.js";
 import { MyPolen } from "./MyPolen.js";
 import { MyHive } from "./MyHive.js";
-import { MyInterface } from "./MyInterface.js";
 
 /**
  * MyScene
@@ -153,7 +149,7 @@ export class MyScene extends CGFscene {
     this.rockSet = new MyRockSet(this);
     this.beeHead = new MyBeeHead(this);
     this.polen = new MyPolen(this, 3, 50, 50);
-    this.bee = new MyBee(this);
+    this.bee = new MyBee(this, 0, 0, 0);
     this.hive = new MyHive(this, this.topTex, this.frontTex, this.sideTex, this.sideTex, this.sideTex, this.bottomTex);
 
     //Objects connected to MyInterface
@@ -162,6 +158,9 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.displayPanorama = true;
     this.infiniteView = false;
+    this.beeSizeFactor = 1;
+    this.speedFactor = 1;
+
 
     this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, 
       this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem'], this.customMaterialValues['Color Leaves']);
@@ -265,11 +264,7 @@ export class MyScene extends CGFscene {
 
     if (this.displayBee) {
       this.updateBee(time);
-      this.pushMatrix();
-      //this.scale(0.2, 0.2, 0.2);
-      this.rotate(Math.PI / 2, 1, 0, 0);
       this.bee.display();
-      this.popMatrix();
     }
 
     if (this.displayFlower) {
@@ -285,23 +280,21 @@ export class MyScene extends CGFscene {
   }
 
   updateBee(t){
-    this.bee.updateBeeMovement(t);
+    this.bee.updateBee(t, this.speedFactor, this.beeSizeFactor);
   }
 
   checkKeys() {
-    var text="Keys pressed: ";
-    var keysPressed=false;
+    var text = "Keys pressed:";
+    var keysPressed = false;
   
-
-    // Check for key codes e.g. in https://keycode.info/
-    if ( this.gui.isKeyPressed("KeyW") ) {
-      text += " W ";
-      keysPressed=true;
+    if (this.gui.isKeyPressed("KeyW")) {
+      text += " W";
+      keysPressed = true;
     }
 
-    if ( this.gui.isKeyPressed("KeyS") ) {
-      text += " S ";
-      keysPressed=true;
+    if (this.gui.isKeyPressed("KeyS")) {
+      text += " S";
+      keysPressed = true;
     }
 
     if (keysPressed) console.log(text);

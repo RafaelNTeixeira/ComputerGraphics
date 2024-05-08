@@ -29,7 +29,7 @@ export class MyBee extends CGFobject {
         this.position = {x: x, y: y, z: z};
         this.initialPosition = {x: x, y: y, z: z};
         this.beeAngle = 0;
-        this.maximumSpeed = 4;
+        this.maximumSpeed = 5;
     }
 
     display() {

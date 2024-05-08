@@ -163,7 +163,6 @@ export class MyScene extends CGFscene {
     this.beeSizeFactor = 1;
     this.speedFactor = 1;
 
-
     this.flower = new MyFlower(this, this.numPetals, this.radiusPetals, this.radiusCenter, this.radiusStem, this.heightStem, 
       this.customMaterialValues['Color Petals'], this.customMaterialValues['Color Center'], this.customMaterialValues['Color Stem'], this.customMaterialValues['Color Leaves']);
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
@@ -289,9 +288,6 @@ export class MyScene extends CGFscene {
     
     // ---- END Primitive drawing section
     this.update();
-    console.log("Follow Bee: ", this.followBee);
-    console.log("First Person: ", this.firstPerson);
-    console.log("Third Person: ", this.thirdPerson);
   }
 
   updateBee(t){

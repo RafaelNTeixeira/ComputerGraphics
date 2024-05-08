@@ -71,23 +71,19 @@ export class MyFlower extends CGFobject {
             const angle = i * angleIncrement;
     
             // Calculate the position of the petal relative to the receptacle
-            const offsetX = Math.cos(angle) * this.radiusPetals; // Adjust the radius as needed
-            const offsetY = Math.sin(angle) * this.radiusPetals; // Adjust the radius as needed
+            const offsetX = Math.cos(angle) * this.radiusPetals;
+            const offsetY = Math.sin(angle) * this.radiusPetals;
     
             // Calculate the rotation angle for the petal
-            const rotationAngle = angle + 45 + Math.PI / this.numPetals; // Adjust the rotation as needed
+            const rotationAngle = angle + 45 + Math.PI / this.numPetals;
     
-            // Apply transformations to position and rotate the petal
-        
             this.scene.pushMatrix();
-            this.scene.translate(offsetX, offsetY, -0.001); // Translate to position
-            this.scene.rotate(rotationAngle, 0, 0, 1); // Rotate around the z-axis
+            this.scene.translate(offsetX, offsetY, -0.001);
+            this.scene.rotate(rotationAngle, 0, 0, 1);
 
-            // Scale
             const scaleFactor = 0.4;
             this.scene.scale(scaleFactor, scaleFactor, scaleFactor);
 
-            // Display the petal
             this.petal.display();
             this.scene.popMatrix();
         }

@@ -23,7 +23,6 @@ export class MySphere extends CGFobject {
         const angSlice = 2 * Math.PI / this.slices; // Angular division for slicing the sphere horizontally (around the equator)
         const angStack = Math.PI / this.stacks; // Angular division for slicing the sphere vertically (pole to pole)
 
-        // Iterate over each stack and slice to calculate the vertices, normals and texture coordinates
         for (let i = 0; i <= this.stacks; i++) {
             const stackRadius = Math.sin(i * angStack) * this.radius;
             const stackY = Math.cos(i * angStack) * this.radius;
@@ -32,17 +31,14 @@ export class MySphere extends CGFobject {
                 const x = Math.cos(j * angSlice) * stackRadius;
                 const z = Math.sin(j * angSlice) * stackRadius;
 
-                // Normal coord values of current slice
-                const nx = (x / this.radius) * this.viewInside; // Normalized
-                const ny = (stackY / this.radius) * this.viewInside;  // Normalized. All the slices in a stack have the same Y value of the current stack
-                const nz = (z / this.radius) * this.viewInside; // Normalized
+                const nx = (x / this.radius) * this.viewInside;
+                const ny = (stackY / this.radius) * this.viewInside;  // All the slices in a stack have the same Y value of the current stack
+                const nz = (z / this.radius) * this.viewInside;
     
-                // Add the vertex, normal, and texture coordinate to their respective arrays
                 this.vertices.push(x, stackY, z);
                 this.normals.push(nx, ny, nz);
                 this.texCoords.push(j / this.slices, i / this.stacks);
 
-                // Create the indices for the current slice and stack
                 if (i <= this.stacks && j <= this.slices) {
                     const current = i * (this.slices) + j;
                     const next = current + this.slices + 1;

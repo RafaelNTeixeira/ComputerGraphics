@@ -29,14 +29,16 @@ export class MyBee extends CGFobject {
         this.position = {x: x, y: y, z: z};
         this.initialPosition = {x: x, y: y, z: z};
         this.beeAngle = 0;
+        this.maximumSpeed = 4;
     }
 
     display() {
         this.scene.pushMatrix();
-        this.scene.scale(this.beeSizeFactor, this.beeSizeFactor, this.beeSizeFactor);
         this.scene.translate(this.position.x, this.position.y, this.position.z);
         this.scene.rotate(this.beeAngle, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.scale(0.2, 0.2, 0.2); // Correction to bee size
+        this.scene.scale(this.beeSizeFactor, this.beeSizeFactor, this.beeSizeFactor);
         this.drawBee();
         this.scene.popMatrix();
     }
@@ -166,6 +168,9 @@ export class MyBee extends CGFobject {
         if (this.speed + v <= 0) {
             this.speed = 0;
         }
+        else if (this.speed + v >= this.maximumSpeed) {
+            this.speed = this.maximumSpeed;
+        }
         else {
             this.speed += v;
         }
@@ -186,7 +191,7 @@ export class MyBee extends CGFobject {
             this.accelerate(value);
         }
         if (this.scene.gui.isKeyPressed("KeyS")) {
-            this.accelerate(-value);
+            this.accelerate(-value/2);
         }
         if (this.scene.gui.isKeyPressed("KeyR")) {
             this.reset();
@@ -206,14 +211,14 @@ export class MyBee extends CGFobject {
 
         this.beeSizeFactor = beeSizeFactor;
 
-        this.keysLogic(speedFactor/5);
+        this.keysLogic(speedFactor/10);
 
         let directionX = Math.sin(this.beeAngle);
         let directionZ = Math.cos(this.beeAngle);
 
         this.position.x += directionX * this.speed/5;
         this.position.z += directionZ * this.speed/5;
-    
+
         let elapsedTime = t - this.startTime;
     
         let amplitude = 5; 

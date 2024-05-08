@@ -22,7 +22,7 @@ export class MyRock extends CGFobject {
         const angSlice = 2 * Math.PI / this.slices;
         const angStack = Math.PI / this.stacks;
 
-        const displacementFactor = 0.1; // Adjust this value to control the depth of protrusions and indentations
+        const displacementFactor = 0.1; // Control the depth of protrusions and indentations
 
         for (let i = 0; i <= this.stacks; i++) {
             const stackRadius = Math.sin(i * angStack) * this.radius;

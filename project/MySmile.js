@@ -14,25 +14,22 @@ export class MySmile extends CGFobject {
         this.normals = [];
         this.texCoords = [];
 
-        // Define the vertices of a simple curve manually
-        // You can adjust these points to create different curves
+        // Define the vertices of a simple curve
         const curvePoints = [
-            [0, 0, 0],       // Start point
+            [0, 0, 0],       // Start
             [-0.5, 0.2, 0],  // Control point 1
             [-0.3, 0.4, 0],  // Control point 2
             [0, 0.6, 0],     // End point
         ];
 
-        // Interpolate points on the curve
         for (let i = 0; i <= this.segments; i++) {
             const t = i / this.segments;
             const point = this.bezierCurve(curvePoints, t);
 
             this.vertices.push(...point);
-            this.normals.push(0, 0, 1); // Normal pointing towards positive z-axis
+            this.normals.push(0, 0, 1); // Normal pointing towards positive z axis
         }
 
-        // Create indices for drawing the curve
         for (let i = 0; i < this.segments; i++) {
             this.indices.push(i, i + 1);
         }
@@ -41,7 +38,6 @@ export class MySmile extends CGFobject {
         this.initGLBuffers();
     }
 
-    // Function to compute a point on a Bezier curve
     bezierCurve(controlPoints, t) {
         const n = controlPoints.length - 1;
         let point = [0, 0, 0];
@@ -56,7 +52,6 @@ export class MySmile extends CGFobject {
         return point;
     }
 
-    // Function to compute binomial coefficient
     binomialCoefficient(n, k) {
         if (k === 0 || k === n) return 1;
 

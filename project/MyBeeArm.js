@@ -12,7 +12,6 @@ export class MyBeeArm extends CGFobject {
     
     display(){
         /* Upper Arm */
-
         var rad = -90 * Math.PI / 180;
         var rotArm = [
             Math.cos(rad), 0.0, Math.sin(rad), 0.0, 

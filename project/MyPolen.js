@@ -57,14 +57,14 @@ export class MyPolen extends CGFobject {
     }
 
     applyScaleFactors() {
-        // Apply different scale factors along the Y-axis to simulate an elongated shape
+        // Apply different scale factors along the y-axis to simulate an elongated shape
         for (let i = 0; i < this.vertices.length; i += 3) {
             if (this.vertices[i + 1] > 0) {
                 // Upper hemisphere
-                this.vertices[i + 1] *= 1.2; // Adjust scale factor as needed
+                this.vertices[i + 1] *= 1.2;
             } else {
                 // Lower hemisphere
-                this.vertices[i + 1] *= 0.8; // Adjust scale factor as needed
+                this.vertices[i + 1] *= 0.8;
             }
         }
     }

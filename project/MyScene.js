@@ -138,7 +138,9 @@ export class MyScene extends CGFscene {
     this.displayRocks = false;
     this.displayBee = true;
     this.displayHive = false;
-    this.centerView = false;
+    this.followBee = false;
+    this.firstPerson = false;
+    this.thirdPerson = true;
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -177,9 +179,9 @@ export class MyScene extends CGFscene {
   initCameras() {
     this.camera = new CGFcamera(
       1.0,
-      0.1,
+      0.01,
       1000,
-      vec3.fromValues(40, 40, 10),
+      vec3.fromValues(20, 20, 10),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -261,9 +263,19 @@ export class MyScene extends CGFscene {
       this.panorama.display();
     } 
     
-
     if (this.displayBee) {
       this.updateBee(time);
+
+      if (this.followBee) {
+        this.camera.setTarget(vec3.fromValues(this.bee.position.x, this.bee.position.y + 10, this.bee.position.z));
+      }
+      else if (this.firstPerson) {
+        this.firstPersonView();
+      }
+      else if (this.thirdPerson) {
+        this.thirdPersonView();
+      }
+
       this.bee.display();
     }
 
@@ -277,6 +289,9 @@ export class MyScene extends CGFscene {
     
     // ---- END Primitive drawing section
     this.update();
+    console.log("Follow Bee: ", this.followBee);
+    console.log("First Person: ", this.firstPerson);
+    console.log("Third Person: ", this.thirdPerson);
   }
 
   updateBee(t){
@@ -302,6 +317,39 @@ export class MyScene extends CGFscene {
 
   update() {
     this.checkKeys();
+  }
+
+  firstPersonView() {
+    let directionX = Math.cos(this.bee.beeAngle);
+    let directionZ = Math.sin(this.bee.beeAngle);
+
+    let newDirectionX = directionZ;
+    let newDirectionZ = directionX;
+
+    let targetX = this.bee.position.x + newDirectionX;
+    let targetY = this.bee.position.y;
+    let targetZ = this.bee.position.z + newDirectionZ;
+
+    this.camera.setPosition(vec3.fromValues(this.bee.position.x, this.bee.position.y, this.bee.position.z));
+    this.camera.setTarget(vec3.fromValues(targetX, targetY, targetZ));
+  }
+
+  thirdPersonView() {
+    let directionX = Math.cos(this.bee.beeAngle);
+    let directionZ = Math.sin(this.bee.beeAngle);
+
+    let newDirectionX = directionZ;
+    let newDirectionZ = directionX;
+
+    let distance = 30;
+    let heightOffset = 10;
+
+    let cameraX = this.bee.position.x - newDirectionX * distance;
+    let cameraY = this.bee.position.y + heightOffset;
+    let cameraZ = this.bee.position.z - newDirectionZ * distance;
+
+    this.camera.setPosition(vec3.fromValues(cameraX, cameraY, cameraZ));
+    this.camera.setTarget(vec3.fromValues(this.bee.position.x, this.bee.position.y, this.bee.position.z));
   }
   
 }

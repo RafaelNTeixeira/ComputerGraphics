@@ -56,7 +56,6 @@ export class MyRockSet extends CGFobject {
             rockAppearance.apply();
         }
         
-
         this.scene.pushMatrix();
 
         let xPos = radius * Math.cos(angle);

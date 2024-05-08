@@ -45,6 +45,31 @@ export class MyInterface extends CGFinterface {
         var f3 = this.gui.addFolder('Bee');
         f3.add(this.scene, 'beeSizeFactor', 0.5, 3).name('Scale Factor');
         f3.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
+        let cameraFolder = f3.addFolder('Camera');
+        let followBeeController = cameraFolder.add(this.scene, 'followBee').name('Follow Bee');
+        followBeeController.onChange(function(value) {
+            if (value) {
+                this.scene.firstPerson = false;
+                this.scene.thirdPerson = false;
+            }
+        }.bind(this));
+
+        let firstPersonController = cameraFolder.add(this.scene, 'firstPerson').name('First Person');
+        firstPersonController.onChange(function(value) {
+            if (value) {
+                this.scene.followBee = false;
+                this.scene.thirdPerson = false;
+            }
+        }.bind(this));
+
+        let thirdPersonController = cameraFolder.add(this.scene, 'thirdPerson').name('Third Person');
+        thirdPersonController.onChange(function(value) {
+            if (value) {
+                this.scene.followBee = false;
+                this.scene.firstPerson = false;
+            }
+        }.bind(this));
+
 
         // Set up callback functions to update flower parameters
         const flowerParameterChangeHandler = () => {

@@ -10,6 +10,8 @@ import { MyBeeHead } from "./MyBeeHead.js";
 import { MyBee } from "./MyBee.js";
 import { MyPolen } from "./MyPolen.js";
 import { MyHive } from "./MyHive.js";
+import { MyGrassPatch } from "./MyGrassPatch.js";
+import { MyGrass } from "./MyGrass.js";
 
 /**
  * MyScene
@@ -45,6 +47,7 @@ export class MyScene extends CGFscene {
     this.centerMaterial = new CGFappearance(this);
     this.stemMaterial = new CGFappearance(this);
     this.leavesMaterial = new CGFappearance(this);
+    this.grassMaterial = new CGFappearance(this);
 
     this.updateCustomMaterial();
   }
@@ -136,7 +139,7 @@ export class MyScene extends CGFscene {
     this.displayFlower = false;
     this.displayGarden = false;
     this.displayRocks = false;
-    this.displayBee = true;
+    this.displayBee = false;
     this.displayHive = false;
     this.followBee = false;
     this.firstPerson = false;
@@ -153,6 +156,7 @@ export class MyScene extends CGFscene {
     this.polen = new MyPolen(this, 3, 50, 50);
     this.bee = new MyBee(this, 0, 0, 0);
     this.hive = new MyHive(this, this.topTex, this.frontTex, this.sideTex, this.sideTex, this.sideTex, this.bottomTex);
+    this.grass = new MyGrassPatch(this, 50, 4, 50, 5, 50, 50);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -285,6 +289,12 @@ export class MyScene extends CGFscene {
     if (this.displayGarden) {
       this.garden.display();
     }
+
+    this.pushMatrix();
+    this.grassMaterial.setDiffuse(0, 0.2, 0, 1);
+    this.grassMaterial.apply();
+    this.grass.display();
+    this.popMatrix();
     
     // ---- END Primitive drawing section
     this.update();

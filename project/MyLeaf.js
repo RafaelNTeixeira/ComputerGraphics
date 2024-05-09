@@ -8,8 +8,4 @@ export class MyLeaf extends CGFobject {
         this.stem = new MyStem(this.scene, 0.2, 0.5, 0);
         this.petal = new MyPetal(this.scene);
     }
-
-    display() {
-        
-    }
 }

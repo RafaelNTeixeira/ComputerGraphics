@@ -9,23 +9,41 @@ export class MyPetal extends CGFobject {
 
     initBuffers() {
         this.vertices = [
+            // Front face
             -1, -1, 0,  // 0
             1, -1, 0,   // 1
             0, 1, 0,    // 2
-            0, -3, this.angle    // 3
+            // Back face
+            -1, -1, 0,  // 3
+            1, -1, 0,   // 4
+            0, 1, 0     // 5
         ];
-    
-        // Define the indices for each triangular face
+        
         this.indices = [
-            0, 1, 2,    
-            3, 1, 0     
+            // Front face
+            0, 1, 2,
+            // Back face
+            5, 4, 3
+        ];
+
+        this.normals = [
+            // Front face
+            0, 0, 1,    // 0
+            0, 0, 1,    // 1
+            0, 0, 1,    // 2
+            // Back face
+            0, 0, -1,   // 3
+            0, 0, -1,   // 4
+            0, 0, -1    // 5
         ];
 
         this.texCoords = [
             0, 0,
-            0, 1,
+            1, 0,
             0.5, 1,
-            0.5, 0
+            0, 0,
+            1, 0,
+            0.5, 1
         ];
     
         this.primitiveType = this.scene.gl.TRIANGLES;

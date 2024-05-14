@@ -1,5 +1,5 @@
-import { CGFappearance, CGFobject, CGFtexture } from '../lib/CGF.js';
-import { MySphere } from "./MySphere.js";
+import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
+import { MySphere } from "../MySphere.js";
 import { MyAntenna } from "./MyAntenna.js";
 import { MySmile } from "./MySmile.js";
 

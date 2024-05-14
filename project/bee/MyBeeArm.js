@@ -1,6 +1,6 @@
-import { CGFappearance, CGFobject, CGFtexture } from '../lib/CGF.js';
-import { MySphere } from "./MySphere.js";
-import { MyStem } from './MyStem.js';
+import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
+import { MySphere } from "../MySphere.js";
+import { MyStem } from '../garden/MyStem.js';
 
 export class MyBeeArm extends CGFobject {
     constructor(scene){

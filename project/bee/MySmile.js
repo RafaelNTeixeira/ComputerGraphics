@@ -1,4 +1,4 @@
-import { CGFobject } from '../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
 
 export class MySmile extends CGFobject {
     constructor(scene, radius, segments) {

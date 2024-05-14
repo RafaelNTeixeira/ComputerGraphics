@@ -1,4 +1,4 @@
-import { CGFappearance, CGFobject } from '../lib/CGF.js';
+import { CGFappearance, CGFobject } from '../../lib/CGF.js';
 
 export class MyStem extends CGFobject {
     constructor(scene, radius, height, obliquity) {

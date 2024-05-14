@@ -2,16 +2,15 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MySphere } from "./MySphere.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyPanorama } from "./MyPanorama.js";
-import { MyFlower } from "./MyFlower.js";
-import { MyGarden } from "./MyGarden.js";
-import { MyRock } from "./MyRock.js";
-import { MyRockSet } from "./MyRockSet.js";
-import { MyBeeHead } from "./MyBeeHead.js";
-import { MyBee } from "./MyBee.js";
-import { MyPolen } from "./MyPolen.js";
-import { MyHive } from "./MyHive.js";
-import { MyGrassPatch } from "./MyGrassPatch.js";
-import { MyGrass } from "./MyGrass.js";
+import { MyFlower } from "./garden/MyFlower.js";
+import { MyGarden } from "./garden/MyGarden.js";
+import { MyRock } from "./rock/MyRock.js";
+import { MyRockSet } from "./rock/MyRockSet.js";
+import { MyBeeHead } from "./bee/MyBeeHead.js";
+import { MyBee } from "./bee/MyBee.js";
+import { MyPolen } from "./garden/MyPolen.js";
+import { MyHive } from "./hive/MyHive.js";
+import { MyGrassPatch } from "./grass/MyGrassPatch.js";
 
 /**
  * MyScene
@@ -293,7 +292,7 @@ export class MyScene extends CGFscene {
     this.pushMatrix();
     this.grassMaterial.setDiffuse(0, 0.2, 0, 1);
     this.grassMaterial.apply();
-    this.grass.display();
+    //this.grass.display();
     this.popMatrix();
     
     // ---- END Primitive drawing section

@@ -1,9 +1,9 @@
-import { CGFappearance, CGFobject, CGFtexture } from '../lib/CGF.js';
+import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
 import { MyBeeHead } from "./MyBeeHead.js";
-import { MySphere } from "./MySphere.js";
+import { MySphere } from "../MySphere.js";
 import { MyCone } from "./MyCone.js";
 import { MyWing } from "./MyWing.js";
-import { MyStem } from './MyStem.js';
+import { MyStem } from '../garden/MyStem.js';
 import { MyBeeArm } from './MyBeeArm.js';
 
 export class MyBee extends CGFobject {

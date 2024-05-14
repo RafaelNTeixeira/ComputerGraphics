@@ -13,17 +13,21 @@ export class MyPetal extends CGFobject {
             -1, -1, 0,  // 0
             1, -1, 0,   // 1
             0, 1, 0,    // 2
+            0, -3, this.angle,    // 3
             // Back face
-            -1, -1, 0,  // 3
-            1, -1, 0,   // 4
-            0, 1, 0     // 5
+            -1, -1, 0,  // 4
+            1, -1, 0,   // 5
+            0, 1, 0 ,    // 6
+            0, -3, this.angle    // 7
         ];
         
         this.indices = [
             // Front face
-            0, 1, 2,
+            0, 1, 2,    
+            3, 1, 0,
             // Back face
-            5, 4, 3
+            6, 5, 4,
+            4, 5, 7,
         ];
 
         this.normals = [
@@ -31,19 +35,25 @@ export class MyPetal extends CGFobject {
             0, 0, 1,    // 0
             0, 0, 1,    // 1
             0, 0, 1,    // 2
+            0, 0, 1,    // 3
             // Back face
-            0, 0, -1,   // 3
             0, 0, -1,   // 4
-            0, 0, -1    // 5
+            0, 0, -1,   // 5
+            0, 0, -1,   // 6
+            0, 0, -1    // 7
         ];
 
         this.texCoords = [
-            0, 0,
-            1, 0,
-            0.5, 1,
-            0, 0,
-            1, 0,
-            0.5, 1
+            // Front face
+            0, 0,   // 0
+            1, 0,   // 1
+            0.5, 1, // 2
+            0.5, 0, // 3
+            // Back face
+            0, 0,   // 4
+            1, 0,   // 5
+            0.5, 1, // 6
+            0.5, 0, // 7
         ];
     
         this.primitiveType = this.scene.gl.TRIANGLES;

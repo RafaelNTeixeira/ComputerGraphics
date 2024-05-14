@@ -38,6 +38,18 @@ export class MyFlower extends CGFobject {
         this.colorLeaves = colorLeaves;
     }
 
+    translateFlower(heightStem) {
+        if (heightStem == 8){
+            return 0;
+        } else if (heightStem == 6) {
+            return 2 * Math.cos(Math.PI);
+        }
+        else if (heightStem == 4) {
+            return 4 * Math.cos(Math.PI);
+        }
+        return 0;
+    }
+
     display() {
         this.scene.centerMaterial.setDiffuse(...this.scene.hexToRgbA(this.colorCenter));
         this.scene.centerMaterial.apply();
@@ -54,6 +66,7 @@ export class MyFlower extends CGFobject {
             0.0, 0.0, 0.0, 1.0
         ]
 
+        //let trans = this.translateFlower(this.heightStem);
         this.scene.pushMatrix();
         this.scene.multMatrix(rotStem);
         this.cylinder.display();

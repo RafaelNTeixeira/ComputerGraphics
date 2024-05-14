@@ -136,10 +136,10 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.displayPanorama = false;
     this.displayFlower = false;
-    this.displayGarden = false;
-    this.displayRocks = false;
+    this.displayGarden = true;
+    this.displayRocks = true;
     this.displayBee = false;
-    this.displayHive = false;
+    this.displayHive = true;
     this.followBee = false;
     this.firstPerson = false;
     this.thirdPerson = true;
@@ -154,7 +154,7 @@ export class MyScene extends CGFscene {
     this.beeHead = new MyBeeHead(this);
     this.polen = new MyPolen(this, 3, 50, 50);
     this.bee = new MyBee(this, 0, 0, 0);
-    this.hive = new MyHive(this, this.topTex, this.frontTex, this.sideTex, this.sideTex, this.sideTex, this.bottomTex);
+    this.hive = new MyHive(this, this.topTex, this.sideTex, this.frontTex, this.sideTex, this.sideTex, this.bottomTex);
     this.grass = new MyGrassPatch(this, 50, 4, 50, 5, 50, 50);
 
     //Objects connected to MyInterface
@@ -251,12 +251,16 @@ export class MyScene extends CGFscene {
     let time = Date.now();
  
     if (this.displayRocks){
+      this.pushMatrix();
+      this.translate(-20, -5, 40);
       this.rockSet.display();
+      this.popMatrix();
     }  
     
     if (this.displayHive){
       this.pushMatrix();
       this.scale(5, 5, 5);
+      this.translate(-4, 0, 10);
       this.hive.display();
       this.popMatrix();
     }
@@ -292,7 +296,9 @@ export class MyScene extends CGFscene {
     this.pushMatrix();
     this.grassMaterial.setDiffuse(0, 0.2, 0, 1);
     this.grassMaterial.apply();
-    //this.grass.display();
+    this.translate(10, -8, 0);
+    this.scale(0.2, 0.2, 0.2);
+    this.grass.display();
     this.popMatrix();
     
     // ---- END Primitive drawing section

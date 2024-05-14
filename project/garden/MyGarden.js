@@ -69,7 +69,7 @@ export class MyGarden extends CGFobject {
                 const x = startX + j * distanceBetweenFlowers;
                 const z = startZ + i * distanceBetweenFlowers;
                 this.scene.pushMatrix();
-                this.scene.translate(x, 0, z);
+                this.scene.translate(x, flower.translateFlower(flower.heightStem), z);
                 flower.display();
                 this.scene.popMatrix();
             }

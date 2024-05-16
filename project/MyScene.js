@@ -159,7 +159,7 @@ export class MyScene extends CGFscene {
     this.bee = new MyBee(this, 0, 0, 0);
     this.hive = new MyHive(this, this.topTex, this.sideTex, this.frontTex, this.sideTex, this.sideTex, this.bottomTex);
     this.hiveHoney = new MyHive(this, this.topTex, this.sideTex, this.frontTexHoney, this.sideTex, this.sideTex, this.bottomTex);
-    this.grass = new MyGrassPatch(this, 10, 4, 5, 5, 5, 5);
+    this.grass = new MyGrassPatch(this, 50, 4, 50, 5, 50, 50);
 
     //Objects connected to MyInterface
     this.displayAxis = false;

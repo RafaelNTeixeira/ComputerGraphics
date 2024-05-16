@@ -4,6 +4,7 @@ import { MySphere } from "../MySphere.js";
 import { MyCone } from "./MyCone.js";
 import { MyWing } from "./MyWing.js";
 import { MyStem } from '../garden/MyStem.js';
+import { MyPolen } from '../garden/MyPolen.js';
 import { MyBeeArm } from './MyBeeArm.js';
 
 export class MyBee extends CGFobject {
@@ -21,6 +22,8 @@ export class MyBee extends CGFobject {
         this.beeArm2 = new MyBeeArm(this.scene);
         this.beeArm3 = new MyBeeArm(this.scene);
         this.beeArm4 = new MyBeeArm(this.scene);
+        this.polen = new MyPolen(this.scene, 0.2, 50, 50);
+        this.polenTexture = new CGFtexture(this.scene, 'images/bee/polen.png');
         this.oscilatingMove = 0;
         this.wingAngle = 0;
         this.beeSizeFactor = 1;
@@ -158,6 +161,19 @@ export class MyBee extends CGFobject {
         this.scene.scale(1.3, 1, 1);
         this.wing2.display();
         this.scene.popMatrix();
+
+        let polenAppearance = new CGFappearance(this.scene);
+        polenAppearance.setTexture(this.polenTexture);
+        polenAppearance.apply();
+
+        this.scene.pushMatrix();
+        this.scene.translate(7, -6, this.oscilatingMove + 2);
+        this.scene.scale(6, 6, 6);
+        this.polen.display();
+        this.scene.popMatrix();
+
+        let appearance1 = new CGFappearance(this.scene);
+        appearance1.apply();
     }
 
     turn(v) {

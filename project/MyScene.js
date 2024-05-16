@@ -74,7 +74,7 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     this.enableTextures(true);
-    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.texture = new CGFtexture(this, "images/grass.jpg");
     this.earthTexture = new CGFtexture(this, 'images/earth.jpg');
     this.panoramaTexture = new CGFtexture(this, 'images/panorama4.jpg');
 
@@ -107,6 +107,7 @@ export class MyScene extends CGFscene {
     this.bottomTex = new CGFtexture(this, 'images/hive/hive_side.jpg');
     this.sideTex = new CGFtexture(this, 'images/hive/beehive_side.png');
     this.frontTex = new CGFtexture(this, 'images/hive/beehive_front.png');
+    this.frontTexHoney = new CGFtexture(this, 'images/hive/beehive_front_honey.png');
 
     this.petalsMaterial.setTexture(this.randomPetalTexture);
     this.petalsMaterial.setTextureWrap('REPEAT', 'REPEAT');
@@ -136,7 +137,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.displayPanorama = false;
     this.displayFlower = false;
-    this.displayGarden = true;
+    this.displayGarden = false;
     this.displayRocks = true;
     this.displayBee = false;
     this.displayHive = true;
@@ -155,6 +156,7 @@ export class MyScene extends CGFscene {
     this.polen = new MyPolen(this, 3, 50, 50);
     this.bee = new MyBee(this, 0, 0, 0);
     this.hive = new MyHive(this, this.topTex, this.sideTex, this.frontTex, this.sideTex, this.sideTex, this.bottomTex);
+    this.hiveHoney = new MyHive(this, this.topTex, this.sideTex, this.frontTexHoney, this.sideTex, this.sideTex, this.bottomTex);
     this.grass = new MyGrassPatch(this, 50, 4, 50, 5, 50, 50);
 
     //Objects connected to MyInterface
@@ -172,10 +174,15 @@ export class MyScene extends CGFscene {
   }
 
   initLights() {
-    this.lights[0].setPosition(15, 0, 5, 1);
+    this.lights[0].setPosition(15, 10, 5, 1);
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
+
+    this.lights[1].setPosition(15, 0, 5, 1);
+    this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[1].enable();
+    this.lights[1].update();
   }
 
   initCameras() {
@@ -236,14 +243,15 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.appearance.apply();
-    this.translate(0,-250,0);
-    this.scale(800, 800, 800);
+    this.translate(0, -9, 0);
+    this.scale(500, 500, 500);
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
     
     this.pushMatrix();
     this.earthTexture.bind();
+    this.translate(0, 20, 0);
     this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
     this.sphere.display();
     this.popMatrix();
@@ -252,7 +260,7 @@ export class MyScene extends CGFscene {
  
     if (this.displayRocks){
       this.pushMatrix();
-      this.translate(-20, -5, 40);
+      this.translate(-20, -8, 40);
       this.rockSet.display();
       this.popMatrix();
     }  
@@ -260,7 +268,7 @@ export class MyScene extends CGFscene {
     if (this.displayHive){
       this.pushMatrix();
       this.scale(5, 5, 5);
-      this.translate(-4, 0, 10);
+      this.translate(-4, -0.6, 10);
       this.hive.display();
       this.popMatrix();
     }

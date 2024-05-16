@@ -102,6 +102,9 @@ export class MyScene extends CGFscene {
     this.randomStemTexture = this.stemTextures[Math.floor(Math.random() * this.stemTextures.length)];
     this.randomLeafTexture = this.leafTextures[Math.floor(Math.random() * this.leafTextures.length)];
 
+    this.grassShader = new CGFshader(this.gl, "shaders/grass.vert", "shaders/grass.frag");
+    //this.grassShader.setUniformsValues({ timeFactor : 0.5 });
+
     this.rockTexture = new CGFtexture(this, 'images/rock.jpg');
     this.topTex = new CGFtexture(this, 'images/hive/beehive_end.png');
     this.bottomTex = new CGFtexture(this, 'images/hive/hive_side.jpg');
@@ -243,7 +246,7 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.appearance.apply();
-    this.translate(0, -9, 0);
+    this.translate(0, -8, 0);
     this.scale(500, 500, 500);
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
@@ -260,7 +263,7 @@ export class MyScene extends CGFscene {
  
     if (this.displayRocks){
       this.pushMatrix();
-      this.translate(-20, -8, 40);
+      this.translate(-20, -7, 40);
       this.rockSet.display();
       this.popMatrix();
     }  
@@ -268,7 +271,7 @@ export class MyScene extends CGFscene {
     if (this.displayHive){
       this.pushMatrix();
       this.scale(5, 5, 5);
-      this.translate(-4, -0.6, 10);
+      this.translate(-4, -0.4, 10);
       this.hive.display();
       this.popMatrix();
     }
@@ -316,7 +319,11 @@ export class MyScene extends CGFscene {
   updateBee(t){
     this.bee.updateBee(t, this.speedFactor, this.beeSizeFactor);
   }
-
+  
+  updateGrass(t){
+    this.grass.update(t, 0, 50);
+  }
+  
   checkKeys() {
     var text = "Keys pressed:";
     var keysPressed = false;

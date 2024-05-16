@@ -1,5 +1,6 @@
 import { CGFobject } from '../../lib/CGF.js';
 import { MyGrass } from './MyGrass.js';
+import { MyGrassWind } from './MyGrassWind.js';
 
 export class MyGrassPatch extends CGFobject {
     constructor(scene, width, height, numStrips, curveFactor, numRows, numCols) {
@@ -27,7 +28,7 @@ export class MyGrassPatch extends CGFobject {
                 const z = row * rowSpacing + Math.random() * rowSpacing;
                 const height = Math.random() * this.height;
 
-                const grassStrip = new MyGrass(this.scene, stripWidth, height, this.curveFactor, x, z);
+                const grassStrip = new MyGrassWind(this.scene, stripWidth, height, this.curveFactor, x, z);
 
                 this.grassStrips.push(grassStrip);
             }
@@ -37,6 +38,12 @@ export class MyGrassPatch extends CGFobject {
     display() {
         for (let i = 0; i < this.grassStrips.length; i++) {
             this.grassStrips[i].display();
+        }
+    }
+
+    update(timeSinceAppStart, windAngle, windStrength) {
+        for (let i = 0; i < this.grassStrips.length; i++) {
+            this.grassStrips[i].update(timeSinceAppStart, windAngle, windStrength);
         }
     }
 }

@@ -102,7 +102,6 @@ export class MyScene extends CGFscene {
     this.randomStemTexture = this.stemTextures[Math.floor(Math.random() * this.stemTextures.length)];
     this.randomLeafTexture = this.leafTextures[Math.floor(Math.random() * this.leafTextures.length)];
 
-    this.grassShader = new CGFshader(this.gl, "shaders/grass.vert", "shaders/grass.frag");
     //this.grassShader.setUniformsValues({ timeFactor : 0.5 });
 
     this.rockTexture = new CGFtexture(this, 'images/rock.jpg');
@@ -160,7 +159,7 @@ export class MyScene extends CGFscene {
     this.bee = new MyBee(this, 0, 0, 0);
     this.hive = new MyHive(this, this.topTex, this.sideTex, this.frontTex, this.sideTex, this.sideTex, this.bottomTex);
     this.hiveHoney = new MyHive(this, this.topTex, this.sideTex, this.frontTexHoney, this.sideTex, this.sideTex, this.bottomTex);
-    this.grass = new MyGrassPatch(this, 50, 4, 50, 5, 50, 50);
+    this.grass = new MyGrassPatch(this, 10, 4, 5, 5, 5, 5);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -314,6 +313,7 @@ export class MyScene extends CGFscene {
     
     // ---- END Primitive drawing section
     this.update();
+    this.updateGrass(time);
   }
 
   updateBee(t){

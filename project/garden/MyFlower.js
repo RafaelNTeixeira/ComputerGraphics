@@ -19,6 +19,11 @@ export class MyFlower extends CGFobject {
         this.colorCenter = colorCenter;
         this.colorStem = colorStem;
         this.colorLeaves = colorLeaves;
+        this.xi = 0;
+        this.xf = 0;
+        this.zi = 0;
+        this.zf = 0;
+        this.beeHere = false;
         
         this.updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, colorLeaves);
 	}
@@ -48,6 +53,13 @@ export class MyFlower extends CGFobject {
             return 4 * Math.cos(Math.PI);
         }
         return 0;
+    }
+
+    printSquare(){
+        console.log("XI: " + this.xi);
+        console.log("XF: " + this.xf);
+        console.log("ZI: " + this.zi);
+        console.log("ZF: " + this.zf);
     }
 
     display() {

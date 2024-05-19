@@ -338,6 +338,11 @@ export class MyScene extends CGFscene {
       keysPressed = true;
     }
 
+    if (this.gui.isKeyPressed("KeyF")) {
+      text += " F";
+      keysPressed = true;
+    }
+
     if (keysPressed) console.log(text);
   }
 

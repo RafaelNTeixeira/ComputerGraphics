@@ -202,6 +202,32 @@ export class MyBee extends CGFobject {
             }
     }
 
+    goDown(){
+        /*
+        if((this.position.x > -4 && this.position.x < 26) && (this.position.z > -2 && this.position.x < 28)){
+            this.scene.garden.flowers[0][0].printSquare();
+        } else{
+            console.log("Outside Garden.");
+        }
+        */
+        for (let i = 0; i < 5; i++) {
+            for (let j = 0; j < 5; j++) {
+                if((this.scene.garden.flowers[i][j].xi < this.position.x && this.scene.garden.flowers[i][j].xf > this.position.x)
+                    && (this.scene.garden.flowers[i][j].zi < this.position.z && this.scene.garden.flowers[i][j].zf > this.position.z)){
+                    this.scene.garden.flowers[i][j].beeHere = true;
+                }
+                
+            }
+        }
+        
+    }
+
+    printPosition(){
+        console.log("X: " + this.position.x);
+        console.log("Y: " + this.position.y);
+        console.log("Z: " + this.position.z);
+    }
+
     keysLogic(value) {
         if (this.scene.gui.isKeyPressed("KeyW")) {
             this.accelerate(value);
@@ -217,6 +243,15 @@ export class MyBee extends CGFobject {
         }
         if (this.scene.gui.isKeyPressed("KeyD")) {
             this.turn(-value/3);
+        }
+        if (this.scene.gui.isKeyPressed("KeyF")) {
+            this.goDown();
+        }
+        if (this.scene.gui.isKeyPressed("KeyP")) {
+            //this.turn(-value/3);
+        }
+        if (this.scene.gui.isKeyPressed("KeyO")) {
+            //this.turn(-value/3);
         }
     }
 

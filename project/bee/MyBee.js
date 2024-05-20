@@ -40,6 +40,9 @@ export class MyBee extends CGFobject {
         this.speedUp = 0;
         this.keyFpressed = false;
         this.keyPpressed = false;
+        this.lastSpeed = 0;
+        this.savePositionX = 0;
+        this.savePositionZ = 0; 
     }
 
     display() {
@@ -169,7 +172,7 @@ export class MyBee extends CGFobject {
         this.wing2.display();
         this.scene.popMatrix();
 
-        if(this.hasPolen){
+        if (this.hasPolen) {
             let polenAppearance = new CGFappearance(this.scene);
             polenAppearance.setTexture(this.polenTexture);
             polenAppearance.apply();
@@ -183,8 +186,6 @@ export class MyBee extends CGFobject {
             let appearance1 = new CGFappearance(this.scene);
             appearance1.apply();
         }
-
-        
     }
 
     turn(v) {
@@ -214,17 +215,15 @@ export class MyBee extends CGFobject {
     }
 
     goDown(v){
-        
         for (let i = 0; i < 5; i++) {
             for (let j = 0; j < 5; j++) {
                 if((this.scene.garden.flowers[i][j].xi < this.position.x && this.scene.garden.flowers[i][j].xf > this.position.x)
                     && (this.scene.garden.flowers[i][j].zi < this.position.z && this.scene.garden.flowers[i][j].zf > this.position.z)
-                    && !this.hasPolen){
+                    && !this.hasPolen) {
                     this.goingDown = true;
                     this.flower = this.scene.garden.flowers[i][j]
-                    this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);                    
+                    this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);               
                     this.speedDown = v;
-                    
                 }
             }
         }
@@ -233,7 +232,6 @@ export class MyBee extends CGFobject {
     goUp(v){
         this.speedUp = v;
         this.goingDown = false;
-        //this.position.y = this.initialPosition.y;
     }
 
     goToHive(v){
@@ -265,7 +263,10 @@ export class MyBee extends CGFobject {
             this.turn(-value/3);
         }
         if (this.scene.gui.isKeyPressed("KeyF")) {
+            this.lastSpeed = this.speed;
             this.keyFpressed = true;
+            this.savePositionX = this.position.x;
+            this.savePositionZ = this.position.z; 
             this.goDown(value);
         }
         if (this.scene.gui.isKeyPressed("KeyP")) {
@@ -292,32 +293,37 @@ export class MyBee extends CGFobject {
         this.position.x += directionX * this.speed/5;
         this.position.z += directionZ * this.speed/5;
 
-        if(this.position.y > this.height){
-            this.position.y -= this.speedDown/5;
+        if (this.position.y > this.height) {
+            this.position.y -= this.speedDown;
         } else { 
-            if(this.keyFpressed){
+            if (this.keyFpressed) {
+                this.speed = 0;
+                this.position.x = this.savePositionX;
+                this.position.z = this.savePositionZ;
                 this.speedDown = 0;
                 this.hasPolen = true;
                 this.flower.beeHere = true;
             }
         }
-        
-        if(this.keyPpressed){
-            if(this.position.y < this.initialPosition.y){
-                this.position.y += this.speedUp/5;
+    
+        if (this.keyPpressed) {
+            if (this.position.y < this.initialPosition.y) {
+                this.position.y += this.speedUp;
             } else {
+                this.position.x = this.savePositionX;
+                this.position.z = this.savePositionZ;
                 this.speedUp = 0;
+                this.speed = this.lastSpeed;
+                this.keyPpressed = false;
             }
         }
-        
-        
-
+    
         let elapsedTime = t - this.startTime;
     
         let amplitude = 5; 
         let frequency = 0.5;
 
-        if(!this.goingDown) {
+        if (!this.goingDown) {
             this.oscilatingMove = amplitude * Math.sin(2 * Math.PI * frequency * (elapsedTime / 1000));
         } 
         /*else {

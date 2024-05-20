@@ -114,7 +114,9 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
         }
 
-        if (!this.beeHere && this.hasPolen) {
+        if (this.beeHere) this.hasPolen = false;
+
+        if (this.hasPolen) {
             let polenAppearance = new CGFappearance(this.scene);
             polenAppearance.setTexture(this.polenTexture);
             polenAppearance.apply();

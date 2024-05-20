@@ -293,13 +293,15 @@ export class MyBee extends CGFobject {
         this.position.x += directionX * this.speed/5;
         this.position.z += directionZ * this.speed/5;
 
-        if (this.position.y > this.height) {
-            this.position.y -= this.speedDown;
-        } else { 
-            if (this.keyFpressed) {
-                this.speed = 0;
+        if (this.keyFpressed) {
+            if (this.position.y > this.height) {
+                this.position.y -= this.speedDown;
                 this.position.x = this.savePositionX;
                 this.position.z = this.savePositionZ;
+                this.speed = this.lastSpeed;
+            } else { 
+                this.keyFpressed = false;
+                this.speed = 0;
                 this.speedDown = 0;
                 this.hasPolen = true;
                 this.flower.beeHere = true;
@@ -309,9 +311,10 @@ export class MyBee extends CGFobject {
         if (this.keyPpressed) {
             if (this.position.y < this.initialPosition.y) {
                 this.position.y += this.speedUp;
-            } else {
                 this.position.x = this.savePositionX;
                 this.position.z = this.savePositionZ;
+            } else {
+                this.keyPpressed = false;
                 this.speedUp = 0;
                 this.speed = this.lastSpeed;
                 this.keyPpressed = false;

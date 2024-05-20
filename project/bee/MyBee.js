@@ -36,6 +36,8 @@ export class MyBee extends CGFobject {
         this.hasPolen = false;
         this.goingDown = false;
         this.height = 0;
+        this.speedDown = 0;
+        this.speedUp = 0;
     }
 
     display() {
@@ -217,12 +219,16 @@ export class MyBee extends CGFobject {
                     && (this.scene.garden.flowers[i][j].zi < this.position.z && this.scene.garden.flowers[i][j].zf > this.position.z)
                     && !this.hasPolen){
                     this.goingDown = true;
-                    //this.speed = 0;
+
+                    if(this.scene.garden.flowers[i][j].beeHere){
+                        this.hasPolen = false;
+                    } else {
+                        this.hasPolen = true;
+                    }
+
                     this.scene.garden.flowers[i][j].beeHere = true;
-                    this.hasPolen = true;
                     this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);
-                    if(this.position.y)
-                    this.position.y -= v;
+                    this.speedDown = v;
                     
                 }
             }
@@ -236,11 +242,13 @@ export class MyBee extends CGFobject {
                     && (this.scene.garden.flowers[i][j].zi < this.position.z && this.scene.garden.flowers[i][j].zf > this.position.z)
                     && !this.hasPolen){
                     this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);
+                    this.speedUp = v;
                     
                 }
             }
         }
         this.goingDown = false;
+        this.position.y = this.initialPosition.y;
     }
 
     goToHive(v){
@@ -296,6 +304,19 @@ export class MyBee extends CGFobject {
 
         this.position.x += directionX * this.speed/5;
         this.position.z += directionZ * this.speed/5;
+        if(this.position.y > this.height){
+            this.position.y -= this.speedDown/5;
+        } else {
+            this.speedDown = 0;
+            console.log("ANI OVER.");
+            console.log("H: " + this.height);
+            console.log("Y: " + this.position.y);     
+        }
+        /*
+        if(this.position.y < this.initialPosition.y){
+            this.position.y += this.speedUp/5;
+        }
+        */
 
         let elapsedTime = t - this.startTime;
     
@@ -304,14 +325,15 @@ export class MyBee extends CGFobject {
 
         if(!this.goingDown) {
             this.oscilatingMove = amplitude * Math.sin(2 * Math.PI * frequency * (elapsedTime / 1000));
-        } else {
+        } 
+        /*else {
             this.oscilatingMove = 0;
             console.log("Height: " + (-this.height));
             if ((-this.height) > this.oscilatingMove) {
                 this.oscilatingMove = (elapsedTime / 1000) + (elapsedTime / 8000);
                 console.log("OM: " + this.oscilatingMove);
             }
-        }
+        } */
     
         this.wingAngle = Math.sin(t * 0.05);
     }

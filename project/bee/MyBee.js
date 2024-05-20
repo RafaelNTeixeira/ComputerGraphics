@@ -38,6 +38,8 @@ export class MyBee extends CGFobject {
         this.height = 0;
         this.speedDown = 0;
         this.speedUp = 0;
+        this.keyFpressed = false;
+        this.keyPpressed = false;
     }
 
     display() {
@@ -219,14 +221,7 @@ export class MyBee extends CGFobject {
                     && (this.scene.garden.flowers[i][j].zi < this.position.z && this.scene.garden.flowers[i][j].zf > this.position.z)
                     && !this.hasPolen){
                     this.goingDown = true;
-
-                    if(this.scene.garden.flowers[i][j].beeHere){
-                        this.hasPolen = false;
-                    } else {
-                        this.hasPolen = true;
-                    }
-
-                    this.scene.garden.flowers[i][j].beeHere = true;
+                    this.flower = this.scene.garden.flowers[i][j]
                     this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);
                     this.speedDown = v;
                     
@@ -280,9 +275,11 @@ export class MyBee extends CGFobject {
             this.turn(-value/3);
         }
         if (this.scene.gui.isKeyPressed("KeyF")) {
+            this.keyFpressed = true;
             this.goDown(value);
         }
         if (this.scene.gui.isKeyPressed("KeyP")) {
+            this.keyPpressed = true;
             this.goUp(value);
         }
         if (this.scene.gui.isKeyPressed("KeyO")) {
@@ -307,16 +304,20 @@ export class MyBee extends CGFobject {
         if(this.position.y > this.height){
             this.position.y -= this.speedDown/5;
         } else {
-            this.speedDown = 0;
-            console.log("ANI OVER.");
-            console.log("H: " + this.height);
-            console.log("Y: " + this.position.y);     
+            if(this.keyFpressed){
+                this.speedDown = 0;
+                this.hasPolen = true;
+                this.flower.beeHere = true;
+            }
+                 
         }
-        /*
-        if(this.position.y < this.initialPosition.y){
-            this.position.y += this.speedUp/5;
+        
+        if(this.keyPpressed){
+            console.log("IY: " + this.initialPosition.y);
+            console.log("Y: " + this.position.y);
         }
-        */
+        
+        
 
         let elapsedTime = t - this.startTime;
     

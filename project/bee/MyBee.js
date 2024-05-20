@@ -222,7 +222,7 @@ export class MyBee extends CGFobject {
                     && !this.hasPolen){
                     this.goingDown = true;
                     this.flower = this.scene.garden.flowers[i][j]
-                    this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);
+                    this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);                    
                     this.speedDown = v;
                     
                 }
@@ -231,19 +231,9 @@ export class MyBee extends CGFobject {
     }
 
     goUp(v){
-        for (let i = 0; i < 5; i++) {
-            for (let j = 0; j < 5; j++) {
-                if((this.scene.garden.flowers[i][j].xi < this.position.x && this.scene.garden.flowers[i][j].xf > this.position.x)
-                    && (this.scene.garden.flowers[i][j].zi < this.position.z && this.scene.garden.flowers[i][j].zf > this.position.z)
-                    && !this.hasPolen){
-                    this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);
-                    this.speedUp = v;
-                    
-                }
-            }
-        }
+        this.speedUp = v;
         this.goingDown = false;
-        this.position.y = this.initialPosition.y;
+        //this.position.y = this.initialPosition.y;
     }
 
     goToHive(v){
@@ -301,20 +291,23 @@ export class MyBee extends CGFobject {
 
         this.position.x += directionX * this.speed/5;
         this.position.z += directionZ * this.speed/5;
+
         if(this.position.y > this.height){
             this.position.y -= this.speedDown/5;
-        } else {
+        } else { 
             if(this.keyFpressed){
                 this.speedDown = 0;
                 this.hasPolen = true;
                 this.flower.beeHere = true;
             }
-                 
         }
         
         if(this.keyPpressed){
-            console.log("IY: " + this.initialPosition.y);
-            console.log("Y: " + this.position.y);
+            if(this.position.y < this.initialPosition.y){
+                this.position.y += this.speedUp/5;
+            } else {
+                this.speedUp = 0;
+            }
         }
         
         

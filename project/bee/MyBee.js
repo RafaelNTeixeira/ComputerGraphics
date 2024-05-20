@@ -222,7 +222,7 @@ export class MyBee extends CGFobject {
                     && !this.hasPolen) {
                     this.goingDown = true;
                     this.flower = this.scene.garden.flowers[i][j]
-                    this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);               
+                    this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);   
                     this.speedDown = v;
                 }
             }
@@ -303,7 +303,12 @@ export class MyBee extends CGFobject {
                 this.keyFpressed = false;
                 this.speed = 0;
                 this.speedDown = 0;
-                this.hasPolen = true;
+                
+                if (this.flower.hasPolen) {
+                    this.hasPolen = true;
+                }
+                else this.hasPolen = false;
+
                 this.flower.beeHere = true;
             }
         }

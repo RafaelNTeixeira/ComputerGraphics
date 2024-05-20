@@ -5,7 +5,7 @@ import { MyCylinder } from "./MyCylinder.js";
 import { MyPolen } from "./MyPolen.js";
 
 export class MyFlower extends CGFobject {
-    constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, colorLeaves) {
+    constructor(scene, numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, colorLeaves, hasPolen) {
 		super(scene);
         this.numPetals = numPetals;
         this.radiusPetals = radiusPetals;
@@ -24,6 +24,7 @@ export class MyFlower extends CGFobject {
         this.zi = 0;
         this.zf = 0;
         this.beeHere = false;
+        this.hasPolen = hasPolen;
         
         this.updateFlowerParameters(numPetals, radiusPetals, radiusCenter, radiusStem, heightStem, colorPetals, colorCenter, colorStem, colorLeaves);
 	}
@@ -113,7 +114,7 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
         }
 
-        if(!this.beeHere){
+        if (!this.beeHere && this.hasPolen) {
             let polenAppearance = new CGFappearance(this.scene);
             polenAppearance.setTexture(this.polenTexture);
             polenAppearance.apply();

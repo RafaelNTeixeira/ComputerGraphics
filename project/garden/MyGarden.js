@@ -44,7 +44,8 @@ export class MyGarden extends CGFobject {
                 generateRandomColor(),
                 generateRandomColor(),
                 generateRandomColor(),
-                generateRandomColor()
+                generateRandomColor(),
+                Math.random() < 0.5 // true or false
             );
         };
     

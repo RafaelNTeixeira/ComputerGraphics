@@ -268,11 +268,20 @@ export class MyScene extends CGFscene {
     }  
     
     if (this.displayHive){
-      this.pushMatrix();
-      this.scale(5, 5, 5);
-      this.translate(-4, -0.4, 10);
-      this.hive.display();
-      this.popMatrix();
+      if(this.bee.inHive){
+        this.pushMatrix();
+        this.scale(5, 5, 5);
+        this.translate(-4, -0.4, 10);
+        this.hiveHoney.display();
+        this.popMatrix();
+      } else {
+        this.pushMatrix();
+        this.scale(5, 5, 5);
+        this.translate(-4, -0.4, 10);
+        this.hive.display();
+        this.popMatrix();
+      }
+      
     }
 
     if (this.displayPanorama) {

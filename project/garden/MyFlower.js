@@ -113,17 +113,21 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
         }
 
-        let polenAppearance = new CGFappearance(this.scene);
-        polenAppearance.setTexture(this.polenTexture);
-        polenAppearance.apply();
+        if(!this.beeHere){
+            let polenAppearance = new CGFappearance(this.scene);
+            polenAppearance.setTexture(this.polenTexture);
+            polenAppearance.apply();
 
-        this.scene.pushMatrix();
-        this.scene.translate(-0.3, 0.3, 0);
-        this.polen.display();
-        this.scene.popMatrix();
+            this.scene.pushMatrix();
+            this.scene.translate(-0.3, 0.3, 0);
+            this.polen.display();
+            this.scene.popMatrix();
 
-        let appearance = new CGFappearance(this.scene);
-        appearance.apply();
+            let appearance = new CGFappearance(this.scene);
+            appearance.apply();
+        }
+
+        
     }
 
 }

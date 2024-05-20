@@ -33,6 +33,9 @@ export class MyBee extends CGFobject {
         this.initialPosition = {x: x, y: y, z: z};
         this.beeAngle = 0;
         this.maximumSpeed = 5;
+        this.hasPolen = false;
+        this.goingDown = false;
+        this.height = 0;
     }
 
     display() {
@@ -162,18 +165,22 @@ export class MyBee extends CGFobject {
         this.wing2.display();
         this.scene.popMatrix();
 
-        let polenAppearance = new CGFappearance(this.scene);
-        polenAppearance.setTexture(this.polenTexture);
-        polenAppearance.apply();
+        if(this.hasPolen){
+            let polenAppearance = new CGFappearance(this.scene);
+            polenAppearance.setTexture(this.polenTexture);
+            polenAppearance.apply();
 
-        this.scene.pushMatrix();
-        this.scene.translate(7, -6, this.oscilatingMove + 2);
-        this.scene.scale(6, 6, 6);
-        this.polen.display();
-        this.scene.popMatrix();
+            this.scene.pushMatrix();
+            this.scene.translate(7, -6, this.oscilatingMove + 2);
+            this.scene.scale(6, 6, 6);
+            this.polen.display();
+            this.scene.popMatrix();
 
-        let appearance1 = new CGFappearance(this.scene);
-        appearance1.apply();
+            let appearance1 = new CGFappearance(this.scene);
+            appearance1.apply();
+        }
+
+        
     }
 
     turn(v) {
@@ -202,25 +209,45 @@ export class MyBee extends CGFobject {
             }
     }
 
-    goDown(){
-        /*
-        if((this.position.x > -4 && this.position.x < 26) && (this.position.z > -2 && this.position.x < 28)){
-            this.scene.garden.flowers[0][0].printSquare();
-        } else{
-            console.log("Outside Garden.");
-        }
-        */
+    goDown(v){
+        
         for (let i = 0; i < 5; i++) {
             for (let j = 0; j < 5; j++) {
                 if((this.scene.garden.flowers[i][j].xi < this.position.x && this.scene.garden.flowers[i][j].xf > this.position.x)
-                    && (this.scene.garden.flowers[i][j].zi < this.position.z && this.scene.garden.flowers[i][j].zf > this.position.z)){
+                    && (this.scene.garden.flowers[i][j].zi < this.position.z && this.scene.garden.flowers[i][j].zf > this.position.z)
+                    && !this.hasPolen){
+                    this.goingDown = true;
+                    //this.speed = 0;
                     this.scene.garden.flowers[i][j].beeHere = true;
+                    this.hasPolen = true;
+                    this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);
+                    if(this.position.y)
+                    this.position.y -= v;
+                    
                 }
-                
             }
         }
-        
     }
+
+    goUp(v){
+        for (let i = 0; i < 5; i++) {
+            for (let j = 0; j < 5; j++) {
+                if((this.scene.garden.flowers[i][j].xi < this.position.x && this.scene.garden.flowers[i][j].xf > this.position.x)
+                    && (this.scene.garden.flowers[i][j].zi < this.position.z && this.scene.garden.flowers[i][j].zf > this.position.z)
+                    && !this.hasPolen){
+                    this.height = this.scene.garden.flowers[i][j].translateFlower(this.scene.garden.flowers[i][j].heightStem);
+                    
+                }
+            }
+        }
+        this.goingDown = false;
+    }
+
+    goToHive(v){
+        this.inHive = true;
+        this.hasPolen = false;
+    }
+
 
     printPosition(){
         console.log("X: " + this.position.x);
@@ -245,13 +272,13 @@ export class MyBee extends CGFobject {
             this.turn(-value/3);
         }
         if (this.scene.gui.isKeyPressed("KeyF")) {
-            this.goDown();
+            this.goDown(value);
         }
         if (this.scene.gui.isKeyPressed("KeyP")) {
-            //this.turn(-value/3);
+            this.goUp(value);
         }
         if (this.scene.gui.isKeyPressed("KeyO")) {
-            //this.turn(-value/3);
+            this.goToHive(value);
         }
     }
 
@@ -274,8 +301,17 @@ export class MyBee extends CGFobject {
     
         let amplitude = 5; 
         let frequency = 0.5;
-    
-        this.oscilatingMove = amplitude * Math.sin(2 * Math.PI * frequency * (elapsedTime / 1000));
+
+        if(!this.goingDown) {
+            this.oscilatingMove = amplitude * Math.sin(2 * Math.PI * frequency * (elapsedTime / 1000));
+        } else {
+            this.oscilatingMove = 0;
+            console.log("Height: " + (-this.height));
+            if ((-this.height) > this.oscilatingMove) {
+                this.oscilatingMove = (elapsedTime / 1000) + (elapsedTime / 8000);
+                console.log("OM: " + this.oscilatingMove);
+            }
+        }
     
         this.wingAngle = Math.sin(t * 0.05);
     }

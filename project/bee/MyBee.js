@@ -240,8 +240,6 @@ export class MyBee extends CGFobject {
 
     goToHive(v){
         this.speedMove = v;
-        //this.inHive = true;
-        //this.hasPolen = false;
     }
 
 
@@ -310,10 +308,12 @@ export class MyBee extends CGFobject {
                 this.speed = 0;
                 this.speedDown = 0;
                 
-                if (this.flower.hasPolen) {
+                if (this.flower.hasPolen || this.hasPolen) {
                     this.hasPolen = true;
                 }
-                else this.hasPolen = false;
+                else {
+                    this.hasPolen = false;
+                } 
 
                 this.flower.beeHere = true;
             }

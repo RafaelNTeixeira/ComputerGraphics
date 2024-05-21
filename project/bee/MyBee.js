@@ -334,32 +334,36 @@ export class MyBee extends CGFobject {
 
         if (this.keyOpressed){
             //this.printPosition();
-            /*
             if(!this.goDownMove || this.position.y < 0) {
                 this.position.y += this.speedMove/2;
             } else {
                 this.position.y -= this.speedMove/2;
-            }*/
+            }
             if(this.position.x > -20){
                 this.position.x -= this.speedMove;
             } else if(this.position.z < 50){
                 this.position.z += this.speedMove;
                 if(this.position.z > 15){
-                    console.log("Here");
                     this.goDownMove = true;
                 }
             } else{
-                this.speed = 0;
-                this.speedMove = 0;
-                if (!this.hasPolen && !this.inHive){
-                    this.inHive = false;
+                if(this.position.y > 0.1){
+                    this.position.y -= this.speedMove/2;
                 } else {
-                    this.inHive = true;
+                    this.speed = 0;
+                    this.speedMove = 0;
+                    if (!this.hasPolen && !this.inHive){
+                        this.inHive = false;
+                    } else {
+                        this.inHive = true;
+                    }
+                    this.hasPolen = false;
+                    this.goDownMove = false;
+                    this.keyOpressed = false;
+                    console.log("In Hive.");
+                    this.printPosition();
                 }
-                this.hasPolen = false;
-                this.keyOpressed = false;
-                console.log("In Hive.");
-                this.printPosition();
+                
             }
         }
     

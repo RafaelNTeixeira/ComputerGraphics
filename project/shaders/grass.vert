@@ -1,20 +1,21 @@
 attribute vec3 aVertexPosition;
-attribute vec2 aTextureCoord;
 attribute vec3 aVertexNormal;
+attribute vec2 aTextureCoord;
 
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
-
-uniform float angle;
-uniform float strength;
+uniform mat4 uNMatrix;
 uniform float timeFactor;
+uniform float strength;
 
-void main() {
-    vec3 offset = vec3(
-        strength * sin(angle) * timeFactor * (aVertexPosition.y + 0.5), 
-        0.0, 
-        strength * cos(angle) * timeFactor * (aVertexPosition.y + 0.5)
-    );
-    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
+varying vec3 vTransformedNormal;
+
+void main(void) {
+    vec4 position = vec4(aVertexPosition, 1.0);
+
+    float movement = sin(position.y * 3.0 + timeFactor * strength);
+    position.x += movement * 0.5;
+
+    gl_Position = uPMatrix * uMVMatrix * position;
+    vTransformedNormal = (uNMatrix * vec4(aVertexNormal, 1.0)).xyz;
 }
-

@@ -330,7 +330,7 @@ export class MyScene extends CGFscene {
   }
   
   updateGrass(t){
-    this.grass.update(t, 0, 50);
+    this.grass.update(t, 0, 5);
   }
   
   checkKeys() {

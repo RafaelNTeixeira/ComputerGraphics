@@ -43,7 +43,7 @@ export class MyGrassPatch extends CGFobject {
         this.scene.setActiveShader(this.grassShader);
 
         this.grassShader.setUniformsValues({
-            timeFactor: Math.sin(2 * Math.PI * this.time),
+            timeFactor: (this.time - this.startTime) / 1000,
             angle: (this.angle * 2 * Math.PI) / 360,
             strength: this.strength,
             grassColor: [0, 0.2, 0, 1]
@@ -57,6 +57,10 @@ export class MyGrassPatch extends CGFobject {
     }
 
     update(time, angle, strength) {
+        if (!this.startTime) {
+            this.startTime = time;
+        }
+
         this.time = time;
         this.angle = angle;
         this.strength = strength;

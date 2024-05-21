@@ -146,6 +146,7 @@ export class MyScene extends CGFscene {
     this.followBee = false;
     this.firstPerson = false;
     this.thirdPerson = true;
+    this.displayGrass = true;
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -312,13 +313,15 @@ export class MyScene extends CGFscene {
       this.garden.display();
     }
 
-    this.pushMatrix();
-    this.grassMaterial.setDiffuse(0, 0.2, 0, 1);
-    this.grassMaterial.apply();
-    this.translate(10, -8, 0);
-    this.scale(0.2, 0.2, 0.2);
-    this.grass.display();
-    this.popMatrix();
+    if (this.displayGrass) {
+      this.pushMatrix();
+      this.grassMaterial.setDiffuse(0, 0.2, 0, 1);
+      this.grassMaterial.apply();
+      this.translate(10, -8, 0);
+      this.scale(0.2, 0.2, 0.2);
+      this.grass.display();
+      this.popMatrix();
+    }
     
     // ---- END Primitive drawing section
     this.update();
@@ -330,7 +333,7 @@ export class MyScene extends CGFscene {
   }
   
   updateGrass(t){
-    this.grass.update(t, 45, 5);
+    this.grass.update(t, 90, 7);
   }
   
   checkKeys() {

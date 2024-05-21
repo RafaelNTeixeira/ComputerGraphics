@@ -298,7 +298,7 @@ export class MyBee extends CGFobject {
         this.position.z += directionZ * this.speed/5;
 
         if (this.keyFpressed) {
-            if (this.position.y > this.height) {
+            if (this.position.y >= this.height) {
                 this.position.y -= this.speedDown;
                 this.position.x = this.savePositionX;
                 this.position.z = this.savePositionZ;
@@ -320,7 +320,7 @@ export class MyBee extends CGFobject {
         }
     
         if (this.keyPpressed) {
-            if (this.position.y < this.initialPosition.y) {
+            if (this.position.y <= this.initialPosition.y) {
                 this.position.y += this.speedUp;
                 this.position.x = this.savePositionX;
                 this.position.z = this.savePositionZ;

@@ -43,6 +43,10 @@ export class MyBee extends CGFobject {
         this.lastSpeed = 0;
         this.savePositionX = 0;
         this.savePositionZ = 0; 
+        this.speedMove = 0;
+        this.keyOpressed = false;
+        //this.topMove = 20;
+        this.goDownMove = false;
     }
 
     display() {
@@ -235,8 +239,9 @@ export class MyBee extends CGFobject {
     }
 
     goToHive(v){
-        this.inHive = true;
-        this.hasPolen = false;
+        this.speedMove = v;
+        //this.inHive = true;
+        //this.hasPolen = false;
     }
 
 
@@ -274,6 +279,7 @@ export class MyBee extends CGFobject {
             this.goUp(value);
         }
         if (this.scene.gui.isKeyPressed("KeyO")) {
+            this.keyOpressed = true;
             this.goToHive(value);
         }
     }
@@ -325,6 +331,37 @@ export class MyBee extends CGFobject {
                 this.keyPpressed = false;
             }
         }
+
+        if (this.keyOpressed){
+            //this.printPosition();
+            /*
+            if(!this.goDownMove || this.position.y < 0) {
+                this.position.y += this.speedMove/2;
+            } else {
+                this.position.y -= this.speedMove/2;
+            }*/
+            if(this.position.x > -20){
+                this.position.x -= this.speedMove;
+            } else if(this.position.z < 50){
+                this.position.z += this.speedMove;
+                if(this.position.z > 15){
+                    console.log("Here");
+                    this.goDownMove = true;
+                }
+            } else{
+                this.speed = 0;
+                this.speedMove = 0;
+                if (!this.hasPolen && !this.inHive){
+                    this.inHive = false;
+                } else {
+                    this.inHive = true;
+                }
+                this.hasPolen = false;
+                this.keyOpressed = false;
+                console.log("In Hive.");
+                this.printPosition();
+            }
+        }
     
         let elapsedTime = t - this.startTime;
     
@@ -342,6 +379,8 @@ export class MyBee extends CGFobject {
                 console.log("OM: " + this.oscilatingMove);
             }
         } */
+
+        //this.printPosition();
     
         this.wingAngle = Math.sin(t * 0.05);
     }

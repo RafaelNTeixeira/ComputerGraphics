@@ -142,7 +142,7 @@ export class MyScene extends CGFscene {
     this.displayGarden = true;
     this.displayRocks = true;
     this.displayBee = true;
-    this.displayHive = false;
+    this.displayHive = true;
     this.followBee = false;
     this.firstPerson = false;
     this.thirdPerson = true;

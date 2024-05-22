@@ -81,3 +81,12 @@ Com `infiniteView`:
 
 ![Screenshot 8](screenshots/project-t09g12-6.png)
 
+
+
+### 6. Shaders e Animação
+
+- No ponto 6.1, criamos duas classes, uma para a modelação de um elemento de relva, `MyGrass`, e outra para representação de um "canteiro" de relva `MyGrassPatch`. Para **contrução de um elemento relva** (`MyGrass`), foram **utilizadas fitas triangulares** e um **fator curva** para dar um ar mais realista. Já para criação do "canteiro" (`MyGrassPatch`), utilizaram-se dois ciclos *for* para criação de uma matriz 50x50 e de modo a que cada flor ocupe a posição adequada ao longo dos eixos xx e zz. Durante este processo foi **também introduzida alguma aleatoridade** nas **coordenadas x e z** e na **altura** de cada elemento da relva.
+
+- No ponto 6.2, passamos à parte do desenvolvimento dos shaders da relva. Esta fase do trabalho foi-nos **relativamente complexa** pois **demoramos algum tempo** até obtermos o **efeito pretendido** que tinha por base o **ângulo de incidência do vento e da sua força**. Para além disso, estavamos inicialmente a atribuir um shader a cada elemento de relva, o que obrigava a uma demanda computacional demasiado elevada pelo computador e, por isso, como solução, aplicamos antes o shader ao "canteiro" de relva, o que provocou uma maior fluidez do nosso trabalho já que o shader estava a ser carregado um menor número de vezes.
+
+![Screenshot 9](screenshots/project-t09g12-7.png)

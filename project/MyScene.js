@@ -146,7 +146,7 @@ export class MyScene extends CGFscene {
     this.followBee = false;
     this.firstPerson = false;
     this.thirdPerson = true;
-    this.displayGrass = false;
+    this.displayGrass = true;
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);

@@ -297,7 +297,7 @@ export class MyBee extends CGFobject {
         this.position.x += directionX * this.speed/5;
         this.position.z += directionZ * this.speed/5;
 
-        if (this.keyFpressed) {
+        if (this.keyFpressed && this.height < 0) {
             if (this.position.y >= this.height) {
                 this.position.y -= this.speedDown;
                 this.position.x = this.savePositionX;
@@ -334,6 +334,7 @@ export class MyBee extends CGFobject {
 
         if (this.keyOpressed){
             //this.printPosition();
+            this.speed = 0;
             if(!this.goDownMove || this.position.y < 0) {
                 this.position.y += this.speedMove;
             } else {
@@ -361,7 +362,6 @@ export class MyBee extends CGFobject {
                     this.goDownMove = false;
                     this.keyOpressed = false;
                     console.log("In Hive.");
-                    this.printPosition();
                 }
                 
             }

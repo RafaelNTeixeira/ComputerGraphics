@@ -75,7 +75,7 @@ Com `infiniteView`:
 - Para terminar este módulo, criamos 3 tipos de visão da câmara: um que **segue a abelha**, um de **primeira pessoa** e outro de **terceira pessoa**.
 
 ![Screenshot 7](screenshots/project-t09g12-5.png)
-*Fig.6 - Câmara em terceira pessoa de MyBee*
+*Fig.7 - Câmara em terceira pessoa de MyBee*
 
 
 
@@ -90,7 +90,7 @@ Com `infiniteView`:
 - Como toque especial, decidimos **adicionar uma textura** à `MyHive` com **mel a transbordar** quando esta já **se encontra com pólen armazenado**.
 
 ![Screenshot 8](screenshots/project-t09g12-6.png)
-*Fig.6 - Display do cenário com MyHive*
+*Fig.8 - Display do cenário com MyHive*
 
 
 
@@ -101,7 +101,7 @@ Com `infiniteView`:
 - No ponto 6.2, passamos à parte do desenvolvimento dos shaders da relva. Esta fase do trabalho foi-nos **relativamente complexa** pois **demoramos algum tempo** até obtermos o **efeito pretendido** que tinha por base o **ângulo de incidência do vento e da sua força**. Para além disso, estavamos inicialmente a atribuir um shader a cada elemento de relva, o que obrigava a uma demanda computacional demasiado elevada pelo computador e, por isso, como solução, aplicamos antes o shader ao "canteiro" de relva, o que provocou uma maior fluidez do nosso trabalho já que o shader estava a ser carregado um menor número de vezes.
 
 ![Screenshot 9](screenshots/project-t09g12-7.png)
-*Fig.6 - Display de MyGrassPatch*
+*Fig.9 - Display de MyGrassPatch*
 
 
 ### 7. Desenvolvimentos Adicionais
@@ -110,3 +110,5 @@ Com `infiniteView`:
 
 - Pelo que interpretamos, estabelecemos a trajetória da abelha como uma parábola com concavidade voltada para baixo, isto é, a abelha desloca-se para cima e depois para baixo em direção à colmeia. Para aplicarmos esta metadologia, fizemos com que a abelha fosse subindo na posição y até atingir metade da distância percorrida entre a colmeia e si mesma, no momento em que se pressionou a tecla **'O'** (tecla para armazenar o pólen na colmeia) e, após isso, fizêmo-la descer até encontrar a colmeia. Apesar de querermos melhorar esta parte, infelizmente, devido à falta de tempo, não conseguimos aplicar este movimento para a colheita de pólen das flores e corrigir alguns bugs que ocorrem.
 
+![Screenshot 10](screenshots/project-t09g12-8.png)
+*Fig.10 - Display do cenário final*

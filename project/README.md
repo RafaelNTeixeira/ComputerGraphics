@@ -21,10 +21,13 @@ Todas os pontos indicados no enunciado do projeto foram implementados, incluindo
 - Dando estes problemas como corrigidos, para finalizar este exercício, alteramos o **FoV** que modo a dar uma perspetiva satisfatória ao visualizador e criamos uma opção que centra a posição da câmara de modo a dar uma ilusão de que a superfície esférica se encontre sempre posicionada no infinito (`infiniteView` na GUI).
 
 ![Screenshot 1](screenshots/project-t09g12-1a.png)
+*Fig.1 - Display de MyPanorama*
+
 
 Com `infiniteView`:
 
 ![Screenshot 2](screenshots/project-t09g12-1b.png)
+*Fig.2 - Display de MyPanorama com vista infinita*
 
 
 
@@ -42,8 +45,10 @@ Com `infiniteView`:
 - No ponto 2.4, aplicamos texturas às componentes de forma a aplicar rugosidade. Durante este processo tivemos dificuldade em aplicá-las devido a um conflito de uma componente **CFGAppearence** com os restantes materiais **CFGAppearence** de cada componente da flor. Ao descobrirmos o que causava o conflito, o resto do processo foi desenvolvido sem dificuldades
 
 ![Screenshot 3](screenshots/project-t09g12-2a.png)
+*Fig.3 - Display de MyFlower*
 
 ![Screenshot 4](screenshots/project-t09g12-2b.png)
+*Fig.4 - Display de MyGarden*
 
 
 ### 3. Pedras e penedos
@@ -51,6 +56,7 @@ Com `infiniteView`:
 - No ponto 3 criamos primeiro a classe `MyRock`, semelhante ao `MySphere`, onde alteramos a inclinação das normais de forma a criar ligeiras deformações e atribuir uma estrutura mais realista às pedras. De seguida, criamos a classe `MyRockSet` onde geramos 10 pedras da classe `MyRock` e as colocamos em posições diferentes e com texturas distintas.
 
 ![Screenshot 5](screenshots/project-t09g12-3.png)
+*Fig.5 - Display de MyRockSet*
 
 
 ### 4. Abelha
@@ -58,6 +64,7 @@ Com `infiniteView`:
 - No ponto 4.1, criamos a classe `MyBee` onde tratamos da modelação da abelha. Durante este processo, alguns dos objetos anteriormente criados foram aproveitados como o objeto `MyStem` para a criação das patas da abelha. Tivemos algumas dificuldades e problemas durante a criação do sorriso da abelha (`MySmile`) pois, apesar de parecer simples, implementamos esse objeto de acordo com as curvas de Bézier estudadas nas aulas teórica que demonstrou ser um pouco complicado.
 
 ![Screenshot 6](screenshots/project-t09g12-4.png)
+*Fig.6 - Display de MyBee*
 
 - No ponto 4.2, tratamos da parte do movimento de oscilação da abelha e do batimento de asas destas. Para criar o movimento oscilatório, criamos a função `updateBee()` e recorremos a uma variável de tempo para conseguir obter um movimento contínuo da abelha porém, foi **necessário aplicar uma variável de frequência** pois a abelha **executava demasiados movimentos oscilatórios** numa questão de poucos segundos. Assim, a abelha passou a ter um movimento de oscilação satisfatório ao olho humano. De seguida, para estabelecer o ângulo e a rapidez do batimento das asas da abelha, recorremos à função **seno**, cujo valor atribuído correspondia ao tempo decorrido. Deste forma, as asas adquiriram uma animação **porém batiam demasiado rápido** pelo que tivemos que**reduzir a variável tempo** introduzida dentro da função **seno** ao multiplicá-la por um fator de `0.05`.
 
@@ -68,6 +75,7 @@ Com `infiniteView`:
 - Para terminar este módulo, criamos 3 tipos de visão da câmara: um que **segue a abelha**, um de **primeira pessoa** e outro de **terceira pessoa**.
 
 ![Screenshot 7](screenshots/project-t09g12-5.png)
+*Fig.6 - Câmara em terceira pessoa de MyBee*
 
 
 
@@ -79,7 +87,10 @@ Com `infiniteView`:
 
 - Aproveitando a variável **hasPolen** mencionada anteriormente, o **processo de deteção de flores com pólen tornou-se fácil** e, consequentemente, **facilitou o processo de a abelha apenas conesguir apanhar pólen de flores que o contêm**. Por último, o **processo de dirigir a abelha até à colmeia** com pólen, **demonstrou ser também complicado**. Acabamos por encontrar uma **solução**, dirigindo a abelha **primeiro ao eixo dos xx e depois seguir pelo eixo dos zz** até se situar na posição da colmeia. Uma abordagem que gostariamos de ter adotado antes seria a determinação da distância da posição atual da abelha e a da colmeia e com base nisso fazer uma deslocação direta até à colmeia em vez de apenas se guiar por um dos eixos. Foi devido ao pormenor de possuirmos outros projetos para terminar que não tivemos tempo para aplicar essa implementação.
 
+- Como toque especial, decidimos **adicionar uma textura** à `MyHive` com **mel a transbordar** quando esta já **se encontra com pólen armazenado**.
+
 ![Screenshot 8](screenshots/project-t09g12-6.png)
+*Fig.6 - Display do cenário com MyHive*
 
 
 
@@ -90,3 +101,12 @@ Com `infiniteView`:
 - No ponto 6.2, passamos à parte do desenvolvimento dos shaders da relva. Esta fase do trabalho foi-nos **relativamente complexa** pois **demoramos algum tempo** até obtermos o **efeito pretendido** que tinha por base o **ângulo de incidência do vento e da sua força**. Para além disso, estavamos inicialmente a atribuir um shader a cada elemento de relva, o que obrigava a uma demanda computacional demasiado elevada pelo computador e, por isso, como solução, aplicamos antes o shader ao "canteiro" de relva, o que provocou uma maior fluidez do nosso trabalho já que o shader estava a ser carregado um menor número de vezes.
 
 ![Screenshot 9](screenshots/project-t09g12-7.png)
+*Fig.6 - Display de MyGrassPatch*
+
+
+### 7. Desenvolvimentos Adicionais
+
+- Como **desenvolvimento adicional**, decidimos aplicar a **movimentação da abelha em parábola**, porém apenas o aplicamos para quando a abelha se dirige à colmeia devido ao fator tempo causado pela necessidade de terminar outros trabalhos. Esta secção gerou-nos algumas dúvidas de interpretação e de desenvolvimento, pois não sabiamos como deveria ser realizado o movimento em parábola mencionado pelo enunciado. 
+
+- Pelo que interpretamos, estabelecemos a trajetória da abelha como uma parábola com concavidade voltada para baixo, isto é, a abelha desloca-se para cima e depois para baixo em direção à colmeia. Para aplicarmos esta metadologia, fizemos com que a abelha fosse subindo na posição y até atingir metade da distância percorrida entre a colmeia e si mesma, no momento em que se pressionou a tecla **'O'** (tecla para armazenar o pólen na colmeia) e, após isso, fizêmo-la descer até encontrar a colmeia. Apesar de querermos melhorar esta parte, infelizmente, devido à falta de tempo, não conseguimos aplicar este movimento para a colheita de pólen das flores e corrigir alguns bugs que ocorrem.
+

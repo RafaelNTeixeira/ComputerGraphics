@@ -160,7 +160,7 @@ export class MyScene extends CGFscene {
     this.bee = new MyBee(this, 0, 0, 0);
     this.hive = new MyHive(this, this.topTex, this.sideTex, this.frontTex, this.sideTex, this.sideTex, this.bottomTex);
     this.hiveHoney = new MyHive(this, this.topTex, this.sideTex, this.frontTexHoney, this.sideTex, this.sideTex, this.bottomTex);
-    this.grass = new MyGrassPatch(this, 50, 4, 50, 5, 50, 50);
+    this.grass = new MyGrassPatch(this, 500, 4, 200, 5, 100, 100);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -317,7 +317,7 @@ export class MyScene extends CGFscene {
       this.pushMatrix();
       this.grassMaterial.setDiffuse(0, 0.2, 0, 1);
       this.grassMaterial.apply();
-      this.translate(10, -8, 0);
+      this.translate(-30, -8, -5);
       this.scale(0.2, 0.2, 0.2);
       this.grass.display();
       this.popMatrix();

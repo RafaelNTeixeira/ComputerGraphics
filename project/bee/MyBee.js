@@ -239,7 +239,7 @@ export class MyBee extends CGFobject {
     }
 
     goToHive(v){
-        this.speedMove = v;
+        this.speedMove = v*4;
     }
 
 
